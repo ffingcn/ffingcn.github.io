@@ -1,0 +1,351 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>FFing</title><meta name="author" content="Ldy"><meta name="copyright" content="Ldy"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="linux技术分享">
+<meta property="og:type" content="website">
+<meta property="og:title" content="FFing">
+<meta property="og:url" content="http://blog.ffing.fun/page/6/index.html">
+<meta property="og:site_name" content="FFing">
+<meta property="og:description" content="linux技术分享">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="Ldy">
+<meta name="twitter:card" content="summary"><link rel="shortcut icon" href="https://src.ffing.cn/hexo/img/fn_logo_32x32.png"><link rel="canonical" href="http://blog.ffing.fun/page/6/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'FFing',
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2023-02-03 23:30:02'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/loading_gif.css"><link rel="stylesheet" href="/css/bg_color.css"><link rel="stylesheet" href="/css/full_page.css"><link rel="stylesheet" href="/css/universe.css"><link rel="stylesheet" href="/css/lightlight.css"><link rel="stylesheet" href="https://src.ffing.cn/hexo/css/nav_menu.css"><link rel="stylesheet" href="/css/foot.css"><link rel="stylesheet" href="/css/auth_icon.css"><link rel="stylesheet" href="//at.alicdn.com/t/c/font_3830672_5bphzb91mjp.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="/css/other_page.css"><link rel="stylesheet" href="/css/mouse.css"><link rel="stylesheet" href="/css/aside.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><div class="loading-img"></div><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (false) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="/css/loading_bar.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js/pace.min.js"></script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/null" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">181</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">290</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 我的</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/about/"><span> 关于我</span></a></li><li><a class="site-page child" href="/timeline/"><span> 时间线</span></a></li></ul></div></div></div></div><div class="page" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><div class="back-home-button" tabindex="-1"><i class="back-home-button-icon fas fa-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://www.ffing.cn" title="前往首页" target="_blank" one-link-mark="yes"><img class="back-menu-item-icon" src="https://src.ffing.cn/hexo/img/fn_white_logo.png"/><span class="back-menu-item-text">首页</span></a><a class="back-menu-item" href="http://pan.ffing.cn/" rel="external nofollow" title="前往alist网盘" target="_blank" one-link-mark="yes"><img class="back-menu-item-icon" src="https://src.ffing.cn/hexo/img/alist_logo.png"/><span class="back-menu-item-text">alist网盘</span></a><a class="back-menu-item" href="https://kms.ffing.cn/" rel="external nofollow" title="前往kms服务" target="_blank" one-link-mark="yes"><img class="back-menu-item-icon" src="https://src.ffing.cn/hexo/img/kms_logo.png"/><span class="back-menu-item-text">kms服务</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">在线工具</div><div class="back-menu-list"><a class="back-menu-item" href="https://www.iconfont.cn" rel="noopener nofollow" title="前往阿里icon" target="_blank" one-link-mark="yes"><img class="back-menu-item-icon" src="https://src.ffing.cn/hexo/img/ali-icon_logo.png"/><span class="back-menu-item-text">阿里icon</span></a></div></div></div></div><a id="site-name" href="/"><div class="title">FFing</div><i class="fa-solid fa-house"></i></a></span><div class="mask-name-container"><center id="name-container"><a id="page-name" href="javascript:btf.scrollToDest(0, 500)">PAGE_NAME</a></center></div><div id="weather"></div><div id="tp-weather-widget"></div> <div id="menus"><div class="nav-button" id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="nav-button" id="darkmode_navswitch"><a class="darkmode_switchbutton" type="button" title="浅色和深色模式转换" onclick="switchDarkMode()"><i class="fas fa-adjust"></i></a></div><div class="nav-button" id="nav-totop"><a class="totopbtn"><i class="fas fa-arrow-up"></i><span id="percent" onclick="btf.scrollToDest(0,500)">0</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 我的</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/about/"><span> 关于我</span></a></li><li><a class="site-page child" href="/timeline/"><span> 时间线</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-content left"><div class="recent-post-cover"><img class="article-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="centos -weblogic 12C 图形化安装及静默安装"></div><div class="recent-post-info"><a class="article-title" href="/posts/9102d83b.html" title="centos -weblogic 12C 图形化安装及静默安装"><div class="article-title-link">centos -weblogic 12C 图形化安装及静默安装</div></a><div class="recent-post-meta">               <div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-12-20T15:28:59.000Z" title="发表于 2021-12-20 23:28:59">2021-12-20</time></span><span class="article-meta"><span class="article-meta-separator"> | </span><svg class="meta_icon post-ui-icon" style="width:12px;height:12px;position:relative;top:1px"><use xlink:href="#icon-fenlei"></use></svg><a class="article-meta__categories" href="/categories/Linux/">Linux</a></span></div></div></div><a class="article-content" href="/posts/9102d83b.html" title="centos -weblogic 12C 图形化安装及静默安装"><div class="article-content-text">好几天没写东西了，写个weblogic部署教程。
+windows和centos下weblogic图形化安装，没什么区别，几乎都是傻瓜式安装，一直下一步。
+centos下也可以静默安装weblogic，适合一键部署，我是懒人，静默安装脚本我回头优化一下回头放到gitee上我的脚本库。
+环境：
+
+centos 7.6
+java 8
+weblogic12c
+图形化
+
+流程：
+
+安装java
+创建weblogic用户及安装目录
+安装图形化（最小化安装时需要）
+安装weblogic
+启动weblogic
+测试
+
+静默安装：
+
+3个响应文件即可！
+
+因为我用centos几乎很少用到图形化，但有的时候做测试又必须有图形化或者使用X11协议远程，这里我以GNOME桌面为例，直接开始教程
+第一步，安装java环境使用我的脚本安装：
+1bash &lt;(curl https://gitee.com/ffing/onekey/raw/master/onekey.sh)
+
+也可以看我前面的文章：centos - 安装java
+第二步，创建weblogic用户及安装目录1.创建weblogic用户
+1234# ...</div></a><div class="recent-post-arrow"></div></div></div><div class="recent-post-item"><div class="recent-post-content right"><div class="recent-post-cover"><img class="article-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="AWK 笔记"></div><div class="recent-post-info"><a class="article-title" href="/posts/ef2b43dd.html" title="AWK 笔记"><div class="article-title-link">AWK 笔记</div></a><div class="recent-post-meta">               <div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-12-04T10:00:43.000Z" title="发表于 2021-12-04 18:00:43">2021-12-04</time></span><span class="article-meta"><span class="article-meta-separator"> | </span><svg class="meta_icon post-ui-icon" style="width:12px;height:12px;position:relative;top:1px"><use xlink:href="#icon-fenlei"></use></svg><a class="article-meta__categories" href="/categories/Linux/">Linux</a></span></div></div></div><a class="article-content" href="/posts/ef2b43dd.html" title="AWK 笔记"><div class="article-content-text">awk太过庞大，过滤打印、浮点运算、条件判断，这里只是整理了一下自己的笔记。
+语法：
+12awk [option] &#x27;program&#x27;  var=value《file》awk [option] -f programfile  var=value《file》
+
+其中program通常被单引号，并可以有3部分组成
+
+BEGIN语句块（对文件处理前执行，表头）
+模式匹配通用语句块
+END语句块（对文件处理后执行，做结果统计）
+
+常见选项：
+
+-F 指定分隔符（支持正则表达式）
+-v var&#x3D;value 变量复制
+
+注：awk中字符串必须要用双引号！默认空格为分隔符。
+例：
+12345678#指定多个分隔符：以空格、：、%为分隔符（支持正则表达式）awk -F &quot; +:%&quot;#定义变量并引用(注-v也可以引用外部变量)awk -v AAA=123 &#x27;BEGIN&#123;print AAA&#125;&#x27;awk -F: -v AAA=&quot;===&quot; &#x27;&#123;print $1 AAA $3 &#12 ...</div></a><div class="recent-post-arrow"></div></div></div><div class="recent-post-item"><div class="recent-post-content left"><div class="recent-post-cover"><img class="article-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="centos  lvm扩容"></div><div class="recent-post-info"><a class="article-title" href="/posts/1e012f73.html" title="centos  lvm扩容"><div class="article-title-link">centos  lvm扩容</div></a><div class="recent-post-meta">               <div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-12-03T12:21:02.000Z" title="发表于 2021-12-03 20:21:02">2021-12-03</time></span><span class="article-meta"><span class="article-meta-separator"> | </span><svg class="meta_icon post-ui-icon" style="width:12px;height:12px;position:relative;top:1px"><use xlink:href="#icon-fenlei"></use></svg><a class="article-meta__categories" href="/categories/Linux/">Linux</a></span></div></div></div><a class="article-content" href="/posts/1e012f73.html" title="centos  lvm扩容"><div class="article-content-text">LVM（Logical Volume Manager）逻辑卷管理
+逻辑卷可以实现动态无限扩容（譬如：&#x2F;根目录空间不足的时候需要扩容）
+3个概念
+
+pv：物理卷（物理卷是独立的个体，物理卷之间没有联系）
+vg：卷组（将多个PV物理卷组合在一起）
+lv：逻辑卷（从VG卷组中划分一部分空间做单个LV逻辑卷空间）
+
+所以，扩容就是将VG组中的剩余空间再分给LV（如果VG也不足，就再创建PV添加到VG即可）
+查看lvm标识的几种方式：
+df（设备名带有&#x2F;dev&#x2F;mapper）
+
+lsblk -f（f参数用来显示分区的文件系统）
+
+fdisk -l （分区id标识为8e）
+
+ll &#x2F;dev&#x2F;mapper&#x2F; （也可以查看设备文件）
+
+物理卷：pv（创建create 显示display 简述s 缩减：reduce 容易造成数据丢失）
+创建物理卷：pvcreate
+（创建物理卷，如果是分区，类型id修改为lvm，）
+1pvcreate 《分区或硬盘》
+
+查看物理卷
+1234#查看物理卷pvs#查看物理卷详细信息pvdisplay
+
+移除物理卷： ...</div></a><div class="recent-post-arrow"></div></div></div><div class="recent-post-item"><div class="recent-post-content right"><div class="recent-post-cover"><img class="article-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="nginx 挂载本地目录"></div><div class="recent-post-info"><a class="article-title" href="/posts/ded7412c.html" title="nginx 挂载本地目录"><div class="article-title-link">nginx 挂载本地目录</div></a><div class="recent-post-meta">               <div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-11-30T13:10:15.000Z" title="发表于 2021-11-30 21:10:15">2021-11-30</time></span><span class="article-meta"><span class="article-meta-separator"> | </span><svg class="meta_icon post-ui-icon" style="width:12px;height:12px;position:relative;top:1px"><use xlink:href="#icon-fenlei"></use></svg><a class="article-meta__categories" href="/categories/Linux/">Linux</a></span></div></div></div><a class="article-content" href="/posts/ded7412c.html" title="nginx 挂载本地目录"><div class="article-content-text">偶尔需要用到本地目录，这里使用nginx代理一下
+核心参数：autoindex on;
+注1：selinux权限，懒人可以直接关闭！（403错误日志一般都是权限问题，需selinux权限）
+注2：挂载目录内不要有索引页(如果不能移除index.html文件，则需index参数定义一个不存在的索引页。)
+12345678910111213141516171819server &#123;listen 888;server_name test.ffing.cn;root /opt/test;#缓存本地一天expires 1d;#开启自动列出目录 autoindex on;#关闭详细文件大小统计，让文件大小显示MB，GB单位，默认为b；autoindex_exact_size off; #显示的文件时间为文件的服务器时间autoindex_localtime on; location / &#123;           &#125;&#125;
+
+root 和 alias区别：
+1234#alias定义目录(必须绝对路径)location /test &#123;alias /opt/te ...</div></a><div class="recent-post-arrow"></div></div></div><div class="recent-post-item"><div class="recent-post-content left"><div class="recent-post-cover"><img class="article-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="shell脚本 防御dos攻击"></div><div class="recent-post-info"><a class="article-title" href="/posts/e45ed511.html" title="shell脚本 防御dos攻击"><div class="article-title-link">shell脚本 防御dos攻击</div></a><div class="recent-post-meta">               <div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-11-30T07:35:22.000Z" title="发表于 2021-11-30 15:35:22">2021-11-30</time></span><span class="article-meta"><span class="article-meta-separator"> | </span><svg class="meta_icon post-ui-icon" style="width:12px;height:12px;position:relative;top:1px"><use xlink:href="#icon-fenlei"></use></svg><a class="article-meta__categories" href="/categories/Linux/">Linux</a></span></div></div></div><a class="article-content" href="/posts/e45ed511.html" title="shell脚本 防御dos攻击"><div class="article-content-text">firewalld禁用IP总是忘记，这里记录一下
+用于云服务器dos攻击的防御脚本。
+当某个IP连接数超过指定数后，屏蔽到此IP，我的脚本设置的连接数超过100，请根据自己情况而定，循环10秒执行一次。你也可以删除我的循环，定义计划任务。
+后期措施：禁止IP访问后，建议禁止一段时间后再删除禁止的IP，可以再根据情况而定。
+1234567891011121314151617181920212223#!/bin/bash#允许一个IP最大连接数，超过则禁止访问NUM=100#判断是否安装netstatnetstat --help &gt; /dev/null 2&gt;&amp;1if [ $? -ne 0 ];thenecho &quot;开始安装net-tools&quot;yum -y install net-toolsfiwhile truedo#获取最大连接数IPGITNUM=`netstat -nt awk  -F &quot; +:&quot; &#x27;&#123;print $6&#125;&#x27;sortuniq -csort -rhead -n1awk &#x2 ...</div></a><div class="recent-post-arrow"></div></div></div><div class="recent-post-item"><div class="recent-post-content right"><div class="recent-post-cover"><img class="article-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="bash 主机统计信息脚本"></div><div class="recent-post-info"><a class="article-title" href="/posts/1a2f4092.html" title="bash 主机统计信息脚本"><div class="article-title-link">bash 主机统计信息脚本</div></a><div class="recent-post-meta">               <div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-11-18T13:47:02.000Z" title="发表于 2021-11-18 21:47:02">2021-11-18</time></span><span class="article-meta"><span class="article-meta-separator"> | </span><svg class="meta_icon post-ui-icon" style="width:12px;height:12px;position:relative;top:1px"><use xlink:href="#icon-fenlei"></use></svg><a class="article-meta__categories" href="/categories/Linux/">Linux</a></span></div></div></div><a class="article-content" href="/posts/1a2f4092.html" title="bash 主机统计信息脚本"><div class="article-content-text">统计信息脚本，留个备份
+因为环境问题，做了多次过滤，如果想简单实现，也可以使用awk
+如简单实现获取硬盘使用率大于10%的分区
+awk 以空格或%为分隔符，取倒数第二列，大于10的行！
+
+需要注意的是硬盘统计问题，fdisk或lsblk是所有硬盘（包含未挂载的），df只能统计已经挂载的，可根据需求编辑脚本。
+
+12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455#!/bin/bash#临时文件名FILE=&quot;devinfo.txt&quot;echo &gt; $FILE#主机名称echo &quot;主机名称：$HOSTNAME &quot; &gt;&gt; $FILE#IP地址IPLAN=$(hostname -I  awk -F &quot; &quot; &#x27;&#123;printf $1&#125;&#x27;)IPWAN=$(curl http://pv.sohu.com/cityjson 2&gt;&gt; ...</div></a><div class="recent-post-arrow"></div></div></div><div class="recent-post-item"><div class="recent-post-content left"><div class="recent-post-cover"><img class="article-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="centos 部署多个tomcat并systemd控制"></div><div class="recent-post-info"><a class="article-title" href="/posts/65c613e1.html" title="centos 部署多个tomcat并systemd控制"><div class="article-title-link">centos 部署多个tomcat并systemd控制</div></a><div class="recent-post-meta">               <div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-11-18T03:55:17.000Z" title="发表于 2021-11-18 11:55:17">2021-11-18</time></span><span class="article-meta"><span class="article-meta-separator"> | </span><svg class="meta_icon post-ui-icon" style="width:12px;height:12px;position:relative;top:1px"><use xlink:href="#icon-fenlei"></use></svg><a class="article-meta__categories" href="/categories/Linux/">Linux</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/%E6%95%99%E7%A8%8B/">教程</a></span></div></div></div><a class="article-content" href="/posts/65c613e1.html" title="centos 部署多个tomcat并systemd控制"><div class="article-content-text">tomcat包是绿色文件，所以以包的方式部署win和linux集群的方式是一样的，唯一需要更改的就是server.xml端口（保障端口不冲突），就实现了集群。
+我的脚本：
+bash &lt;(curl https://gitee.com/ffing/onekey/raw/master/onekey.sh)
+
+第一种方法：快捷方式win集群：复制N个包，修改N个server.xml端口，创建N对快捷方式到桌面（start.bat、shutodwn.bat）
+linux集群：复制N个包，修改N个server.xml端口，创建N对软链接到&#x2F;usr&#x2F;bin下(start.sh、shutdown.sh)
+这种快捷方式部署的方式，效率很高，什么也不用配置，创建快捷方式就OK，但后期管理就很不方便了（譬如上个zabbix，脚本就需要再根据情况编写）
+第二种方法：配置环境变量配置环境变量，就可以实现systemd进行控制。
+流程：
+下载安装tomcat
+配置环境变量
+更新tomcat变量
+修改tomcat访问端口
+防火墙放行端口
+创建systemd服务文件
+测试
+
+本次集群以3个t ...</div></a><div class="recent-post-arrow"></div></div></div><div class="recent-post-item"><div class="recent-post-content right"><div class="recent-post-cover"><img class="article-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="centos 安装tomcat并systemctl控制"></div><div class="recent-post-info"><a class="article-title" href="/posts/93d10bf1.html" title="centos 安装tomcat并systemctl控制"><div class="article-title-link">centos 安装tomcat并systemctl控制</div></a><div class="recent-post-meta">               <div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-11-17T08:55:40.000Z" title="发表于 2021-11-17 16:55:40">2021-11-17</time></span><span class="article-meta"><span class="article-meta-separator"> | </span><svg class="meta_icon post-ui-icon" style="width:12px;height:12px;position:relative;top:1px"><use xlink:href="#icon-fenlei"></use></svg><a class="article-meta__categories" href="/categories/Linux/">Linux</a></span></div></div></div><a class="article-content" href="/posts/93d10bf1.html" title="centos 安装tomcat并systemctl控制"><div class="article-content-text">tomcat依赖java环境，所以需要先安装java。
+因为这几天需要tomcat集群环境，这里使用tomcat8包进行安装。
+安装很简单，就是个绿色包，直接运行就可以，但为了后期管理方便要配置环境变量。
+我的脚本：
+bash &lt;(curl https://gitee.com/ffing/onekey/raw/master/onekey.sh)
+
+流程
+安装配置java
+安装配置tomcat
+配置system服务
+测试
+
+一，安装配置JAVA请看我前面文章：centos 安装JAVA
+二，安装配置tomcattomcat官网：https://tomcat.apache.org/
+
+下载,并解压tomcat包到&#x2F;usr&#x2F;local&#x2F;
+（解压的路径需要记住，后面要配置环境）
+12345678#安装wget（如已安装可以忽略）yum -y insatll wget#下载tomcat（路径可能失效，请官网更新）wget https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.72/bin/apache-tomcat-8.5 ...</div></a><div class="recent-post-arrow"></div></div></div><div class="recent-post-item"><div class="recent-post-content left"><div class="recent-post-cover"><img class="article-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="centos 搭建ftp(匿名+本地用户)"></div><div class="recent-post-info"><a class="article-title" href="/posts/26cdf4b7.html" title="centos 搭建ftp(匿名+本地用户)"><div class="article-title-link">centos 搭建ftp(匿名+本地用户)</div></a><div class="recent-post-meta">               <div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-11-15T14:04:53.000Z" title="发表于 2021-11-15 22:04:53">2021-11-15</time></span><span class="article-meta"><span class="article-meta-separator"> | </span><svg class="meta_icon post-ui-icon" style="width:12px;height:12px;position:relative;top:1px"><use xlink:href="#icon-fenlei"></use></svg><a class="article-meta__categories" href="/categories/Linux/">Linux</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/%E6%95%99%E7%A8%8B/">教程</a></span></div></div></div><a class="article-content" href="/posts/26cdf4b7.html" title="centos 搭建ftp(匿名+本地用户)"><div class="article-content-text">今天临时需要用下ftp，发现我云服务器的ftp被我改完配置后没有恢复，导致无法使用，这里记录一下，顺便存个脚本。
+bash &lt;(curl https://gitee.com/ffing/onekey/raw/master/onekey.sh)
+本脚本vsftp实现：匿名+本地用户访问FTP！
+
+流程：
+
+创建ftp账号&#x2F;组
+安装vsftpd
+创建目录及文件
+配置vsftpd
+测试ftp
+
+第一步，创建用户&#x2F;组创建FTP组：
+12#以&quot;ftpgroup&quot;为ftp组groupadd ftpgroup
+
+创建FTP目录：
+123#以&quot;/ftp&quot;为根目录，并更改属组mkdir /ftpchown :ftpgroup /ftp
+
+创建FTP用户：
+12#创建用户&quot;ffing&quot;（配置bash、家目录、组、备注）useradd -s /sbin/nologin -d /ftp/ffing -g ftpgroup -c &quot;FTP用户&quot; ffing
+
+第二步，安装vsftpd123456789101 ...</div></a><div class="recent-post-arrow"></div></div></div><div class="recent-post-item"><div class="recent-post-content right"><div class="recent-post-cover"><img class="article-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="shell echo颜色"></div><div class="recent-post-info"><a class="article-title" href="/posts/2864b428.html" title="shell echo颜色"><div class="article-title-link">shell echo颜色</div></a><div class="recent-post-meta">               <div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-11-15T06:21:58.000Z" title="发表于 2021-11-15 14:21:58">2021-11-15</time></span><span class="article-meta"><span class="article-meta-separator"> | </span><svg class="meta_icon post-ui-icon" style="width:12px;height:12px;position:relative;top:1px"><use xlink:href="#icon-fenlei"></use></svg><a class="article-meta__categories" href="/categories/Linux/">Linux</a></span></div></div></div><a class="article-content" href="/posts/2864b428.html" title="shell echo颜色"><div class="article-content-text">echo -e 激活转义字符
+12echo -e &quot;\033[字背景颜色;字体颜色;字体属性m 《输出的内容》 \033[0m&quot;echo -e &quot;\e[字背景颜色;字体颜色;字体属性m 《输出的内容》 \e[0m&quot;
+
+
+\033 转义起始符，定义一个转义序列，可以使用 \e 或 \E 代替。
+[ 表示开始定义颜色。
+字背景颜色 范围 40-47 。
+字体颜色 范围 30-37 。
+m 转义终止符，表示颜色定义完毕。
+再次使用 \033[ ，表示再次开启颜色定义，0 表示颜色定义结束，所以 \033[0m 的作用是恢复之前的配色方案。
+
+背景色（40-47）
+字体色（30-37）
+字体控制属性
+默认&#x3D;0黑色&#x3D;40红色&#x3D;41绿色&#x3D;42黄色&#x3D;43蓝色&#x3D;44紫色&#x3D;45青色&#x3D;46白色&#x3D;47
+默认&#x3D;0黑色&#x3D;30红色&#x3D;31绿色&#x3D;32黄色&#x3D;33蓝色&#x3D;34紫色&#x3D;35青色&#x3D;36白色&#x3D;37
+ ...</div></a><div class="recent-post-arrow"></div></div></div><div class="recent-post-item"><div class="recent-post-content left"><div class="recent-post-cover"><img class="article-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="centos-sed在指定行前后追加、替换、插入等操作"></div><div class="recent-post-info"><a class="article-title" href="/posts/32361c04.html" title="centos-sed在指定行前后追加、替换、插入等操作"><div class="article-title-link">centos-sed在指定行前后追加、替换、插入等操作</div></a><div class="recent-post-meta">               <div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-11-14T14:48:15.000Z" title="发表于 2021-11-14 22:48:15">2021-11-14</time></span><span class="article-meta"><span class="article-meta-separator"> | </span><svg class="meta_icon post-ui-icon" style="width:12px;height:12px;position:relative;top:1px"><use xlink:href="#icon-fenlei"></use></svg><a class="article-meta__categories" href="/categories/Linux/">Linux</a></span></div></div></div><a class="article-content" href="/posts/32361c04.html" title="centos-sed在指定行前后追加、替换、插入等操作"><div class="article-content-text">时间久了，有点忘记了，呵呵呵，备注一下
+sed -i i——&gt;所在行的上一行，追加行
+sed -i a——&gt;所在行的下一行，追加行
+sed -i c——&gt;行标，整行替换
+sed -i &amp;——&gt;连接符，在本行指定字符串追加或插入
+一、在匹配行前后插入内容
+1234#匹配行前加sed -i &#x27;/《匹配字段》/i 《插入内容》&#x27; 《文件名》#匹配行后加sed -i &#x27;/《匹配字段》/a 《插入内容》&#x27; 《文件名》
+
+例：firewall文件加入禁止访问IP
+1sed -i &quot;/&lt;\/zone&gt;/i &lt;rule family=&quot;ipv4&quot;&gt;    &lt;source address=&quot;$IP&quot;/&gt;    &lt;reject/&gt;  &lt;/rule&gt;&quot; /etc/firewalld/zones/public.xml
+
+二，在具体行号前后增加内容
+12345#在指定行前插入内容sed -i &#x27;《行号》 i 《插 ...</div></a><div class="recent-post-arrow"></div></div></div><div class="recent-post-item"><div class="recent-post-content right"><div class="recent-post-cover"><img class="article-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="shell grep/sed/awk/head|tail获取指定行或指定列"></div><div class="recent-post-info"><a class="article-title" href="/posts/1f1528f7.html" title="shell grep/sed/awk/head|tail获取指定行或指定列"><div class="article-title-link">shell grep/sed/awk/head|tail获取指定行或指定列</div></a><div class="recent-post-meta">               <div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-11-14T06:37:42.000Z" title="发表于 2021-11-14 14:37:42">2021-11-14</time></span><span class="article-meta"><span class="article-meta-separator"> | </span><svg class="meta_icon post-ui-icon" style="width:12px;height:12px;position:relative;top:1px"><use xlink:href="#icon-fenlei"></use></svg><a class="article-meta__categories" href="/categories/Linux/">Linux</a></span></div></div></div><a class="article-content" href="/posts/1f1528f7.html" title="shell grep/sed/awk/head|tail获取指定行或指定列"><div class="article-content-text">
+譬如要打印num.txt中的第三行内容
+grep:
+12345#过滤包含字母“c”的行cat num.txt grep c#grep还有个精确过滤\&lt;\&gt;，一般很少用到#如包含root和roott行，只过滤root就需要grep &#x27;\&lt; &quot;root&quot;\&gt;&#x27;cat num.txt grep &#x27;\&lt; &quot;你要过滤的字段&quot;\&gt;&#x27;
+
+sed：
+12345678910111213141516171819202122232425262728293031323334353637#打印包含字母“c”的行（-n）cat num.txt sed -n &#x27;/c/p&#x27;#打印包含字母“c”开头的行cat num.txt sed -n &#x27;/^c/p&#x27;#打印第3行cat num.txt sed -n &#x27;3p&#x27;#区间打印#打印第1~3行和第5行cat num.txt sed -n &#x27;1,3p;5p&#x27;#打印从第3行开始,再向后 ...</div></a><div class="recent-post-arrow"></div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/5/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/#content-inner">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/#content-inner">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/#content-inner">16</a><a class="extend next" rel="next" href="/page/7/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="author-info__description"><img style="float:left;width:100px;height:100px " src="https://src.ffing.cn/hexo/img/fn_logo.png"><p style="font-size:13px">兴趣是最好的老师<br>时间是最贵的学费</p></div></div><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://gitee.com/ffing" target="_blank" title="Gitee"><svg class="social_icon iconfont" aria-hidden="true"><use xlink:href="#icon-gitee"></use></svg></a><a class="social-icon faa-parent animated-hover" href="mailto:79131627@qq.com" target="_blank" title="Email"><svg class="social_icon iconfont" aria-hidden="true"><use xlink:href="#icon-youxiang"></use></svg></a><a class="social-icon faa-parent animated-hover" href="https://space.bilibili.com/376172153" target="_blank" title="BiliBili"><svg class="social_icon iconfont" aria-hidden="true"><use xlink:href="#icon-bilibili-line1"></use></svg></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            
+            </div>
+            <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Debian/"><span class="card-category-list-name">Debian</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Linux/"><span class="card-category-list-name">Linux</span><span class="card-category-list-count">134</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Me/"><span class="card-category-list-name">Me</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/SQL/"><span class="card-category-list-name">SQL</span><span class="card-category-list-count">7</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Windows/"><span class="card-category-list-name">Windows</span><span class="card-category-list-count">11</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/other/"><span class="card-category-list-name">other</span><span class="card-category-list-count">16</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%95%99%E7%A8%8B/"><span class="card-category-list-name">教程</span><span class="card-category-list-count">40</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E9%BB%91%E8%8B%B9%E6%9E%9C/"><span class="card-category-list-name">黑苹果</span><span class="card-category-list-count">10</span></a></li>
+            </ul></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="fas fa-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/02/"><span class="card-archive-list-date">二月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/12/"><span class="card-archive-list-date">十二月 2022</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/11/"><span class="card-archive-list-date">十一月 2022</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">5</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/10/"><span class="card-archive-list-date">十月 2022</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/09/"><span class="card-archive-list-date">九月 2022</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">3</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/08/"><span class="card-archive-list-date">八月 2022</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/07/"><span class="card-archive-list-date">七月 2022</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">3</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/05/"><span class="card-archive-list-date">五月 2022</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li></ul></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Ldy</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div><div id="footer-banner"><div class="footer-banner-links"><div class="footer-banner-left"><div class="footer-banner-left"><div id="footer-banner-tips"></div><script src="https://src.ffing.cn/hexo/js/typed.min.foot_daziji.js"></script><script>var typed = new Typed("#footer-banner-tips", {
+  strings: ["你不在正经事上忧虑,就会在乱七八糟事上忧虑,能力守恒!", "折腾硬件、软件;折腾系统、平台;折腾开发、环境;折腾window、linux;折腾,折腾,瞎J8折腾."],
+  startDelay: 200,
+  backDelay: 2000,
+  typeSpeed: 100,
+  loop: true,
+  backSpeed: 20
+})
+</script></div></div><div class="footer-banner-right"><p><a target="_blank" href="https://hexo.io/"><img src="http://src.ffing.cn/hexo/img/Frame-Hexo-blue.svg" title="框架"></a>&nbsp;<a target="_blank" href="https://butterfly.js.org/"><img src="http://src.ffing.cn/hexo/img/Theme-Butterfly.svg" title="主题"></a>&nbsp;<a target="_blank" href="https://www.upyun.com/"><img src="http://src.ffing.cn/hexo/img/CDN又拍云.svg" title="CDN加速"></a>&nbsp;<a target="_blank" href="https://www.51.la/"><img src="http://src.ffing.cn/hexo/img/Analytics-51la.svg" title="51la统计"></a>&nbsp;<a target="_blank" href="https://www.upyun.com/"><img src="http://src.ffing.cn/hexo/img/豫ICP备2021016009.svg" title="ICP备案"></a></p></div></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><script src="https://src.ffing.cn/hexo/js/jquery.min.3.6.3.js"></script><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script defer src="https://src.ffing.cn/hexo/js/switchDarkMode.js"></script><script defer src="https://src.ffing.cn/hexo/js/nav_menu.js"></script><script src="https://src.ffing.cn/hexo/js/foot_runtime.js"></script><script async src="//at.alicdn.com/t/c/font_3830672_5bphzb91mjp.js"></script></div></body></html>

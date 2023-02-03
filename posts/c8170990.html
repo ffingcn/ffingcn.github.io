@@ -1,0 +1,225 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Floccus+坚果云——实现跨平台书签同步插件工具 | FFing</title><meta name="author" content="Ldy"><meta name="copyright" content="Ldy"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="类似插件有很多，也有第三方平台提供书签空间的，但太过于方便，就要有灾难的觉悟（当初的TX网络书签一样，停止运维就预示是GameOver） 项目地址: Github – Floccus 官网地址：Floccus  WebDAV ：目前支持 「坚果云、nextcloud &#x2F; owncloud，box」 等 WebDAV 服务器 Nextcloud 书签 ：利用 Nextcloud 自带的书签">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Floccus+坚果云——实现跨平台书签同步插件工具">
+<meta property="og:url" content="http://blog.ffing.fun/posts/c8170990.html">
+<meta property="og:site_name" content="FFing">
+<meta property="og:description" content="类似插件有很多，也有第三方平台提供书签空间的，但太过于方便，就要有灾难的觉悟（当初的TX网络书签一样，停止运维就预示是GameOver） 项目地址: Github – Floccus 官网地址：Floccus  WebDAV ：目前支持 「坚果云、nextcloud &#x2F; owncloud，box」 等 WebDAV 服务器 Nextcloud 书签 ：利用 Nextcloud 自带的书签">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-05-11T14:53:43.000Z">
+<meta property="article:modified_time" content="2023-01-25T10:48:56.000Z">
+<meta property="article:author" content="Ldy">
+<meta property="article:tag" content="Floccus">
+<meta property="article:tag" content="书签同步">
+<meta property="article:tag" content="坚果云">
+<meta name="twitter:card" content="summary"><link rel="shortcut icon" href="https://src.ffing.cn/hexo/img/fn_logo_32x32.png"><link rel="canonical" href="http://blog.ffing.fun/posts/c8170990"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Floccus+坚果云——实现跨平台书签同步插件工具',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-01-25 18:48:56'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/loading_gif.css"><link rel="stylesheet" href="/css/bg_color.css"><link rel="stylesheet" href="/css/full_page.css"><link rel="stylesheet" href="/css/universe.css"><link rel="stylesheet" href="/css/lightlight.css"><link rel="stylesheet" href="https://src.ffing.cn/hexo/css/nav_menu.css"><link rel="stylesheet" href="/css/foot.css"><link rel="stylesheet" href="/css/auth_icon.css"><link rel="stylesheet" href="//at.alicdn.com/t/c/font_3830672_5bphzb91mjp.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="/css/other_page.css"><link rel="stylesheet" href="/css/mouse.css"><link rel="stylesheet" href="/css/aside.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><div class="loading-img"></div><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (false) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="/css/loading_bar.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js/pace.min.js"></script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/null" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">181</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">290</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 我的</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/about/"><span> 关于我</span></a></li><li><a class="site-page child" href="/timeline/"><span> 时间线</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><div class="back-home-button" tabindex="-1"><i class="back-home-button-icon fas fa-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://www.ffing.cn" title="前往首页" target="_blank" one-link-mark="yes"><img class="back-menu-item-icon" src="https://src.ffing.cn/hexo/img/fn_white_logo.png"/><span class="back-menu-item-text">首页</span></a><a class="back-menu-item" href="http://pan.ffing.cn/" rel="external nofollow" title="前往alist网盘" target="_blank" one-link-mark="yes"><img class="back-menu-item-icon" src="https://src.ffing.cn/hexo/img/alist_logo.png"/><span class="back-menu-item-text">alist网盘</span></a><a class="back-menu-item" href="https://kms.ffing.cn/" rel="external nofollow" title="前往kms服务" target="_blank" one-link-mark="yes"><img class="back-menu-item-icon" src="https://src.ffing.cn/hexo/img/kms_logo.png"/><span class="back-menu-item-text">kms服务</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">在线工具</div><div class="back-menu-list"><a class="back-menu-item" href="https://www.iconfont.cn" rel="noopener nofollow" title="前往阿里icon" target="_blank" one-link-mark="yes"><img class="back-menu-item-icon" src="https://src.ffing.cn/hexo/img/ali-icon_logo.png"/><span class="back-menu-item-text">阿里icon</span></a></div></div></div></div><a id="site-name" href="/"><div class="title">FFing</div><i class="fa-solid fa-house"></i></a></span><div class="mask-name-container"><center id="name-container"><a id="page-name" href="javascript:btf.scrollToDest(0, 500)">PAGE_NAME</a></center></div><div id="weather"></div><div id="tp-weather-widget"></div> <div id="menus"><div class="nav-button" id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="nav-button" id="darkmode_navswitch"><a class="darkmode_switchbutton" type="button" title="浅色和深色模式转换" onclick="switchDarkMode()"><i class="fas fa-adjust"></i></a></div><div class="nav-button" id="nav-totop"><a class="totopbtn"><i class="fas fa-arrow-up"></i><span id="percent" onclick="btf.scrollToDest(0,500)">0</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 我的</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/about/"><span> 关于我</span></a></li><li><a class="site-page child" href="/timeline/"><span> 时间线</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">Floccus+坚果云——实现跨平台书签同步插件工具</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-05-11T14:53:43.000Z" title="发表于 2021-05-11 22:53:43">2021-05-11</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-25T10:48:56.000Z" title="更新于 2023-01-25 18:48:56">2023-01-25</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%95%99%E7%A8%8B/">教程</a></span></div><div class="meta-secondline"></div></div></div><article class="post-content" id="article-container"><p>类似插件有很多，也有第三方平台提供书签空间的，但太过于方便，就要有灾难的觉悟（当初的TX网络书签一样，停止运维就预示是GameOver）</p>
+<p>项目地址: <a target="_blank" rel="noopener" href="https://github.com/marcelklehr/floccus"><strong>Github – Floccus</strong></a></p>
+<p>官网地址：<a target="_blank" rel="noopener" href="https://floccus.org/download">Floccus</a></p>
+<ul>
+<li><strong>WebDAV</strong> ：目前支持 「坚果云、nextcloud &#x2F; owncloud，box」 等 WebDAV 服务器</li>
+<li><strong>Nextcloud 书签</strong> ：利用 Nextcloud 自带的书签应用程序进行同步，可通过 Web 访问。(需要nextcloud v12 以上版本)。</li>
+<li><strong>本地文件同步</strong> ：利用 <a target="_blank" rel="noopener" href="https://github.com/TCB13/LoFloccus">LoFloccus</a>软件将书签同步到本地, 再利用 Dropbox，Syncthing，rsync 等进行跨设备同步。</li>
+</ul>
+<p>Floccus插件是个工具！搬运书签的工具！支持IE内核、火狐内核、google内核！</p>
+<p>利用Floccus插件，将书签保存到WebDAV后，再将书签同步到其它平台浏览器。</p>
+<p><strong>书签同步：坚果云WebDAV（可理解为备份中心）《&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;》Floccus插件（书签搬运工）《&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;》浏览器</strong></p>
+<h2 id="流程："><a href="#流程：" class="headerlink" title="流程："></a>流程：</h2><ul>
+<li>一、下载安装floccus</li>
+<li>二、注册坚果云，设置应用账号</li>
+<li>三、Floccus插件添加坚果账号</li>
+</ul>
+<h2 id="一、下载安装Floccus"><a href="#一、下载安装Floccus" class="headerlink" title="一、下载安装Floccus"></a>一、下载安装Floccus</h2><ul>
+<li>下载Floccus插件</li>
+</ul>
+<p>github项目更新最新的插件，所以建议从github下载：–&gt;<a target="_blank" rel="noopener" href="https://github.com/floccusaddon/floccus/releases">下载</a></p>
+<ul>
+<li>安装Floccus插件</li>
+</ul>
+<p>安装很简单，打开插件管理页面</p>
+<p>支持crx文件直接拖进去，或者添加解压文件</p>
+<p>下面以谷歌浏览器为例：</p>
+<p>打开chrome插件管理页：chrome:&#x2F;&#x2F;extensions&#x2F;</p>
+<p>打开开发者模式，添加解压文件即可。</p>
+<p><img src="https://qnimg.ffing.cn/wp-content/uploads/2021/05/image-31-1024x403.png"></p>
+<p><img src="https://qnimg.ffing.cn/wp-content/uploads/2021/05/image-32-1024x539.png"></p>
+<p><img src="https://qnimg.ffing.cn/wp-content/uploads/2021/05/image-33-1024x577.png"></p>
+<h2 id="二、注册坚果云，设置应用密码"><a href="#二、注册坚果云，设置应用密码" class="headerlink" title="二、注册坚果云，设置应用密码"></a>二、注册坚果云，设置应用密码</h2><p>坚果云地址：<a target="_blank" rel="noopener" href="https://www.jianguoyun.com/">https://www.jianguoyun.com/</a></p>
+<p><img src="https://qnimg.ffing.cn/wp-content/uploads/2021/05/image-34.png"></p>
+<p>登录注册账户后，在根目录下建立“书签”文件夹，作为我们同步书签的目录</p>
+<p><img src="https://qnimg.ffing.cn/wp-content/uploads/2021/05/image-41-1024x332.png"></p>
+<p>右上角点击自己的用户名——》账户信息</p>
+<p><img src="https://qnimg.ffing.cn/wp-content/uploads/2021/05/image-35-1024x186.png"></p>
+<p>添加应用密码（可以理解为坚果云的API接口）</p>
+<p><img src="https://qnimg.ffing.cn/wp-content/uploads/2021/05/image-37-1024x657.png"></p>
+<p>不要关闭网页，一会需要服务器地址、账户、应用密码</p>
+<p><img src="https://qnimg.ffing.cn/wp-content/uploads/2021/05/image-38.png"></p>
+<h2 id="三、Floccus插件添加坚果账号"><a href="#三、Floccus插件添加坚果账号" class="headerlink" title="三、Floccus插件添加坚果账号"></a>三、Floccus插件添加坚果账号</h2><p>返回浏览器，点击Floccus插件，添加账户</p>
+<p><img src="https://qnimg.ffing.cn/wp-content/uploads/2021/05/image-39.png"></p>
+<p>选择webdav同步</p>
+<p><img src="https://qnimg.ffing.cn/wp-content/uploads/2021/05/image-40.png"></p>
+<p>添加账户信息（我们刚坚果云注册账户及应用密码），保存。</p>
+<p><img src="https://qnimg.ffing.cn/wp-content/uploads/2021/05/image-67.png"></p>
+<p>同步选项：</p>
+<p>注：收藏夹，就是你浏览器中的收藏夹；选项卡就是你当前浏览器打开的网页标签卡</p>
+<p><img src="https://qnimg.ffing.cn/wp-content/uploads/2021/05/image-69-1024x123.png"></p>
+<p>根据自己需求选择，我直接同步“收藏夹”</p>
+<p><img src="https://qnimg.ffing.cn/wp-content/uploads/2021/05/image-70.png"></p>
+<p>返回插件，点击“同步”，提示成功（MAC提示完美）</p>
+<p><img src="https://qnimg.ffing.cn/wp-content/uploads/2021/05/image-45.png"></p>
+<p>至此，插件已经安装完成，书签已经上传至坚果云。</p>
+<p>我们想同步到哪个浏览器，只需安装Floccus插件，就可将书签下载到浏览器</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://blog.ffing.fun">Ldy</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://blog.ffing.fun/posts/c8170990.html">http://blog.ffing.fun/posts/c8170990.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://blog.ffing.fun" target="_blank">FFing</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Floccus/">Floccus</a><a class="post-meta__tags" href="/tags/%E4%B9%A6%E7%AD%BE%E5%90%8C%E6%AD%A5/">书签同步</a><a class="post-meta__tags" href="/tags/%E5%9D%9A%E6%9E%9C%E4%BA%91/">坚果云</a></div><div class="post_share"><div class="social-share" data-image="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/870ab642.html"><img class="prev-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Centos-阿里云ddsn域名解析，钉钉机器人推送提醒</div></div></a></div><div class="next-post pull-right"><a href="/posts/ce21d3df.html"><img class="next-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">科学上网——免费亚马逊云搭建v2ray</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%81%E7%A8%8B%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">流程：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85Floccus"><span class="toc-number">2.</span> <span class="toc-text">一、下载安装Floccus</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%B3%A8%E5%86%8C%E5%9D%9A%E6%9E%9C%E4%BA%91%EF%BC%8C%E8%AE%BE%E7%BD%AE%E5%BA%94%E7%94%A8%E5%AF%86%E7%A0%81"><span class="toc-number">3.</span> <span class="toc-text">二、注册坚果云，设置应用密码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81Floccus%E6%8F%92%E4%BB%B6%E6%B7%BB%E5%8A%A0%E5%9D%9A%E6%9E%9C%E8%B4%A6%E5%8F%B7"><span class="toc-number">4.</span> <span class="toc-text">三、Floccus插件添加坚果账号</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Ldy</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div><div id="footer-banner"><div class="footer-banner-links"><div class="footer-banner-left"><div class="footer-banner-left"><div id="footer-banner-tips"></div><script src="https://src.ffing.cn/hexo/js/typed.min.foot_daziji.js"></script><script>var typed = new Typed("#footer-banner-tips", {
+  strings: ["你不在正经事上忧虑,就会在乱七八糟事上忧虑,能力守恒!", "折腾硬件、软件;折腾系统、平台;折腾开发、环境;折腾window、linux;折腾,折腾,瞎J8折腾."],
+  startDelay: 200,
+  backDelay: 2000,
+  typeSpeed: 100,
+  loop: true,
+  backSpeed: 20
+})
+</script></div></div><div class="footer-banner-right"><p><a target="_blank" href="https://hexo.io/"><img src="http://src.ffing.cn/hexo/img/Frame-Hexo-blue.svg" title="框架"></a>&nbsp;<a target="_blank" href="https://butterfly.js.org/"><img src="http://src.ffing.cn/hexo/img/Theme-Butterfly.svg" title="主题"></a>&nbsp;<a target="_blank" href="https://www.upyun.com/"><img src="http://src.ffing.cn/hexo/img/CDN又拍云.svg" title="CDN加速"></a>&nbsp;<a target="_blank" href="https://www.51.la/"><img src="http://src.ffing.cn/hexo/img/Analytics-51la.svg" title="51la统计"></a>&nbsp;<a target="_blank" href="https://www.upyun.com/"><img src="http://src.ffing.cn/hexo/img/豫ICP备2021016009.svg" title="ICP备案"></a></p></div></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><script src="https://src.ffing.cn/hexo/js/jquery.min.3.6.3.js"></script><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script defer src="https://src.ffing.cn/hexo/js/switchDarkMode.js"></script><script defer src="https://src.ffing.cn/hexo/js/nav_menu.js"></script><script src="https://src.ffing.cn/hexo/js/foot_runtime.js"></script><script async src="//at.alicdn.com/t/c/font_3830672_5bphzb91mjp.js"></script></div></body></html>

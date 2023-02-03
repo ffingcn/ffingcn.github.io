@@ -1,0 +1,22 @@
+#article-container 
+figure.highlight,#article-container 
+pre {
+    color: #a2a29f;
+    background: rgba(12, 11, 11, 0.3);
+}
+
+#article-container 
+figure.highlight 
+.highlight-tools {
+    background: rgba(182, 180, 180, 0.6);
+    color: #EEE9E9;
+}
+
+#article-container figure.highlight .gutter pre {
+    color: #A5A5A5;
+    background: rgba(5, 5, 5, 0.6);
+}
+
+#article-container figure.highlight figcaption a {
+    color: #a9a9a9!important;
+}

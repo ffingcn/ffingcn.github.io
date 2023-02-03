@@ -1,0 +1,52 @@
+:root {
+    --default-cursor: url(https://src.ffing.cn/hexo/img/mouse_default.cur);
+    --pointer-cursor: url(https://src.ffing.cn/hexo/img/mouse_pointer.cur);
+}
+  
+  /* 鼠标样式 */
+  html {
+    cursor: var(--default-cursor, default), default !important;
+  }
+  
+  body {
+    cursor: var(--default-cursor, default), default !important;
+  }
+  
+  #recent-posts>.recent-post-item>.recent-post-info>.article-meta-wrap>.post-meta-date {
+    cursor: var(--default-cursor, default), default !important;
+  }
+  
+  ul::before,
+  li::before {
+    cursor: var(--default-cursor, default), default !important;
+  }
+  
+  #pagination span {
+    cursor: var(--default-cursor, default), default !important;
+  }
+  
+  a,
+  img,
+  button,
+  svg,
+  canvas,
+  select {
+    cursor: var(--pointer-cursor), pointer !important;
+  }
+  
+  i.scroll-down-effects {
+    cursor: var(--pointer-cursor), pointer !important;
+  }
+  
+  .reward-button {
+    cursor: var(--pointer-cursor), pointer !important;
+  }
+  
+  #pagination a {
+    cursor: var(--pointer-cursor), pointer !important;
+  }
+
+  
+
+ 
+  

@@ -1,0 +1,217 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>centos7下swap (删除、创建、扩容) | FFing</title><meta name="author" content="Ldy"><meta name="copyright" content="Ldy"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="查看swap 1free -m  查看swap的位置及uuid 1blkid  查看swap路径及优先级 1swapon -s  启用所有swap 1swapon -a  禁用所有swap 1swapoff -a   删除SWAP1.停止swap分区 1swapoff  ”swap分区位置“  2.删除swap分区 1rm -rf “swap分区位置“  3.在&#x2F;etc&#x2F;fst">
+<meta property="og:type" content="article">
+<meta property="og:title" content="centos7下swap (删除、创建、扩容)">
+<meta property="og:url" content="http://blog.ffing.fun/posts/f142b42f.html">
+<meta property="og:site_name" content="FFing">
+<meta property="og:description" content="查看swap 1free -m  查看swap的位置及uuid 1blkid  查看swap路径及优先级 1swapon -s  启用所有swap 1swapon -a  禁用所有swap 1swapoff -a   删除SWAP1.停止swap分区 1swapoff  ”swap分区位置“  2.删除swap分区 1rm -rf “swap分区位置“  3.在&#x2F;etc&#x2F;fst">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-07-08T15:37:52.000Z">
+<meta property="article:modified_time" content="2023-01-25T10:48:56.000Z">
+<meta property="article:author" content="Ldy">
+<meta property="article:tag" content="swap">
+<meta name="twitter:card" content="summary"><link rel="shortcut icon" href="https://src.ffing.cn/hexo/img/fn_logo_32x32.png"><link rel="canonical" href="http://blog.ffing.fun/posts/f142b42f"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'centos7下swap (删除、创建、扩容)',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-01-25 18:48:56'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/loading_gif.css"><link rel="stylesheet" href="/css/bg_color.css"><link rel="stylesheet" href="/css/full_page.css"><link rel="stylesheet" href="/css/universe.css"><link rel="stylesheet" href="/css/lightlight.css"><link rel="stylesheet" href="https://src.ffing.cn/hexo/css/nav_menu.css"><link rel="stylesheet" href="/css/foot.css"><link rel="stylesheet" href="/css/auth_icon.css"><link rel="stylesheet" href="//at.alicdn.com/t/c/font_3830672_5bphzb91mjp.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="/css/other_page.css"><link rel="stylesheet" href="/css/mouse.css"><link rel="stylesheet" href="/css/aside.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><div class="loading-img"></div><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (false) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="/css/loading_bar.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js/pace.min.js"></script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/null" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">181</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">290</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 我的</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/about/"><span> 关于我</span></a></li><li><a class="site-page child" href="/timeline/"><span> 时间线</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><div class="back-home-button" tabindex="-1"><i class="back-home-button-icon fas fa-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://www.ffing.cn" title="前往首页" target="_blank" one-link-mark="yes"><img class="back-menu-item-icon" src="https://src.ffing.cn/hexo/img/fn_white_logo.png"/><span class="back-menu-item-text">首页</span></a><a class="back-menu-item" href="http://pan.ffing.cn/" rel="external nofollow" title="前往alist网盘" target="_blank" one-link-mark="yes"><img class="back-menu-item-icon" src="https://src.ffing.cn/hexo/img/alist_logo.png"/><span class="back-menu-item-text">alist网盘</span></a><a class="back-menu-item" href="https://kms.ffing.cn/" rel="external nofollow" title="前往kms服务" target="_blank" one-link-mark="yes"><img class="back-menu-item-icon" src="https://src.ffing.cn/hexo/img/kms_logo.png"/><span class="back-menu-item-text">kms服务</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">在线工具</div><div class="back-menu-list"><a class="back-menu-item" href="https://www.iconfont.cn" rel="noopener nofollow" title="前往阿里icon" target="_blank" one-link-mark="yes"><img class="back-menu-item-icon" src="https://src.ffing.cn/hexo/img/ali-icon_logo.png"/><span class="back-menu-item-text">阿里icon</span></a></div></div></div></div><a id="site-name" href="/"><div class="title">FFing</div><i class="fa-solid fa-house"></i></a></span><div class="mask-name-container"><center id="name-container"><a id="page-name" href="javascript:btf.scrollToDest(0, 500)">PAGE_NAME</a></center></div><div id="weather"></div><div id="tp-weather-widget"></div> <div id="menus"><div class="nav-button" id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="nav-button" id="darkmode_navswitch"><a class="darkmode_switchbutton" type="button" title="浅色和深色模式转换" onclick="switchDarkMode()"><i class="fas fa-adjust"></i></a></div><div class="nav-button" id="nav-totop"><a class="totopbtn"><i class="fas fa-arrow-up"></i><span id="percent" onclick="btf.scrollToDest(0,500)">0</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 我的</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/about/"><span> 关于我</span></a></li><li><a class="site-page child" href="/timeline/"><span> 时间线</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">centos7下swap (删除、创建、扩容)</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-07-08T15:37:52.000Z" title="发表于 2021-07-08 23:37:52">2021-07-08</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-25T10:48:56.000Z" title="更新于 2023-01-25 18:48:56">2023-01-25</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Linux/">Linux</a></span></div><div class="meta-secondline"></div></div></div><article class="post-content" id="article-container"><p>查看swap</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">free -m</span><br></pre></td></tr></table></figure>
+
+<p>查看swap的位置及uuid</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">blkid</span><br></pre></td></tr></table></figure>
+
+<p>查看swap路径及优先级</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">swapon -s</span><br></pre></td></tr></table></figure>
+
+<p>启用所有swap</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">swapon -a</span><br></pre></td></tr></table></figure>
+
+<p>禁用所有swap</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">swapoff -a</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://qnimg.ffing.cn/wp-content/uploads/2021/07/image-41.png"></p>
+<h2 id="删除SWAP"><a href="#删除SWAP" class="headerlink" title="删除SWAP"></a>删除SWAP</h2><p>1.停止swap分区</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">swapoff  ”swap分区位置“</span><br></pre></td></tr></table></figure>
+
+<p>2.删除swap分区</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm -rf “swap分区位置“</span><br></pre></td></tr></table></figure>
+
+<p>3.在&#x2F;etc&#x2F;fstab中，删除或注释掉swap行</p>
+<p>vi &#x2F;etc&#x2F;fstab</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#/dev/mapper/centos-swap swap swap defaults 0 0</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://qnimg.ffing.cn/wp-content/uploads/2021/07/image-42.png"></p>
+<h2 id="创建swap"><a href="#创建swap" class="headerlink" title="创建swap"></a>创建swap</h2><p>1.使用dd命令创建swap交换文件</p>
+<p>下例：创建swap分区&#x2F;var&#x2F;swapfile，容量为1M*4096&#x3D;4096M&#x3D;4G</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#命令格式：dd if=/dev/zero of=&quot;swap文件&quot; bs=&quot;块大小&quot; count=”块数量“</span><br><span class="line"></span><br><span class="line">dd  if=/dev/zero  of=/var/swapfile  bs=1M  count=4096</span><br></pre></td></tr></table></figure>
+
+<p>2.格式化swap分区</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkswap  /var/swapfile</span><br></pre></td></tr></table></figure>
+
+<p>3.激活swap分区</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">swapon /var/swapfile</span><br></pre></td></tr></table></figure>
+
+<p>4.更改swap权限</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod -R 0600 /var/swapfile</span><br></pre></td></tr></table></figure>
+
+<p>5.配置&#x2F;etc&#x2F;fstab,添加swap分区开机自动挂载</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo  &quot;/var/swapfile   swap  swap  defaults  0  0&quot; &gt;&gt;  /etc/fstab</span><br></pre></td></tr></table></figure>
+
+<h2 id="扩容swap"><a href="#扩容swap" class="headerlink" title="扩容swap"></a>扩容swap</h2><p>扩容其实就是创建一个新的swap分区并激活。</p>
+<p>脚本实例：</p>
+<p>以M为单位！推荐！</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">#检测并设置swap</span><br><span class="line">#如果swap不存在，则创建,SETSWAP为指定的swap大小值</span><br><span class="line"></span><br><span class="line">#read键盘输入固定值</span><br><span class="line">read -p &quot;输入swap固定值(单位G)：&quot; GSETSWAP</span><br><span class="line"></span><br><span class="line">#swap固定值,单位G</span><br><span class="line">#GSETSWAP=8</span><br><span class="line"></span><br><span class="line">################以下无需修改##################</span><br><span class="line">echo &quot;当前设置SWAP固定值为$GSETSWAP G&quot;</span><br><span class="line"></span><br><span class="line">#G转换为M</span><br><span class="line">MSETSWAP=`echo &quot;1024*$GSETSWAP&quot;bc`</span><br><span class="line">#swap文件名</span><br><span class="line">RANDOM=`date +%N`</span><br><span class="line">SWAPFILE=&quot;/var/swapfile$RANDOM&quot;</span><br><span class="line">#获取swap</span><br><span class="line">OLDSWAP=`free -mawk &#x27;/Swap/ &#123;print $2&#125;&#x27;`</span><br><span class="line">OLDSWAPG=`free -hawk &#x27;/Swap/ &#123;print $2&#125;&#x27;`</span><br><span class="line"></span><br><span class="line">###判断swap</span><br><span class="line">#判断是否存在swap分区</span><br><span class="line">if [ &quot;$OLDSWAP&quot; = &quot;0B&quot; ] ;then</span><br><span class="line">#0B表示不存在swap，则创建swap</span><br><span class="line">echo  &quot;正在创建swap，请等待 ……&quot;</span><br><span class="line">dd  if=/dev/zero  of=$SWAPFILE  bs=1M  count=$MSETSWAP &gt; /dev/null 2&gt;&amp;1</span><br><span class="line">else</span><br><span class="line"></span><br><span class="line">#否则，扩容</span><br><span class="line">#判断当前设置swap是否大于原有swap</span><br><span class="line">if [ &quot;$MSETSWAP&quot; -gt &quot;$OLDSWAP&quot; ] ;then</span><br><span class="line">ADDSWAP=`echo &quot;$MSETSWAP-$OLDSWAP&quot;bc`</span><br><span class="line">echo  &quot;正在创建swap，请等待 ……&quot;</span><br><span class="line">dd  if=/dev/zero  of=$SWAPFILE  bs=1M  count=$ADDSWAP &gt; /dev/null 2&gt;&amp;1</span><br><span class="line">else</span><br><span class="line">echo &quot;已存在SWAP: $OLDSWAPG&quot;</span><br><span class="line">echo &quot;错误！设置的swap需大于已有swap，请确认！&quot;</span><br><span class="line">exit</span><br><span class="line">fi</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">#格式化swap</span><br><span class="line">mkswap  $SWAPFILE</span><br><span class="line">#启动swap</span><br><span class="line">swapon $SWAPFILE</span><br><span class="line">#swap权限</span><br><span class="line">chmod -R 0600 $SWAPFILE</span><br><span class="line">#开机挂载swap</span><br><span class="line">echo  &quot;$SWAPFILE   swap  swap  defaults  0  0&quot; &gt;&gt;  /etc/fstab</span><br><span class="line">echo</span><br><span class="line">echo &quot;----------------------当前交换分区----------------------&quot;</span><br><span class="line">swapon -s</span><br><span class="line">echo &quot;----------------------当前内存信息----------------------&quot;</span><br><span class="line">free -h</span><br></pre></td></tr></table></figure>
+
+<p>____________________________________________________________</p>
+<p>以G为单位，会出现些许偏差，推荐上面的脚本</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">#检测并设置swap</span><br><span class="line">#如果swap不存在，则创建,SETSWAP为指定的swap大小值</span><br><span class="line">SETSWAP=8</span><br><span class="line"></span><br><span class="line">###################################</span><br><span class="line">#swap文件名</span><br><span class="line">RANDOM=`date +%N`</span><br><span class="line">SWAPFILE=&quot;/var/swapfile$RANDOM&quot;</span><br><span class="line">#获取swap</span><br><span class="line">OLDSWAP=`free -mawk &#x27;/Swap/ &#123;print $2&#125;&#x27;`</span><br><span class="line">#OLDSWAP转换单位为G，并取整数部分</span><br><span class="line">OLDINTSWAP=`echo &quot;$OLDSWAP&quot;awk  &#x27;&#123;printf &quot;%.0f &quot;, $OLDSWAP/1024&#125;&#x27;`</span><br><span class="line"></span><br><span class="line">###判断swap</span><br><span class="line">#判断是否为空</span><br><span class="line">if [ &quot;$OLDINTSWAP&quot; = &quot;0B&quot; ] ;then</span><br><span class="line">#空则创建swap</span><br><span class="line">echo  &quot;正在创建swap，请等待 ……&quot;</span><br><span class="line">dd  if=/dev/zero  of=$SWAPFILE  bs=1G  count=$SETSWAP</span><br><span class="line">else</span><br><span class="line"></span><br><span class="line">#不为空，则扩容</span><br><span class="line">#判断当前设置swap是否大于原有swap</span><br><span class="line">if [ &quot;$SETSWAP&quot; -gt &quot;$OLDINTSWAP&quot; ] ;then</span><br><span class="line">ADDSWAP=`echo &quot;$SETSWAP-$OLDINTSWAP&quot;bc`</span><br><span class="line">echo  &quot;正在创建swap，请等待 ……&quot;</span><br><span class="line">dd  if=/dev/zero  of=$SWAPFILE  bs=1G  count=$ADDSWAP</span><br><span class="line">else</span><br><span class="line">echo &quot;设置的swap比当前swap小，请确认&quot;</span><br><span class="line">exit</span><br><span class="line">fi</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">#格式化swap</span><br><span class="line">mkswap  $SWAPFILE</span><br><span class="line">#启动swap</span><br><span class="line">swapon $SWAPFILE</span><br><span class="line">#swap权限</span><br><span class="line">chmod -R 0600 $SWAPFILE</span><br><span class="line">#开机挂载swap</span><br><span class="line">echo  &quot;$SWAPFILE   swap  swap  defaults  0  0&quot; &gt;&gt;  /etc/fstab</span><br><span class="line">echo</span><br><span class="line">echo &quot;----------------------当前交换分区----------------------&quot;</span><br><span class="line">swapon -s</span><br><span class="line">echo &quot;----------------------当前内存信息----------------------&quot;</span><br><span class="line">free -h</span><br></pre></td></tr></table></figure></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://blog.ffing.fun">Ldy</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://blog.ffing.fun/posts/f142b42f.html">http://blog.ffing.fun/posts/f142b42f.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://blog.ffing.fun" target="_blank">FFing</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/swap/">swap</a></div><div class="post_share"><div class="social-share" data-image="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/fa8e788e.html"><img class="prev-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">通过win10  、mac下终端ssh到服务器</div></div></a></div><div class="next-post pull-right"><a href="/posts/6c807a65.html"><img class="next-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">windows 一键共享</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A0%E9%99%A4SWAP"><span class="toc-number">1.</span> <span class="toc-text">删除SWAP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BAswap"><span class="toc-number">2.</span> <span class="toc-text">创建swap</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%A9%E5%AE%B9swap"><span class="toc-number">3.</span> <span class="toc-text">扩容swap</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Ldy</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div><div id="footer-banner"><div class="footer-banner-links"><div class="footer-banner-left"><div class="footer-banner-left"><div id="footer-banner-tips"></div><script src="https://src.ffing.cn/hexo/js/typed.min.foot_daziji.js"></script><script>var typed = new Typed("#footer-banner-tips", {
+  strings: ["你不在正经事上忧虑,就会在乱七八糟事上忧虑,能力守恒!", "折腾硬件、软件;折腾系统、平台;折腾开发、环境;折腾window、linux;折腾,折腾,瞎J8折腾."],
+  startDelay: 200,
+  backDelay: 2000,
+  typeSpeed: 100,
+  loop: true,
+  backSpeed: 20
+})
+</script></div></div><div class="footer-banner-right"><p><a target="_blank" href="https://hexo.io/"><img src="http://src.ffing.cn/hexo/img/Frame-Hexo-blue.svg" title="框架"></a>&nbsp;<a target="_blank" href="https://butterfly.js.org/"><img src="http://src.ffing.cn/hexo/img/Theme-Butterfly.svg" title="主题"></a>&nbsp;<a target="_blank" href="https://www.upyun.com/"><img src="http://src.ffing.cn/hexo/img/CDN又拍云.svg" title="CDN加速"></a>&nbsp;<a target="_blank" href="https://www.51.la/"><img src="http://src.ffing.cn/hexo/img/Analytics-51la.svg" title="51la统计"></a>&nbsp;<a target="_blank" href="https://www.upyun.com/"><img src="http://src.ffing.cn/hexo/img/豫ICP备2021016009.svg" title="ICP备案"></a></p></div></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><script src="https://src.ffing.cn/hexo/js/jquery.min.3.6.3.js"></script><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script defer src="https://src.ffing.cn/hexo/js/switchDarkMode.js"></script><script defer src="https://src.ffing.cn/hexo/js/nav_menu.js"></script><script src="https://src.ffing.cn/hexo/js/foot_runtime.js"></script><script async src="//at.alicdn.com/t/c/font_3830672_5bphzb91mjp.js"></script></div></body></html>

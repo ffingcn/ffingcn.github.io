@@ -1,0 +1,357 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>FFing</title><meta name="author" content="Ldy"><meta name="copyright" content="Ldy"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="linux技术分享">
+<meta property="og:type" content="website">
+<meta property="og:title" content="FFing">
+<meta property="og:url" content="http://blog.ffing.fun/page/10/index.html">
+<meta property="og:site_name" content="FFing">
+<meta property="og:description" content="linux技术分享">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="Ldy">
+<meta name="twitter:card" content="summary"><link rel="shortcut icon" href="https://src.ffing.cn/hexo/img/fn_logo_32x32.png"><link rel="canonical" href="http://blog.ffing.fun/page/10/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'FFing',
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2023-02-03 23:30:02'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/loading_gif.css"><link rel="stylesheet" href="/css/bg_color.css"><link rel="stylesheet" href="/css/full_page.css"><link rel="stylesheet" href="/css/universe.css"><link rel="stylesheet" href="/css/lightlight.css"><link rel="stylesheet" href="https://src.ffing.cn/hexo/css/nav_menu.css"><link rel="stylesheet" href="/css/foot.css"><link rel="stylesheet" href="/css/auth_icon.css"><link rel="stylesheet" href="//at.alicdn.com/t/c/font_3830672_5bphzb91mjp.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="/css/other_page.css"><link rel="stylesheet" href="/css/mouse.css"><link rel="stylesheet" href="/css/aside.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><div class="loading-img"></div><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (false) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="/css/loading_bar.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js/pace.min.js"></script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/null" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">181</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">290</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 我的</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/about/"><span> 关于我</span></a></li><li><a class="site-page child" href="/timeline/"><span> 时间线</span></a></li></ul></div></div></div></div><div class="page" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><div class="back-home-button" tabindex="-1"><i class="back-home-button-icon fas fa-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://www.ffing.cn" title="前往首页" target="_blank" one-link-mark="yes"><img class="back-menu-item-icon" src="https://src.ffing.cn/hexo/img/fn_white_logo.png"/><span class="back-menu-item-text">首页</span></a><a class="back-menu-item" href="http://pan.ffing.cn/" rel="external nofollow" title="前往alist网盘" target="_blank" one-link-mark="yes"><img class="back-menu-item-icon" src="https://src.ffing.cn/hexo/img/alist_logo.png"/><span class="back-menu-item-text">alist网盘</span></a><a class="back-menu-item" href="https://kms.ffing.cn/" rel="external nofollow" title="前往kms服务" target="_blank" one-link-mark="yes"><img class="back-menu-item-icon" src="https://src.ffing.cn/hexo/img/kms_logo.png"/><span class="back-menu-item-text">kms服务</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">在线工具</div><div class="back-menu-list"><a class="back-menu-item" href="https://www.iconfont.cn" rel="noopener nofollow" title="前往阿里icon" target="_blank" one-link-mark="yes"><img class="back-menu-item-icon" src="https://src.ffing.cn/hexo/img/ali-icon_logo.png"/><span class="back-menu-item-text">阿里icon</span></a></div></div></div></div><a id="site-name" href="/"><div class="title">FFing</div><i class="fa-solid fa-house"></i></a></span><div class="mask-name-container"><center id="name-container"><a id="page-name" href="javascript:btf.scrollToDest(0, 500)">PAGE_NAME</a></center></div><div id="weather"></div><div id="tp-weather-widget"></div> <div id="menus"><div class="nav-button" id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="nav-button" id="darkmode_navswitch"><a class="darkmode_switchbutton" type="button" title="浅色和深色模式转换" onclick="switchDarkMode()"><i class="fas fa-adjust"></i></a></div><div class="nav-button" id="nav-totop"><a class="totopbtn"><i class="fas fa-arrow-up"></i><span id="percent" onclick="btf.scrollToDest(0,500)">0</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 我的</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/about/"><span> 关于我</span></a></li><li><a class="site-page child" href="/timeline/"><span> 时间线</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-content left"><div class="recent-post-cover"><img class="article-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="小众网盘kiftd（3分钟搭建适合个人或小团队的网盘）"></div><div class="recent-post-info"><a class="article-title" href="/posts/c360478d.html" title="小众网盘kiftd（3分钟搭建适合个人或小团队的网盘）"><div class="article-title-link">小众网盘kiftd（3分钟搭建适合个人或小团队的网盘）</div></a><div class="recent-post-meta">               <div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-08-15T10:44:43.000Z" title="发表于 2021-08-15 18:44:43">2021-08-15</time></span><span class="article-meta"><span class="article-meta-separator"> | </span><svg class="meta_icon post-ui-icon" style="width:12px;height:12px;position:relative;top:1px"><use xlink:href="#icon-fenlei"></use></svg><a class="article-meta__categories" href="/categories/other/">other</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/%E6%95%99%E7%A8%8B/">教程</a></span></div></div></div><a class="article-content" href="/posts/c360478d.html" title="小众网盘kiftd（3分钟搭建适合个人或小团队的网盘）"><div class="article-content-text">适合个人及小团体使用，作者有详细的操作安装文档可自行查看。
+我上篇文章写的onedirve网盘，冗长的搭建流程。。。
+今天这篇问题就写个“几乎”一键搭建的网盘——kiftd
+推荐理由：多平台（win&#x2F;mac&#x2F;linux）、几乎做到开箱即用（仅需java环境）、开源！
+kiftd官网：https://kohgylw.gitee.io/
+痛点：原来测试搭建过Owncloud、nextcloud、可道云、seafile（有兴趣的也可以看下Filerun和h5ai），这些开源都需要http、php、mysql环境支持，且部分对环境版本也有要求、故障排查麻烦。。。（seafile文件上传端口跳转搞了我好几天，印象深刻！！！），总而言之适合企业的网盘，接口再多、支持几千用户量然并卵。平时我们个人使用或者小团队使用时用不到那么多功能，那么这个kiftd就比较适合了。
+所以，总而言之、言而总之适合自己的才是好的。
+流程很简单：
+
+安装java(8以上)
+下载kiftd
+启动kiftd
+
+Mac、Win平台1.下载安装java，下载后双击安装程序下一步下一步即可。
+通过java官方下 ...</div></a><div class="recent-post-arrow"></div></div></div><div class="recent-post-item"><div class="recent-post-content right"><div class="recent-post-cover"><img class="article-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="搭建个人5T网盘（OneindexN+OneDrive）"></div><div class="recent-post-info"><a class="article-title" href="/posts/6ed33d25.html" title="搭建个人5T网盘（OneindexN+OneDrive）"><div class="article-title-link">搭建个人5T网盘（OneindexN+OneDrive）</div></a><div class="recent-post-meta">               <div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-08-15T06:55:42.000Z" title="发表于 2021-08-15 14:55:42">2021-08-15</time></span><span class="article-meta"><span class="article-meta-separator"> | </span><svg class="meta_icon post-ui-icon" style="width:12px;height:12px;position:relative;top:1px"><use xlink:href="#icon-fenlei"></use></svg><a class="article-meta__categories" href="/categories/other/">other</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/%E6%95%99%E7%A8%8B/">教程</a></span></div></div></div><a class="article-content" href="/posts/6ed33d25.html" title="搭建个人5T网盘（OneindexN+OneDrive）"><div class="article-content-text">Demo：cloud.ffing.cn
+使用motrix下载工具，满速下载香，真香！
+
+因为牵涉内容较多，篇幅较长。
+oneindex作者已经删库，这里我以OneindexN稍做修改作为我的前端。
+当个网盘、图床都可以，尽量不要当电影库，避免被封。
+优势：
+
+oneindex 不走服务器流量，直连国内世纪互联数据中心
+满速下载（速度优于国产网盘）
+空间1-5 T , 自定义页面，可玩性大
+微软官方解释：我们为中国用户提供了 Office 365 全球版和 Office 365 中国版两种版本。主要区别在于： Office 365 中国版由世纪互联负责运营，数据中心位于北京、上海，可以提供增值税发票。 目前仅 Office 365 全球版提供 Yammer、Microsoft Planner、Microsoft Teams 以及 Sway 等产品。
+
+准备工作：
+
+微软账号
+手机号
+科学上网
+云服务器（nginx+php5.6以上）
+
+流程：
+
+onedrive business 账号 (订阅office开发者E5账号) 
+onedrive（调整5T空间）
+创建OneDriveAPP
+部 ...</div></a><div class="recent-post-arrow"></div></div></div><div class="recent-post-item"><div class="recent-post-content left"><div class="recent-post-cover"><img class="article-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="3分钟搭建免费静态主机"></div><div class="recent-post-info"><a class="article-title" href="/posts/fdb43bb5.html" title="3分钟搭建免费静态主机"><div class="article-title-link">3分钟搭建免费静态主机</div></a><div class="recent-post-meta">               <div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-08-07T14:49:41.000Z" title="发表于 2021-08-07 22:49:41">2021-08-07</time></span><span class="article-meta"><span class="article-meta-separator"> | </span><svg class="meta_icon post-ui-icon" style="width:12px;height:12px;position:relative;top:1px"><use xlink:href="#icon-fenlei"></use></svg><a class="article-meta__categories" href="/categories/other/">other</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/%E6%95%99%E7%A8%8B/">教程</a></span></div></div></div><a class="article-content" href="/posts/fdb43bb5.html" title="3分钟搭建免费静态主机"><div class="article-content-text">最近没状态，写下原来懒得写的东西吧。
+免费是真的免费，但免费也是有些许的限制的，主要分为两种：无限流量有限带宽 和 有限流量无限带宽，两种免费模式自行选择。
+鉴于局限性也就让我们玩玩就可以了，或者做个简单的门户首页就行了。（搭建博客不好用，因为是静态网页就会导致每次先备份，再更新、全部更新。。。）
+无限流量有限带宽：利用托管平台page服务搭建静态网页，如：gitee平台（gitee.io）、github平台（github.io）、coding平台（conding.io）听说coding支持动态了，还没去看呢
+有限流量无限带宽：利用CDN的免费存储空间做静态网页发布，如：又拍云（10G空间+15G流量）、七牛云（10G空间+10流量）
+第一种：无限流量，有限带宽利用page服务搭建静态网页。
+gitee、github、coding这3个代码平台的操作都差不多，毕竟都可以使用git的，我这里以github为例做个演示。
+流程：
+
+注册github账号
+创建仓库（仓库名：你的用户名+github.io）
+上传静态网页
+配置github page项
+测试
+解析到个人域名（可选）
+
+第一步，注 ...</div></a><div class="recent-post-arrow"></div></div></div><div class="recent-post-item"><div class="recent-post-content right"><div class="recent-post-cover"><img class="article-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="centos 函数定义"></div><div class="recent-post-info"><a class="article-title" href="/posts/b485d268.html" title="centos 函数定义"><div class="article-title-link">centos 函数定义</div></a><div class="recent-post-meta">               <div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-08-02T09:29:00.000Z" title="发表于 2021-08-02 17:29:00">2021-08-02</time></span><span class="article-meta"><span class="article-meta-separator"> | </span><svg class="meta_icon post-ui-icon" style="width:12px;height:12px;position:relative;top:1px"><use xlink:href="#icon-fenlei"></use></svg><a class="article-meta__categories" href="/categories/Linux/">Linux</a></span></div></div></div><a class="article-content" href="/posts/b485d268.html" title="centos 函数定义"><div class="article-content-text">别名：单个命令
+函数：可以理解为多个或多组命令的集合
+系统默认函数，可自行查看：&#x2F;etc&#x2F;init.d&#x2F;functions
+别名和函数都是为了实现变量替换，且函数文件也可以实现嵌套，也就说我们可以将写好的函数文件备份到任意电脑上进行调用，方便运维工作。（函数可以写入脚本也可以单独文件，可根据情况自行选择）
+定义函数语法
+语法一（常用）：
+123[函数名]()&#123;...函数体...&#125;
+
+语法二：
+123function [函数名]()&#123;...函数体...&#125;
+
+语法三：
+123function [函数名]&#123;...函数体...&#125;
+
+以删除文件为例，定义”删除成功”、”删除失败”函数，并调用系统action函数提示。
+脚本如下：
+1234567891011121314151617181920212223242526272829#!/bin/bash#激活系统函数. /etc/init.d/functions#定义del_success函数del_success () &#123;action &quot;删 ...</div></a><div class="recent-post-arrow"></div></div></div><div class="recent-post-item"><div class="recent-post-content left"><div class="recent-post-cover"><img class="article-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="通过win10  、mac下终端ssh到服务器"></div><div class="recent-post-info"><a class="article-title" href="/posts/fa8e788e.html" title="通过win10  、mac下终端ssh到服务器"><div class="article-title-link">通过win10  、mac下终端ssh到服务器</div></a><div class="recent-post-meta">               <div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-07-09T02:46:38.000Z" title="发表于 2021-07-09 10:46:38">2021-07-09</time></span><span class="article-meta"><span class="article-meta-separator"> | </span><svg class="meta_icon post-ui-icon" style="width:12px;height:12px;position:relative;top:1px"><use xlink:href="#icon-fenlei"></use></svg><a class="article-meta__categories" href="/categories/Windows/">Windows</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/%E6%95%99%E7%A8%8B/">教程</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/%E9%BB%91%E8%8B%B9%E6%9E%9C/">黑苹果</a></span></div></div></div><a class="article-content" href="/posts/fa8e788e.html" title="通过win10  、mac下终端ssh到服务器"><div class="article-content-text">原生工具：win10 或 mac下的终端，临时满足个人使用。（win7需要安装ssh）
+ssh命令连接服务器：ssh [-p 端口号] [-i 证书名] 服务器用户名@服务器IP或域名
+注：win10:证书需放置在用户目录下%HOMEPATH%;也可以做个配置文件：用户目录&#x2F;.ssh&#x2F;config
+
+SPC传输scp 文件或目录 –到–&gt; 文件或目录
+scp命令上传文件或目录：scp [-r] 本地文件或目录 服务器用户名@地址:目录
+scp下载命令格式和上传是反过来。
+小技巧：文件路径太深的时候，直接将文件或目录拖入终端框即可出现路径
+
+
+
+小提示：如需长期使用，可以保存为脚本文件。
+windows下做个批处理，懒人懒事
+Mac也可以做个shell脚本。
+注：mac下shell脚本想实现双击打开，需要满足两点：
+1.添加执行权限：chmod +x 你的脚本文件
+2.默认打开方式为“终端”:右键更改默认打开方式，在选择应用程序时选择“启用：所有应用程序”，选择”终端.app”。
+
+</div></a><div class="recent-post-arrow"></div></div></div><div class="recent-post-item"><div class="recent-post-content right"><div class="recent-post-cover"><img class="article-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="centos7下swap (删除、创建、扩容)"></div><div class="recent-post-info"><a class="article-title" href="/posts/f142b42f.html" title="centos7下swap (删除、创建、扩容)"><div class="article-title-link">centos7下swap (删除、创建、扩容)</div></a><div class="recent-post-meta">               <div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-07-08T15:37:52.000Z" title="发表于 2021-07-08 23:37:52">2021-07-08</time></span><span class="article-meta"><span class="article-meta-separator"> | </span><svg class="meta_icon post-ui-icon" style="width:12px;height:12px;position:relative;top:1px"><use xlink:href="#icon-fenlei"></use></svg><a class="article-meta__categories" href="/categories/Linux/">Linux</a></span></div></div></div><a class="article-content" href="/posts/f142b42f.html" title="centos7下swap (删除、创建、扩容)"><div class="article-content-text">查看swap
+1free -m
+
+查看swap的位置及uuid
+1blkid
+
+查看swap路径及优先级
+1swapon -s
+
+启用所有swap
+1swapon -a
+
+禁用所有swap
+1swapoff -a
+
+
+删除SWAP1.停止swap分区
+1swapoff  ”swap分区位置“
+
+2.删除swap分区
+1rm -rf “swap分区位置“
+
+3.在&#x2F;etc&#x2F;fstab中，删除或注释掉swap行
+vi &#x2F;etc&#x2F;fstab
+1#/dev/mapper/centos-swap swap swap defaults 0 0
+
+
+创建swap1.使用dd命令创建swap交换文件
+下例：创建swap分区&#x2F;var&#x2F;swapfile，容量为1M*4096&#x3D;4096M&#x3D;4G
+123#命令格式：dd if=/dev/zero of=&quot;swap文件&quot; bs=&quot;块大小&quot; count=”块数量“dd  if=/dev/zero  of=/var/swapfile  bs=1M  ...</div></a><div class="recent-post-arrow"></div></div></div><div class="recent-post-item"><div class="recent-post-content left"><div class="recent-post-cover"><img class="article-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="windows 一键共享"></div><div class="recent-post-info"><a class="article-title" href="/posts/6c807a65.html" title="windows 一键共享"><div class="article-title-link">windows 一键共享</div></a><div class="recent-post-meta">               <div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-07-06T09:44:13.000Z" title="发表于 2021-07-06 17:44:13">2021-07-06</time></span><span class="article-meta"><span class="article-meta-separator"> | </span><svg class="meta_icon post-ui-icon" style="width:12px;height:12px;position:relative;top:1px"><use xlink:href="#icon-fenlei"></use></svg><a class="article-meta__categories" href="/categories/Windows/">Windows</a></span></div></div></div><a class="article-content" href="/posts/6c807a65.html" title="windows 一键共享"><div class="article-content-text">OKshare代码，自行bat
+俩字，好用！
+123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140141142143144145146147148149150151152153154155156157158159160161162163164165166167168169170171172173174175176177178179180181182183184185186187188189190191192193194195 ...</div></a><div class="recent-post-arrow"></div></div></div><div class="recent-post-item"><div class="recent-post-content right"><div class="recent-post-cover"><img class="article-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="windows 开机自动登录（免去密码输入环节）"></div><div class="recent-post-info"><a class="article-title" href="/posts/c5ca7821.html" title="windows 开机自动登录（免去密码输入环节）"><div class="article-title-link">windows 开机自动登录（免去密码输入环节）</div></a><div class="recent-post-meta">               <div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-07-06T03:04:02.000Z" title="发表于 2021-07-06 11:04:02">2021-07-06</time></span><span class="article-meta"><span class="article-meta-separator"> | </span><svg class="meta_icon post-ui-icon" style="width:12px;height:12px;position:relative;top:1px"><use xlink:href="#icon-fenlei"></use></svg><a class="article-meta__categories" href="/categories/Windows/">Windows</a></span></div></div></div><a class="article-content" href="/posts/c5ca7821.html" title="windows 开机自动登录（免去密码输入环节）"><div class="article-content-text">背景：
+办公室电脑需要被远程、还随时win+l，就必须设置密码。但每次开机又懒得输入密码。
+so
+netplwiz或control userpasswords2
+第一步：打开“用户账户”
+“运行”或dos（黑框）输入：netplwiz或control userpasswords2
+
+
+第二步，取消“输入密码”
+
+第三步，点击“确定”，输入需要自动登录都用户名、密码，确认。
+
+</div></a><div class="recent-post-arrow"></div></div></div><div class="recent-post-item"><div class="recent-post-content left"><div class="recent-post-cover"><img class="article-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="一分钟申请xshell免费版"></div><div class="recent-post-info"><a class="article-title" href="/posts/7a05da75.html" title="一分钟申请xshell免费版"><div class="article-title-link">一分钟申请xshell免费版</div></a><div class="recent-post-meta">               <div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-07-02T07:23:35.000Z" title="发表于 2021-07-02 15:23:35">2021-07-02</time></span><span class="article-meta"><span class="article-meta-separator"> | </span><svg class="meta_icon post-ui-icon" style="width:12px;height:12px;position:relative;top:1px"><use xlink:href="#icon-fenlei"></use></svg><a class="article-meta__categories" href="/categories/other/">other</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/%E6%95%99%E7%A8%8B/">教程</a></span></div></div></div><a class="article-content" href="/posts/7a05da75.html" title="一分钟申请xshell免费版"><div class="article-content-text">前几天朋友让我帮忙找xshell的破解版，我很懵逼，个人免费版不可以用吗？？？
+免费版和商业版最大区别就是在于一个前端最多打开4个标签，超过4个后，就自动再打开下一个前端程序，个人使用已经可以满足了。
+当然，懒人还可以使用系统自带的终端连接服务器，文章结尾有介绍。
+
+介于朋友的这种情况，写个1分钟申请流程吧。
+官网–&gt;免费授权–&gt;填写你的邮箱–&gt;登录你的邮箱–&gt;打开邮件链接下载–&gt;ok
+1.打开xshell的官网：https://www.netsarang.com/zh/xshell/
+（注：带cn的那个是国内代理商的网站，是不会放免费的东东的。）
+2.点击下载
+
+3.选择免费授权
+
+4.邮箱必须正确，下载链接会发送到你填写的邮箱（这里一般选择两者，可以把xshell和xftp都发给你）
+
+5.到你自己填写的邮箱，会有xshell发送的邮件，点击链接下载即可
+
+6.安装流程我就不讲了吧，下一步即可。
+注：xshell需要vc++环境，如果缺省xxx.dll，就安装一下微软常用运行库吧。
+-———————————————————————————–
+顺便推荐下 ...</div></a><div class="recent-post-arrow"></div></div></div><div class="recent-post-item"><div class="recent-post-content right"><div class="recent-post-cover"><img class="article-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="利用X协议实现linux图像转发"></div><div class="recent-post-info"><a class="article-title" href="/posts/a121e4d7.html" title="利用X协议实现linux图像转发"><div class="article-title-link">利用X协议实现linux图像转发</div></a><div class="recent-post-meta">               <div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-07-01T15:24:17.000Z" title="发表于 2021-07-01 23:24:17">2021-07-01</time></span><span class="article-meta"><span class="article-meta-separator"> | </span><svg class="meta_icon post-ui-icon" style="width:12px;height:12px;position:relative;top:1px"><use xlink:href="#icon-fenlei"></use></svg><a class="article-meta__categories" href="/categories/Linux/">Linux</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/Windows/">Windows</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/%E6%95%99%E7%A8%8B/">教程</a></span></div></div></div><a class="article-content" href="/posts/a121e4d7.html" title="利用X协议实现linux图像转发"><div class="article-content-text">安装oracle数据库，必须要有图像安装，而我的centos没有装gnome桌面，但我又不想装桌面，浪费资源。所以就懵逼着百度看到了着个X协议。
+x11端口：默认 DISPLAY&#x3D;IP:0.0 使用端口 6000，DISPLAY&#x3D;IP:1.0 使用端口6001，以此类推。
+X协议:实现在没有安装图像的主机上，将图像转发到可以展示图像的主机上。
+流程：
+图解
+配置客户端
+配置服务端
+测试
+
+一，图解：
+从上图可以看出：
+最终将图像转发到我们的个人电脑上，免去服务器安装桌面。
+centos为客户端，而我们的个人PC为服务端，所以我们需要对客户端和服务端这两个地方操作。（这里的客户端和服务端很别扭，有历史原因可以自行百度）
+客户端为centos7：配置sshd_config，安装xorg-x11-apps，安装 Fonts（如果没有字体会出现中文乱码）
+服务端为个人PC：为windos时，安装Xming；为MAC时，安装Xquartz
+二，客户端配置本地ssh远程到centos做操作。
+1.配置&#x2F;etc&#x2F;ssh&#x2F;sshd_config，在最后 ...</div></a><div class="recent-post-arrow"></div></div></div><div class="recent-post-item"><div class="recent-post-content left"><div class="recent-post-cover"><img class="article-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="U盘安装centos，无法找到U盘安装源，最简单的解决方法"></div><div class="recent-post-info"><a class="article-title" href="/posts/cd69956f.html" title="U盘安装centos，无法找到U盘安装源，最简单的解决方法"><div class="article-title-link">U盘安装centos，无法找到U盘安装源，最简单的解决方法</div></a><div class="recent-post-meta">               <div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-07-01T07:35:01.000Z" title="发表于 2021-07-01 15:35:01">2021-07-01</time></span><span class="article-meta"><span class="article-meta-separator"> | </span><svg class="meta_icon post-ui-icon" style="width:12px;height:12px;position:relative;top:1px"><use xlink:href="#icon-fenlei"></use></svg><a class="article-meta__categories" href="/categories/Linux/">Linux</a></span></div></div></div><a class="article-content" href="/posts/cd69956f.html" title="U盘安装centos，无法找到U盘安装源，最简单的解决方法"><div class="article-content-text">每年都丢U盘，每年都买U盘。
+今年买了2个U盘备用，顺带重装centos7发现使用网上通用的方法无法发现U盘，额。当时在想是不是新U盘（金士顿）是不是主控版本太高。。。后发现是现在的金士顿太垃圾。。。
+然后就百度有了新发现，最简单的操作，实在是NB，只需要删除“6_64”即可。
+原始的：
+1vmlinuz initrd=initrd.img inst.stage2=hd:LABEL=CentOS\x207\x20x86_64 quiet
+
+更改后：
+1vmlinuz initrd=initrd.img inst.stage2=hd:LABEL=CentOS\x207\x20x8 quiet
+
+ctrl+x保存，就顺利安装系统了。切记只需要删除“6_64”即可
+忘记了哪位大神写了，做个记录吧。
+</div></a><div class="recent-post-arrow"></div></div></div><div class="recent-post-item"><div class="recent-post-content right"><div class="recent-post-cover"><img class="article-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="按键精灵-实现自动刷视频"></div><div class="recent-post-info"><a class="article-title" href="/posts/d5da22f3.html" title="按键精灵-实现自动刷视频"><div class="article-title-link">按键精灵-实现自动刷视频</div></a><div class="recent-post-meta">               <div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-06-23T09:12:31.000Z" title="发表于 2021-06-23 17:12:31">2021-06-23</time></span><span class="article-meta"><span class="article-meta-separator"> | </span><svg class="meta_icon post-ui-icon" style="width:12px;height:12px;position:relative;top:1px"><use xlink:href="#icon-fenlei"></use></svg><a class="article-meta__categories" href="/categories/other/">other</a></span></div></div></div><a class="article-content" href="/posts/d5da22f3.html" title="按键精灵-实现自动刷视频"><div class="article-content-text">按键精灵官网：http://www.anjian.com/
+手机助手下载：http://download.myanjian.com/
+使用“按键精灵-手机助手”版本，进行安卓调试。
+注：安卓手机精灵需安卓手机需要root，root方式建议：TWRP+Magisk
+TWRP:https://twrp.me/Devices/
+Magisk：https://github.com/topjohnwu/Magisk/releases
+历时1天半完善脚本，适配所有屏幕尺寸，随机观看6~16秒。
+1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889909192939495969798991001011021031041051061071081091101111121131141151161171181191201211 ...</div></a><div class="recent-post-arrow"></div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/9/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/#content-inner">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/#content-inner">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/#content-inner">16</a><a class="extend next" rel="next" href="/page/11/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="author-info__description"><img style="float:left;width:100px;height:100px " src="https://src.ffing.cn/hexo/img/fn_logo.png"><p style="font-size:13px">兴趣是最好的老师<br>时间是最贵的学费</p></div></div><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://gitee.com/ffing" target="_blank" title="Gitee"><svg class="social_icon iconfont" aria-hidden="true"><use xlink:href="#icon-gitee"></use></svg></a><a class="social-icon faa-parent animated-hover" href="mailto:79131627@qq.com" target="_blank" title="Email"><svg class="social_icon iconfont" aria-hidden="true"><use xlink:href="#icon-youxiang"></use></svg></a><a class="social-icon faa-parent animated-hover" href="https://space.bilibili.com/376172153" target="_blank" title="BiliBili"><svg class="social_icon iconfont" aria-hidden="true"><use xlink:href="#icon-bilibili-line1"></use></svg></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            
+            </div>
+            <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Debian/"><span class="card-category-list-name">Debian</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Linux/"><span class="card-category-list-name">Linux</span><span class="card-category-list-count">134</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Me/"><span class="card-category-list-name">Me</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/SQL/"><span class="card-category-list-name">SQL</span><span class="card-category-list-count">7</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Windows/"><span class="card-category-list-name">Windows</span><span class="card-category-list-count">11</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/other/"><span class="card-category-list-name">other</span><span class="card-category-list-count">16</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%95%99%E7%A8%8B/"><span class="card-category-list-name">教程</span><span class="card-category-list-count">40</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E9%BB%91%E8%8B%B9%E6%9E%9C/"><span class="card-category-list-name">黑苹果</span><span class="card-category-list-count">10</span></a></li>
+            </ul></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="fas fa-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/02/"><span class="card-archive-list-date">二月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/12/"><span class="card-archive-list-date">十二月 2022</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/11/"><span class="card-archive-list-date">十一月 2022</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">5</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/10/"><span class="card-archive-list-date">十月 2022</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/09/"><span class="card-archive-list-date">九月 2022</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">3</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/08/"><span class="card-archive-list-date">八月 2022</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/07/"><span class="card-archive-list-date">七月 2022</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">3</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/05/"><span class="card-archive-list-date">五月 2022</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li></ul></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Ldy</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div><div id="footer-banner"><div class="footer-banner-links"><div class="footer-banner-left"><div class="footer-banner-left"><div id="footer-banner-tips"></div><script src="https://src.ffing.cn/hexo/js/typed.min.foot_daziji.js"></script><script>var typed = new Typed("#footer-banner-tips", {
+  strings: ["你不在正经事上忧虑,就会在乱七八糟事上忧虑,能力守恒!", "折腾硬件、软件;折腾系统、平台;折腾开发、环境;折腾window、linux;折腾,折腾,瞎J8折腾."],
+  startDelay: 200,
+  backDelay: 2000,
+  typeSpeed: 100,
+  loop: true,
+  backSpeed: 20
+})
+</script></div></div><div class="footer-banner-right"><p><a target="_blank" href="https://hexo.io/"><img src="http://src.ffing.cn/hexo/img/Frame-Hexo-blue.svg" title="框架"></a>&nbsp;<a target="_blank" href="https://butterfly.js.org/"><img src="http://src.ffing.cn/hexo/img/Theme-Butterfly.svg" title="主题"></a>&nbsp;<a target="_blank" href="https://www.upyun.com/"><img src="http://src.ffing.cn/hexo/img/CDN又拍云.svg" title="CDN加速"></a>&nbsp;<a target="_blank" href="https://www.51.la/"><img src="http://src.ffing.cn/hexo/img/Analytics-51la.svg" title="51la统计"></a>&nbsp;<a target="_blank" href="https://www.upyun.com/"><img src="http://src.ffing.cn/hexo/img/豫ICP备2021016009.svg" title="ICP备案"></a></p></div></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><script src="https://src.ffing.cn/hexo/js/jquery.min.3.6.3.js"></script><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script defer src="https://src.ffing.cn/hexo/js/switchDarkMode.js"></script><script defer src="https://src.ffing.cn/hexo/js/nav_menu.js"></script><script src="https://src.ffing.cn/hexo/js/foot_runtime.js"></script><script async src="//at.alicdn.com/t/c/font_3830672_5bphzb91mjp.js"></script></div></body></html>

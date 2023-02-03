@@ -1,0 +1,76 @@
+
+:root {
+
+
+
+  --border-radius: .5rem;
+
+}
+
+
+
+
+
+
+
+
+
+/* 归档、分类、标签页排版美化 */
+.article-sort {
+  
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    border: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .article-sort-title {
+    
+    margin: 0;
+    padding: 0;
+    border: none;
+  }
+  
+  .article-sort-item {
+    width: 100%;
+    padding: .5rem;
+    margin: .3rem 0;
+    background: rgba(161, 150, 150, 0.1);
+    border-radius: var(--border-radius);
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -ms-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+  }
+  
+  .article-sort-item.year {
+    width: 100%;
+    margin: .5rem 0;
+    color: var(--second);
+    background: rgba(160, 157, 157, 0.3) !important;
+  }
+  
+  .article-sort-title::before,
+  .article-sort-title::after,
+  .article-sort-item::before {
+    
+    display: none;
+  }
+  
+  @media screen and (min-width: 901px) {
+    .article-sort-item:not(.year):not(#fc-state):not(#fc-more) {
+      
+      width: calc(50% - .25rem);
+    }
+  }
+  
+  .article-sort-item-img {
+    
+    height: 80px;
+    width: 120px;
+    border-radius: var(--border-radius);
+  }
+  

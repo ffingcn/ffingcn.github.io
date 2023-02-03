@@ -1,0 +1,327 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>FFing</title><meta name="author" content="Ldy"><meta name="copyright" content="Ldy"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="linux技术分享">
+<meta property="og:type" content="website">
+<meta property="og:title" content="FFing">
+<meta property="og:url" content="http://blog.ffing.fun/page/12/index.html">
+<meta property="og:site_name" content="FFing">
+<meta property="og:description" content="linux技术分享">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="Ldy">
+<meta name="twitter:card" content="summary"><link rel="shortcut icon" href="https://src.ffing.cn/hexo/img/fn_logo_32x32.png"><link rel="canonical" href="http://blog.ffing.fun/page/12/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'FFing',
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2023-02-03 23:30:02'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/loading_gif.css"><link rel="stylesheet" href="/css/bg_color.css"><link rel="stylesheet" href="/css/full_page.css"><link rel="stylesheet" href="/css/universe.css"><link rel="stylesheet" href="/css/lightlight.css"><link rel="stylesheet" href="https://src.ffing.cn/hexo/css/nav_menu.css"><link rel="stylesheet" href="/css/foot.css"><link rel="stylesheet" href="/css/auth_icon.css"><link rel="stylesheet" href="//at.alicdn.com/t/c/font_3830672_5bphzb91mjp.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="/css/other_page.css"><link rel="stylesheet" href="/css/mouse.css"><link rel="stylesheet" href="/css/aside.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><div class="loading-img"></div><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (false) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="/css/loading_bar.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js/pace.min.js"></script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/null" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">181</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">290</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 我的</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/about/"><span> 关于我</span></a></li><li><a class="site-page child" href="/timeline/"><span> 时间线</span></a></li></ul></div></div></div></div><div class="page" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><div class="back-home-button" tabindex="-1"><i class="back-home-button-icon fas fa-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://www.ffing.cn" title="前往首页" target="_blank" one-link-mark="yes"><img class="back-menu-item-icon" src="https://src.ffing.cn/hexo/img/fn_white_logo.png"/><span class="back-menu-item-text">首页</span></a><a class="back-menu-item" href="http://pan.ffing.cn/" rel="external nofollow" title="前往alist网盘" target="_blank" one-link-mark="yes"><img class="back-menu-item-icon" src="https://src.ffing.cn/hexo/img/alist_logo.png"/><span class="back-menu-item-text">alist网盘</span></a><a class="back-menu-item" href="https://kms.ffing.cn/" rel="external nofollow" title="前往kms服务" target="_blank" one-link-mark="yes"><img class="back-menu-item-icon" src="https://src.ffing.cn/hexo/img/kms_logo.png"/><span class="back-menu-item-text">kms服务</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">在线工具</div><div class="back-menu-list"><a class="back-menu-item" href="https://www.iconfont.cn" rel="noopener nofollow" title="前往阿里icon" target="_blank" one-link-mark="yes"><img class="back-menu-item-icon" src="https://src.ffing.cn/hexo/img/ali-icon_logo.png"/><span class="back-menu-item-text">阿里icon</span></a></div></div></div></div><a id="site-name" href="/"><div class="title">FFing</div><i class="fa-solid fa-house"></i></a></span><div class="mask-name-container"><center id="name-container"><a id="page-name" href="javascript:btf.scrollToDest(0, 500)">PAGE_NAME</a></center></div><div id="weather"></div><div id="tp-weather-widget"></div> <div id="menus"><div class="nav-button" id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="nav-button" id="darkmode_navswitch"><a class="darkmode_switchbutton" type="button" title="浅色和深色模式转换" onclick="switchDarkMode()"><i class="fas fa-adjust"></i></a></div><div class="nav-button" id="nav-totop"><a class="totopbtn"><i class="fas fa-arrow-up"></i><span id="percent" onclick="btf.scrollToDest(0,500)">0</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 我的</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/about/"><span> 关于我</span></a></li><li><a class="site-page child" href="/timeline/"><span> 时间线</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-content left"><div class="recent-post-cover"><img class="article-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Windows RDP远程到centos桌面"></div><div class="recent-post-info"><a class="article-title" href="/posts/3e75b8f7.html" title="Windows RDP远程到centos桌面"><div class="article-title-link">Windows RDP远程到centos桌面</div></a><div class="recent-post-meta">               <div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-05-21T08:03:31.000Z" title="发表于 2021-05-21 16:03:31">2021-05-21</time></span><span class="article-meta"><span class="article-meta-separator"> | </span><svg class="meta_icon post-ui-icon" style="width:12px;height:12px;position:relative;top:1px"><use xlink:href="#icon-fenlei"></use></svg><a class="article-meta__categories" href="/categories/Linux/">Linux</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/%E6%95%99%E7%A8%8B/">教程</a></span></div></div></div><a class="article-content" href="/posts/3e75b8f7.html" title="Windows RDP远程到centos桌面"><div class="article-content-text">流程：
+
+1.安装GNOME桌面
+2.安装xrdp
+3.放行3389端口
+
+一，安装GNOME桌面yum   -y grouplist “GNOME Desktop”
+注：可使用yum grouplist 查看yum安装组列表
+二，安装xrdp，并启动#安装epel源yum -y install epel-release#安装xrdpyum -y install xrdp#启动xrdpsystemctl start xrdp#设置xrdp开机启动systemctl enable xrdp
+三，放行3389端口#永久放行3389端口firewall-cmd –zone&#x3D;public –add-port&#x3D;3389&#x2F;tcp –permanent#防火墙配置重新加载firewall-cmd –reload
+
+</div></a><div class="recent-post-arrow"></div></div></div><div class="recent-post-item"><div class="recent-post-content right"><div class="recent-post-cover"><img class="article-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Centos-shell脚本判断系统位数"></div><div class="recent-post-info"><a class="article-title" href="/posts/5df4e843.html" title="Centos-shell脚本判断系统位数"><div class="article-title-link">Centos-shell脚本判断系统位数</div></a><div class="recent-post-meta">               <div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-05-20T03:28:23.000Z" title="发表于 2021-05-20 11:28:23">2021-05-20</time></span><span class="article-meta"><span class="article-meta-separator"> | </span><svg class="meta_icon post-ui-icon" style="width:12px;height:12px;position:relative;top:1px"><use xlink:href="#icon-fenlei"></use></svg><a class="article-meta__categories" href="/categories/Linux/">Linux</a></span></div></div></div><a class="article-content" href="/posts/5df4e843.html" title="Centos-shell脚本判断系统位数"><div class="article-content-text">if [ $(getconf WORD_BIT) &#x3D; ‘32’ ] &amp;&amp; [ $(getconf LONG_BIT) &#x3D; ‘64’ ] ; then     echo “it’s 64bit” else     echo “it’s 32bit” fi
+</div></a><div class="recent-post-arrow"></div></div></div><div class="recent-post-item"><div class="recent-post-content left"><div class="recent-post-cover"><img class="article-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Centos-阿里云ddsn域名解析，钉钉机器人推送提醒"></div><div class="recent-post-info"><a class="article-title" href="/posts/870ab642.html" title="Centos-阿里云ddsn域名解析，钉钉机器人推送提醒"><div class="article-title-link">Centos-阿里云ddsn域名解析，钉钉机器人推送提醒</div></a><div class="recent-post-meta">               <div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-05-19T16:27:14.000Z" title="发表于 2021-05-20 00:27:14">2021-05-20</time></span><span class="article-meta"><span class="article-meta-separator"> | </span><svg class="meta_icon post-ui-icon" style="width:12px;height:12px;position:relative;top:1px"><use xlink:href="#icon-fenlei"></use></svg><a class="article-meta__categories" href="/categories/Linux/">Linux</a></span></div></div></div><a class="article-content" href="/posts/870ab642.html" title="Centos-阿里云ddsn域名解析，钉钉机器人推送提醒"><div class="article-content-text">家里路由老化（梅林固件），撸了个京东云路由器（下车方便刷第三方固件），官方固件没办法第三方插件，所以就需要在家里的centos装个ddns实现域名解析自动更新。
+github很多脚本，大部分都需要python环境的，也有纯shell的，偶然发现一个web管理页面的（go语言环境），这里记录一下配置过程。
+ddns-go 项目地址：https://github.com/jeessy2/ddns-go
+提前准备：
+
+1.阿里云域名
+2.阿里云AccessKey ：ID及Secret
+3.钉钉机器人
+
+流程：
+
+一.centos安装go语言环境
+二.下载ddns-go
+三.安装ddns-go
+四.防火墙放行端口
+五.配置ddns-go
+
+一.centos安装go语言环境yum安装go语言
+#安装epel源yum -y install epel-release#安装go语言yum -y install golang
+二.下载ddns-go国外github源作者项目地址：下载
+国内gitee我备份的项目地址：下载
+三.安装ddns-go将下载的包解压后，只需要ddns-go文件
+#进入ddns- ...</div></a><div class="recent-post-arrow"></div></div></div><div class="recent-post-item"><div class="recent-post-content right"><div class="recent-post-cover"><img class="article-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Floccus+坚果云——实现跨平台书签同步插件工具"></div><div class="recent-post-info"><a class="article-title" href="/posts/c8170990.html" title="Floccus+坚果云——实现跨平台书签同步插件工具"><div class="article-title-link">Floccus+坚果云——实现跨平台书签同步插件工具</div></a><div class="recent-post-meta">               <div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-05-11T14:53:43.000Z" title="发表于 2021-05-11 22:53:43">2021-05-11</time></span><span class="article-meta"><span class="article-meta-separator"> | </span><svg class="meta_icon post-ui-icon" style="width:12px;height:12px;position:relative;top:1px"><use xlink:href="#icon-fenlei"></use></svg><a class="article-meta__categories" href="/categories/%E6%95%99%E7%A8%8B/">教程</a></span></div></div></div><a class="article-content" href="/posts/c8170990.html" title="Floccus+坚果云——实现跨平台书签同步插件工具"><div class="article-content-text">类似插件有很多，也有第三方平台提供书签空间的，但太过于方便，就要有灾难的觉悟（当初的TX网络书签一样，停止运维就预示是GameOver）
+项目地址: Github – Floccus
+官网地址：Floccus
+
+WebDAV ：目前支持 「坚果云、nextcloud &#x2F; owncloud，box」 等 WebDAV 服务器
+Nextcloud 书签 ：利用 Nextcloud 自带的书签应用程序进行同步，可通过 Web 访问。(需要nextcloud v12 以上版本)。
+本地文件同步 ：利用 LoFloccus软件将书签同步到本地, 再利用 Dropbox，Syncthing，rsync 等进行跨设备同步。
+
+Floccus插件是个工具！搬运书签的工具！支持IE内核、火狐内核、google内核！
+利用Floccus插件，将书签保存到WebDAV后，再将书签同步到其它平台浏览器。
+书签同步：坚果云WebDAV（可理解为备份中心）《&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;》Floccus插件（书签搬运工）《&#x3D;&#x3D;&# ...</div></a><div class="recent-post-arrow"></div></div></div><div class="recent-post-item"><div class="recent-post-content left"><div class="recent-post-cover"><img class="article-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="科学上网——免费亚马逊云搭建v2ray"></div><div class="recent-post-info"><a class="article-title" href="/posts/ce21d3df.html" title="科学上网——免费亚马逊云搭建v2ray"><div class="article-title-link">科学上网——免费亚马逊云搭建v2ray</div></a><div class="recent-post-meta">               <div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-05-11T07:18:58.000Z" title="发表于 2021-05-11 15:18:58">2021-05-11</time></span><span class="article-meta"><span class="article-meta-separator"> | </span><svg class="meta_icon post-ui-icon" style="width:12px;height:12px;position:relative;top:1px"><use xlink:href="#icon-fenlei"></use></svg><a class="article-meta__categories" href="/categories/Linux/">Linux</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/%E6%95%99%E7%A8%8B/">教程</a></span></div></div></div><a class="article-content" href="/posts/ce21d3df.html" title="科学上网——免费亚马逊云搭建v2ray"><div class="article-content-text">因为经常找些资料，避免不了需要访问外网，就必须有个梯子。可以付费也可以自己搭建，付费的满天飞，可以自行百度。我这里就自己搭建的，有多种选择从图形化的vpn（softether、openvpn），再到后来的socks（frp、nps），再到现在代理服务ss、ssr、v2ray、trojin（刚出没多久）。折腾了太多，最后我选择了v2ray的代理模式，当时用的github项目作者233boy的一键v2ray脚本，着实让我用了3年多（因为家里电脑系统太久了，把硬盘全格式化了，导致亚马逊的key给弄丢了，网盘太多也不知道放哪里了，关键是邮箱也不知道当时用的哪个，呵呵呵。。。大意了）
+没办法重新申请亚马逊EC2再搞吧，上github发现v2ray的有了很多版本，真是道高一尺魔高一丈，原来用的233boy作者也把v2ray的项目删除了，真的是从新来过，这里就顺便记录一下从服务器到搭建过程。
+准备：1.邮箱（注册亚马逊云）
+2.手机（验证）
+3.一张外币信用卡（1美元的核验，只验证不扣钱）
+4.SSH工具（shell工具很多，自己顺手就可以，我这里用finalshell多平台免费）
+5.v2rayU ...</div></a><div class="recent-post-arrow"></div></div></div><div class="recent-post-item"><div class="recent-post-content right"><div class="recent-post-cover"><img class="article-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="shell -tar命令（简版）"></div><div class="recent-post-info"><a class="article-title" href="/posts/2019e692.html" title="shell -tar命令（简版）"><div class="article-title-link">shell -tar命令（简版）</div></a><div class="recent-post-meta">               <div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-04-23T11:35:06.000Z" title="发表于 2021-04-23 19:35:06">2021-04-23</time></span><span class="article-meta"><span class="article-meta-separator"> | </span><svg class="meta_icon post-ui-icon" style="width:12px;height:12px;position:relative;top:1px"><use xlink:href="#icon-fenlei"></use></svg><a class="article-meta__categories" href="/categories/Linux/">Linux</a></span></div></div></div><a class="article-content" href="/posts/2019e692.html" title="shell -tar命令（简版）"><div class="article-content-text">命令格式：tar [cxt zjJ vf pPN] 生成tar文件 要压缩的文件或目录 -C 解压到指定目录
+tar命令只是打包，而压缩实际是调用gzipbzip2xz等工具，所以要执行某种压缩的前提是系统装有对应的压缩程序！！！
+参数解析：
+————cxt同时只会出现一个，不能同事解压又压缩，不符合逻辑
+-c 创建
+-x 解压
+-t 查看
+————压缩格式，前提是系统有对应的压缩工具（centos7自带gzip和xz）
+z-gzip压缩
+j-bzip2压缩
+J-xz压缩
+————
+v-查看
+f-文件
+————其他属性
+p-保留文件属性
+N-时间节点剔除（剔除时间节点之前的文件）
+exclude-文件或目录剔除
+
+范例：-c 打包[压缩]只打包或打包并压缩，根据需求添加参数
+#将&#x2F;etc目录，打包后，命名为etc.tar
+tar -cvf etc.tar /etc/
+#将&#x2F;etc目录，gzip格式打包，命名为etc.tar.gz
+tar -zcvf etc.tar.gz /etc/
+#将&#x2F;etc目录，bzip2格式打包，命名为etc.tar.gz
+tar  ...</div></a><div class="recent-post-arrow"></div></div></div><div class="recent-post-item"><div class="recent-post-content left"><div class="recent-post-cover"><img class="article-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="nginx -配置文件及虚拟主机+https"></div><div class="recent-post-info"><a class="article-title" href="/posts/2e01ad0d.html" title="nginx -配置文件及虚拟主机+https"><div class="article-title-link">nginx -配置文件及虚拟主机+https</div></a><div class="recent-post-meta">               <div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-04-21T03:56:44.000Z" title="发表于 2021-04-21 11:56:44">2021-04-21</time></span><span class="article-meta"><span class="article-meta-separator"> | </span><svg class="meta_icon post-ui-icon" style="width:12px;height:12px;position:relative;top:1px"><use xlink:href="#icon-fenlei"></use></svg><a class="article-meta__categories" href="/categories/Linux/">Linux</a></span></div></div></div><a class="article-content" href="/posts/2e01ad0d.html" title="nginx -配置文件及虚拟主机+https"><div class="article-content-text">因为很多东西是自学的，都百度了很多坑，所有可能有描述不到位的，请见谅。
+昨天同事请教https这个问题，我就帮忙解决了一下，但发现虽然自己的思路很清晰，但却没办法很好的传授同事，尴尬。。。
+申明一下，https只是一种协议，任何端口都可以实现这个的协议，不是必须是443端口（就譬如我的ffing.fun:88就用了https协议）
+http默认端口80，即当我们访问http://ffing.cn和http://ffing.cn:80，在浏览器解析的效果是一样，加不加80都是一样的，这个是肯定的。
+但！！！https虽然默认端口443，但不一定必须443，可以是任意端口，只是加入了ssl字段关联证书即可。
+首先，了解一下nginx配置文件默认配置文件位置 ：&#x2F;etc&#x2F;nginx&#x2F;nginx.conf
+
+nginx.conf的配置里主要分了3大块
+
+
+nginx程序相关信息
+http｛｝（全局）
+server｛｝（虚拟主机）
+
+user
+http ｛
+server｛｝
+｝
+下面我做个简单的nginx.conf配置文件做个讲解
+#第一部分，nginx相关信息：用 ...</div></a><div class="recent-post-arrow"></div></div></div><div class="recent-post-item"><div class="recent-post-content right"><div class="recent-post-cover"><img class="article-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="QPlayer2--Wordpress网站底部悬浮音乐播放器"></div><div class="recent-post-info"><a class="article-title" href="/posts/e56debf3.html" title="QPlayer2--Wordpress网站底部悬浮音乐播放器"><div class="article-title-link">QPlayer2--Wordpress网站底部悬浮音乐播放器</div></a><div class="recent-post-meta">               <div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-04-18T03:15:57.000Z" title="发表于 2021-04-18 11:15:57">2021-04-18</time></span><span class="article-meta"><span class="article-meta-separator"> | </span><svg class="meta_icon post-ui-icon" style="width:12px;height:12px;position:relative;top:1px"><use xlink:href="#icon-fenlei"></use></svg><a class="article-meta__categories" href="/categories/%E6%95%99%E7%A8%8B/">教程</a></span></div></div></div><a class="article-content" href="/posts/e56debf3.html" title="QPlayer2--Wordpress网站底部悬浮音乐播放器"><div class="article-content-text">
+网上有很多类似的插件，免费、收费、代码各种有，我喜欢折腾，偏向于开源的，没事看看github，发现个好用的音乐播放器QPlayer2，支持网易云音乐解析。
+项目地址：https://github.com/Jrohy/QPlayer-WordPress-Plugin，最新版本为v1.3.4.2，更新于三年前，已不再更新。
+如今，MoeShin将代码优化后制成QPlayer2，现已支持WordPress、Typecho、Z-Blog。
+一，下载Moeshin的github地址：下载
+国内我的gitee地址：下载
+二，安装插件默认都放在wp-content&#x2F;plugins目录下即可
+三，设置
+进入后台设置-QPlayer2，作者都有注释，很简单，这里只说下歌曲设置
+
+添加歌单模式
+
+网易云音乐解析，ID：就是歌单的ID（获取歌单ID，需要在网易云网网页版，点击进入喜欢的歌单，可以在地址栏看到歌单ID）
+[{“server”: “netease”, “type”: “playlist”, “id”: “2698841554”}]
+
+添加单曲模式
+
+单曲模式比较繁琐，自由度高，可以看 ...</div></a><div class="recent-post-arrow"></div></div></div><div class="recent-post-item"><div class="recent-post-content left"><div class="recent-post-cover"><img class="article-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="BAT 多选择执行"></div><div class="recent-post-info"><a class="article-title" href="/posts/abcba213.html" title="BAT 多选择执行"><div class="article-title-link">BAT 多选择执行</div></a><div class="recent-post-meta">               <div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-04-14T13:35:36.000Z" title="发表于 2021-04-14 21:35:36">2021-04-14</time></span><span class="article-meta"><span class="article-meta-separator"> | </span><svg class="meta_icon post-ui-icon" style="width:12px;height:12px;position:relative;top:1px"><use xlink:href="#icon-fenlei"></use></svg><a class="article-meta__categories" href="/categories/Windows/">Windows</a></span></div></div></div><a class="article-content" href="/posts/abcba213.html" title="BAT 多选择执行"><div class="article-content-text">因国内访问github要修改hosts文件重定向github，但家里联通宽带就又个奇怪的现象，一段时间可以访问过段时间又不可以访问，所以要频繁的修改hosts文件，很不方便，这里利用bat批处理执行选择操作。
+hosts文件位置hosts文件位置为c:\windows\System32\drivers\etc\hosts 因为有人系统可能安装的不是C盘，所以使用变量%systemroot%来代替windows目录 %systemroot%\System32\drivers\etc\hosts
+bat内容我有两个需要重定向的域名，github是需要频繁修改的，但另外一个ffing.fun是固定的
+@echo offTitle github重定向Color 0A:githubecho.echo ══════════════════════════════════echo 【hosts加入githb地址】：echo 1.加入githubecho 2.注释github
+echo.set &#x2F;p n&#x3D;请输入:if “%n%”&#x3D;&#x3D;”” cls&amp;goto ...</div></a><div class="recent-post-arrow"></div></div></div><div class="recent-post-item"><div class="recent-post-content right"><div class="recent-post-cover"><img class="article-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Nginx-实现同一端口HTTP跳转HTTPS(497错误码)"></div><div class="recent-post-info"><a class="article-title" href="/posts/f5dd9734.html" title="Nginx-实现同一端口HTTP跳转HTTPS(497错误码)"><div class="article-title-link">Nginx-实现同一端口HTTP跳转HTTPS(497错误码)</div></a><div class="recent-post-meta">               <div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-04-09T09:24:00.000Z" title="发表于 2021-04-09 17:24:00">2021-04-09</time></span><span class="article-meta"><span class="article-meta-separator"> | </span><svg class="meta_icon post-ui-icon" style="width:12px;height:12px;position:relative;top:1px"><use xlink:href="#icon-fenlei"></use></svg><a class="article-meta__categories" href="/categories/Linux/">Linux</a></span></div></div></div><a class="article-content" href="/posts/f5dd9734.html" title="Nginx-实现同一端口HTTP跳转HTTPS(497错误码)"><div class="article-content-text">一般我们遇到的都是80转443，协议与端口同时跳转，这个很简单；但如果是非标准端口，就譬如我的家庭宽带（80、443）默认是关闭的，所以我只能用其他端口，譬如我的88端口，这里就要用到浏览器返回的错误码，让nginx实现跳转。
+497错误码解释：当此虚拟站点只允许https访问时，用户http访问时nginx会报出497错误码
+而我要实现的就是用户访问http://ffing.fun:88——&gt;https://ffing.fun:88
+所以就通过error_page的错误页面实现跳转。
+error_page 497 https://$host:$server_port$uri$is_args$args;
+497作用域：http或server
+下图是我的测试跳转配置：
+
+注：修改配置后要重启nginx才会生效！！！
+</div></a><div class="recent-post-arrow"></div></div></div><div class="recent-post-item"><div class="recent-post-content left"><div class="recent-post-cover"><img class="article-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="windows-二次验证登录（multiotp）"></div><div class="recent-post-info"><a class="article-title" href="/posts/cae128dd.html" title="windows-二次验证登录（multiotp）"><div class="article-title-link">windows-二次验证登录（multiotp）</div></a><div class="recent-post-meta">               <div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-04-06T14:28:14.000Z" title="发表于 2021-04-06 22:28:14">2021-04-06</time></span><span class="article-meta"><span class="article-meta-separator"> | </span><svg class="meta_icon post-ui-icon" style="width:12px;height:12px;position:relative;top:1px"><use xlink:href="#icon-fenlei"></use></svg><a class="article-meta__categories" href="/categories/Windows/">Windows</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/%E6%95%99%E7%A8%8B/">教程</a></span></div></div></div><a class="article-content" href="/posts/cae128dd.html" title="windows-二次验证登录（multiotp）"><div class="article-content-text">
+这两天写登录验证的东西，突然想起前两年用的windows的OTP验证，不过估计大家应该用的都非常少，我是因为当时的阿里云搭的windows服务，总是被暴力破解RDP，所以装的multiotp，实现RDP的二次验证登录。
+两年前用的东西，现在回忆整理一下
+github地址：https://github.com/multiOTP/multiotp
+二进制下载地址：https://download.multiotp.net/credential-provider/
+支持Windows 7&#x2F;8 &#x2F; 8.1 &#x2F; 10&#x2F;2012（R2）&#x2F; 2016&#x2F;2019的multiOTP的multiOTP凭据提供程序-支持本地和域用户-强制对RDP进行OTP检查-强制或禁用本地登录的OTP检查-客户端可执行文件自动安装和配置multiOTP-仅在成功通过身份验证测试后，才激活multiOTP凭据提供程序-DLL和EXE文件经过数字签名-第一个强大的两因素身份验证解决方案具有缓存支持，以便也可以脱机工作！
+
+准备
+windows系统，登录用户必须设置 ...</div></a><div class="recent-post-arrow"></div></div></div><div class="recent-post-item"><div class="recent-post-content right"><div class="recent-post-cover"><img class="article-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="centos -webshell之ttyd"></div><div class="recent-post-info"><a class="article-title" href="/posts/47d97286.html" title="centos -webshell之ttyd"><div class="article-title-link">centos -webshell之ttyd</div></a><div class="recent-post-meta">               <div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2021-04-06T07:48:51.000Z" title="发表于 2021-04-06 15:48:51">2021-04-06</time></span><span class="article-meta"><span class="article-meta-separator"> | </span><svg class="meta_icon post-ui-icon" style="width:12px;height:12px;position:relative;top:1px"><use xlink:href="#icon-fenlei"></use></svg><a class="article-meta__categories" href="/categories/Linux/">Linux</a></span></div></div></div><a class="article-content" href="/posts/47d97286.html" title="centos -webshell之ttyd"><div class="article-content-text">
+背景：前几天去朋友家完，临时需要连接家里的centos，但他电脑上没有安装shell类的工具，避免给朋友电脑装太多“垃圾”（shell工具及服务秘钥），所以找了下web版的shell，百度了一下有很多，这里我推荐一下ttyd。
+ttyd是一款开源的webshell工具，支持多平台 macOS, Linux, FreeBSD&#x2F;OpenBSD, OpenWrt, Windows。
+作者源地址https://github.com/tsl0922/ttyd，下载页也有已编译好的文件
+
+流程
+
+下载ttyd
+
+防火墙添加放行端口（7681）
+
+移动ttyd到&#x2F;usr&#x2F;sbin
+
+添加systemctl服务
+
+测试ttyd
+
+
+
+
+第一步，下载ttyd我这里直接用我的gitee文件，也是从作者那下载的1.6.3，如果版本更新你也可以从作者github下载
+1234#安装gityum -y install git#git我的ttydgit clone https://gitee.com/ffing/ttyd_webshell-1.6.3.git
+
+第二步，防火墙添加放 ...</div></a><div class="recent-post-arrow"></div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/11/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/#content-inner">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/#content-inner">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/#content-inner">16</a><a class="extend next" rel="next" href="/page/13/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="author-info__description"><img style="float:left;width:100px;height:100px " src="https://src.ffing.cn/hexo/img/fn_logo.png"><p style="font-size:13px">兴趣是最好的老师<br>时间是最贵的学费</p></div></div><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://gitee.com/ffing" target="_blank" title="Gitee"><svg class="social_icon iconfont" aria-hidden="true"><use xlink:href="#icon-gitee"></use></svg></a><a class="social-icon faa-parent animated-hover" href="mailto:79131627@qq.com" target="_blank" title="Email"><svg class="social_icon iconfont" aria-hidden="true"><use xlink:href="#icon-youxiang"></use></svg></a><a class="social-icon faa-parent animated-hover" href="https://space.bilibili.com/376172153" target="_blank" title="BiliBili"><svg class="social_icon iconfont" aria-hidden="true"><use xlink:href="#icon-bilibili-line1"></use></svg></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            
+            </div>
+            <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Debian/"><span class="card-category-list-name">Debian</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Linux/"><span class="card-category-list-name">Linux</span><span class="card-category-list-count">134</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Me/"><span class="card-category-list-name">Me</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/SQL/"><span class="card-category-list-name">SQL</span><span class="card-category-list-count">7</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Windows/"><span class="card-category-list-name">Windows</span><span class="card-category-list-count">11</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/other/"><span class="card-category-list-name">other</span><span class="card-category-list-count">16</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%95%99%E7%A8%8B/"><span class="card-category-list-name">教程</span><span class="card-category-list-count">40</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E9%BB%91%E8%8B%B9%E6%9E%9C/"><span class="card-category-list-name">黑苹果</span><span class="card-category-list-count">10</span></a></li>
+            </ul></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="fas fa-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/02/"><span class="card-archive-list-date">二月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/12/"><span class="card-archive-list-date">十二月 2022</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/11/"><span class="card-archive-list-date">十一月 2022</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">5</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/10/"><span class="card-archive-list-date">十月 2022</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/09/"><span class="card-archive-list-date">九月 2022</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">3</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/08/"><span class="card-archive-list-date">八月 2022</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/07/"><span class="card-archive-list-date">七月 2022</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">3</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/05/"><span class="card-archive-list-date">五月 2022</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li></ul></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Ldy</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div><div id="footer-banner"><div class="footer-banner-links"><div class="footer-banner-left"><div class="footer-banner-left"><div id="footer-banner-tips"></div><script src="https://src.ffing.cn/hexo/js/typed.min.foot_daziji.js"></script><script>var typed = new Typed("#footer-banner-tips", {
+  strings: ["你不在正经事上忧虑,就会在乱七八糟事上忧虑,能力守恒!", "折腾硬件、软件;折腾系统、平台;折腾开发、环境;折腾window、linux;折腾,折腾,瞎J8折腾."],
+  startDelay: 200,
+  backDelay: 2000,
+  typeSpeed: 100,
+  loop: true,
+  backSpeed: 20
+})
+</script></div></div><div class="footer-banner-right"><p><a target="_blank" href="https://hexo.io/"><img src="http://src.ffing.cn/hexo/img/Frame-Hexo-blue.svg" title="框架"></a>&nbsp;<a target="_blank" href="https://butterfly.js.org/"><img src="http://src.ffing.cn/hexo/img/Theme-Butterfly.svg" title="主题"></a>&nbsp;<a target="_blank" href="https://www.upyun.com/"><img src="http://src.ffing.cn/hexo/img/CDN又拍云.svg" title="CDN加速"></a>&nbsp;<a target="_blank" href="https://www.51.la/"><img src="http://src.ffing.cn/hexo/img/Analytics-51la.svg" title="51la统计"></a>&nbsp;<a target="_blank" href="https://www.upyun.com/"><img src="http://src.ffing.cn/hexo/img/豫ICP备2021016009.svg" title="ICP备案"></a></p></div></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><script src="https://src.ffing.cn/hexo/js/jquery.min.3.6.3.js"></script><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script defer src="https://src.ffing.cn/hexo/js/switchDarkMode.js"></script><script defer src="https://src.ffing.cn/hexo/js/nav_menu.js"></script><script src="https://src.ffing.cn/hexo/js/foot_runtime.js"></script><script async src="//at.alicdn.com/t/c/font_3830672_5bphzb91mjp.js"></script></div></body></html>
