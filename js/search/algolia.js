@@ -81,7 +81,8 @@ window.addEventListener('load', () => {
   const searchBox = instantsearch.widgets.searchBox({
     container: '#algolia-search-input',
     showReset: false,
-    showSubmit: false,
+    showSubmit: true,
+    searchAsYouType: false,
     placeholder: GLOBAL_CONFIG.algolia.languages.input_placeholder,
     showLoadingIndicator: true
   })
@@ -135,7 +136,7 @@ window.addEventListener('load', () => {
 
   const pagination = instantsearch.widgets.pagination({
     container: '#algolia-pagination',
-    totalPages: 5,
+
     templates: {
       first: '<i class="fas fa-angle-double-left"></i>',
       last: '<i class="fas fa-angle-double-right"></i>',

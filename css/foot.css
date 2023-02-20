@@ -87,13 +87,7 @@ img.footer_mini_logo {
     transform: scale(1.03)
 }
 
-#footer {
-    background: linear-gradient(180deg, var(--Jay-background) 0, var(--Jay-card-bg) 25%);
-    margin-top: 1rem;
-    display: flex;
-    flex-direction: column;
-    z-index: 1002
-}
+
 
 @media screen and (max-width: 768px) {
     #footer {
