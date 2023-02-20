@@ -1,0 +1,667 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>linux 日志过滤常用sed、awk、grep、xargs等操作 | FFing</title><meta name="author" content="Ldy"><meta name="copyright" content="Ldy"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="因为最近一直在写过滤日志的脚本，写一下日志中的常用的相关操作命令。 xargs命令很方便的工具，支持管道或标准输入，尝尝find配合使用，当然也可以对ls配合，通常用于批量文件操作。也可以将单行或多行文本输入转换为其他格式，例如多行变单行，单行变多行。 （xargs 默认的命令是 echo「默认空格定界符，-d 自定义定界符」，因此通过xargs 的处理，换行和空白将被空格取代，变成一行数据！！！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux 日志过滤常用sed、awk、grep、xargs等操作">
+<meta property="og:url" content="http://blog.ffing.fun/posts/196759049.html">
+<meta property="og:site_name" content="FFing">
+<meta property="og:description" content="因为最近一直在写过滤日志的脚本，写一下日志中的常用的相关操作命令。 xargs命令很方便的工具，支持管道或标准输入，尝尝find配合使用，当然也可以对ls配合，通常用于批量文件操作。也可以将单行或多行文本输入转换为其他格式，例如多行变单行，单行变多行。 （xargs 默认的命令是 echo「默认空格定界符，-d 自定义定界符」，因此通过xargs 的处理，换行和空白将被空格取代，变成一行数据！！！">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-03-14T03:21:27.000Z">
+<meta property="article:modified_time" content="2023-02-20T16:09:15.429Z">
+<meta property="article:author" content="Ldy">
+<meta property="article:tag" content="awk">
+<meta property="article:tag" content="sed">
+<meta property="article:tag" content="grep">
+<meta property="article:tag" content="xargs">
+<meta name="twitter:card" content="summary"><link rel="shortcut icon" href="https://src.ffing.cn/hexo/img/fn_logo_32x32.png"><link rel="canonical" href="http://blog.ffing.fun/posts/196759049"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/6.0.0/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.staticfile.org/fancyapps-ui/4.0.31/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: {"appId":"DMF88DHB4X","apiKey":"143e12084a3d7306535e056bf276ba91","indexName":"hexo-blog","hits":{"per_page":5},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdnjs.cloudflare.com/ajax/libs/flickr-justified-gallery/2.1.2/fjGallery.min.js',
+      css: 'https://cdnjs.cloudflare.com/ajax/libs/flickr-justified-gallery/2.1.2/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'linux 日志过滤常用sed、awk、grep、xargs等操作',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-02-21 00:09:15'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/loading_gif.css"><link rel="stylesheet" href="/css/bg_color.css"><link rel="stylesheet" href="/css/full_page.css"><link rel="stylesheet" href="/css/universe.css"><link rel="stylesheet" href="/css/lightlight.css"><link rel="stylesheet" href="https://src.ffing.cn/hexo/css/nav_menu.css"><link rel="stylesheet" href="/css/foot.css"><link rel="stylesheet" href="/css/auth_icon.css"><link rel="stylesheet" href="//at.alicdn.com/t/c/font_3830672_5bphzb91mjp.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="/css/other_page.css"><link rel="stylesheet" href="/css/mouse.css"><link rel="stylesheet" href="/css/aside.css"><link rel="stylesheet" href="/css/ip.css"><link rel="stylesheet" href="/css/copy_index.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><div class="loading-img"></div><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (false) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="/css/loading_bar.css"/><script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js"></script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://src.ffing.cn/hexo/img/fn_logo100.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">184</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">297</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><span> 归档</span></a></li><li><a class="site-page child" href="/categories/"><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 关于</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/about/"><span> 关于我</span></a></li><li><a class="site-page child" href="/timeline/"><span> 时间线</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><div class="back-home-button" tabindex="-1"><i class="back-home-button-icon fas fa-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://www.ffing.cn" title="前往首页" target="_blank" one-link-mark="yes"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://src.ffing.cn/hexo/img/fn_white_logo.png"/><span class="back-menu-item-text">首页</span></a><a class="back-menu-item" href="http://pan.ffing.cn/" rel="external nofollow" title="前往alist网盘" target="_blank" one-link-mark="yes"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://src.ffing.cn/hexo/img/alist_logo.png"/><span class="back-menu-item-text">alist网盘</span></a><a class="back-menu-item" href="https://kms.ffing.cn/" rel="external nofollow" title="前往kms服务" target="_blank" one-link-mark="yes"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://src.ffing.cn/hexo/img/kms_logo.png"/><span class="back-menu-item-text">kms服务</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">在线工具</div><div class="back-menu-list"><a class="back-menu-item" href="https://www.iconfont.cn" rel="noopener nofollow" title="前往阿里icon" target="_blank" one-link-mark="yes"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://src.ffing.cn/hexo/img/ali-icon_logo.png"/><span class="back-menu-item-text">阿里icon</span></a></div></div></div></div><a id="site-name" href="/"><div class="title">FFing</div><i class="fa-solid fa-house"></i></a></span><div class="mask-name-container"><center id="name-container"><a id="page-name" href="javascript:btf.scrollToDest(0, 500)">PAGE_NAME</a></center></div><div id="weather"></div><div id="tp-weather-widget"></div> <div id="menus"><div class="nav-button" id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="nav-button" id="darkmode_navswitch"><a class="darkmode_switchbutton" type="button" title="浅色和深色模式转换" onclick="switchDarkMode()"><i class="fas fa-adjust"></i></a></div><div class="nav-button" id="nav-totop"><a class="totopbtn"><i class="fas fa-arrow-up"></i><span id="percent" onclick="btf.scrollToDest(0,500)">0</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><span> 归档</span></a></li><li><a class="site-page child" href="/categories/"><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 关于</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/about/"><span> 关于我</span></a></li><li><a class="site-page child" href="/timeline/"><span> 时间线</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">linux 日志过滤常用sed、awk、grep、xargs等操作</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-03-14T03:21:27.000Z" title="发表于 2022-03-14 11:21:27">2022-03-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-02-20T16:09:15.429Z" title="更新于 2023-02-21 00:09:15">2023-02-21</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Linux/">Linux</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">6206</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>27分钟</span></span></div></div></div><article class="post-content" id="article-container"><p>因为最近一直在写过滤日志的脚本，写一下日志中的常用的相关操作命令。</p>
+<h2 id="xargs命令"><a href="#xargs命令" class="headerlink" title="xargs命令"></a>xargs命令</h2><p>很方便的工具，支持管道或标准输入，尝尝find配合使用，当然也可以对ls配合，通常用于批量文件操作。也可以将单行或多行文本输入转换为其他格式，例如多行变单行，单行变多行。</p>
+<p>（<strong>xargs 默认的命令是 echo「默认空格定界符，-d 自定义定界符」，因此通过xargs 的处理，换行和空白将被空格取代，变成一行数据！！！</strong>它能够捕获一个命令的输出，然后传递给另外一个命令）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">find / *[0-9].log ls -l       #这个命令是错误的</span><br><span class="line">find / *[0-9].log xargs ls -lh   #查找以“数字.log”结尾的文件并现在文件详细信息</span><br><span class="line">ls *[1-9].xml xargs cp &#123;&#125; /tmp   #查找以“数字.xml”结尾的文件并cp到/tmp</span><br></pre></td></tr></table></figure>
+
+<p>语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">somecommand xargs -【参数选项】  command</span><br></pre></td></tr></table></figure>
+
+<p>参数：</p>
+<ul>
+<li>-a file 从文件中读入作为 stdin</li>
+<li>-d 自定义定界符</li>
+<li>-e flag ，注意有的时候可能会是-E，flag必须是一个以空格分隔的标志，当xargs分析到含有flag这个标志的时候就停止。</li>
+<li>-p 当每次执行一个命令时询问一次用户。</li>
+<li>-n num 后面加次数，表示命令在执行的时候一次用的argument的个数，默认是用所有的。</li>
+<li>-t 表示先打印命令，然后再执行。</li>
+<li>-i 或者是-I，这得看linux支持了，将xargs的每项名称，一般是一行一行赋值给 {}，可以用 {} 代替。</li>
+<li>-r no-run-if-empty 当xargs的输入为空的时候则停止xargs，不用再去执行了。</li>
+<li>-s num 命令行的最大字符数，指的是 xargs 后面那个命令的最大命令行字符数。</li>
+<li>-L num 从标准输入一次读取 num 行送给 command 命令。</li>
+<li>-l 同 -L。</li>
+<li>-d delim 分隔符，默认的xargs分隔符是回车，argument的分隔符是空格，这里修改的是xargs的分隔符。</li>
+<li>-x exit的意思，主要是配合-s使用。。</li>
+<li>-P 修改最大的进程数，默认是1，为0时候为as many as it can ，这个例子我没有想到，应该平时都用不到的吧。</li>
+</ul>
+<p>例：xargs将管道传递数据变为一行数据</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://qnimg.ffing.cn/wp-content/uploads/2022/03/image-20.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">#创建测试文件</span><br><span class="line">[root@ffing test]# touch test.&#123;1..3&#125;.log test.&#123;1..3&#125;.txt test.&#123;1..3&#125;.xml</span><br><span class="line">[root@ffing test]# ll</span><br><span class="line">总用量 0</span><br><span class="line">-rw-r--r--. 1 root root 0 2月  18 21:19 test.1.log</span><br><span class="line">-rw-r--r--. 1 root root 0 2月  18 21:19 test.1.txt</span><br><span class="line">-rw-r--r--. 1 root root 0 2月  18 21:19 test.1.xml</span><br><span class="line">-rw-r--r--. 1 root root 0 2月  18 21:19 test.2.log</span><br><span class="line">-rw-r--r--. 1 root root 0 2月  18 21:19 test.2.txt</span><br><span class="line">-rw-r--r--. 1 root root 0 2月  18 21:19 test.2.xml</span><br><span class="line">-rw-r--r--. 1 root root 0 2月  18 21:19 test.3.log</span><br><span class="line">-rw-r--r--. 1 root root 0 2月  18 21:19 test.3.txt</span><br><span class="line">-rw-r--r--. 1 root root 0 2月  18 21:19 test.3.xml</span><br><span class="line">#利用xargs将管道传递内容变转换为一行</span><br><span class="line">[root@ffing test]# ll xargs </span><br><span class="line">总用量 0 -rw-r--r--. 1 root root 0 2月 18 21:19 test.1.log -rw-r--r--. 1 root root 0 2月 18 21:19 test.1.txt -rw-r--r--. 1 root root 0 2月 18 21:19 test.1.xml -rw-r--r--. 1 root root 0 2月 18 21:19 test.2.log -rw-r--r--. 1 root root 0 2月 18 21:19 test.2.txt -rw-r--r--. 1 root root 0 2月 18 21:19 test.2.xml -rw-r--r--. 1 root root 0 2月 18 21:19 test.3.log -rw-r--r--. 1 root root 0 2月 18 21:19 test.3.txt -rw-r--r--. 1 root root 0 2月 18 21:19 test.3.xml</span><br></pre></td></tr></table></figure>
+
+<p>=&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</p>
+<p>例：xargs，定义分隔符，定义一行输出几个（默认为空格）</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://qnimg.ffing.cn/wp-content/uploads/2022/03/image-25.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[root@ffing test]# cat test.log</span><br><span class="line">2022-02-18 info test.log testlog</span><br><span class="line">2022-02-18 error.log testlog</span><br><span class="line">[root@ffing test]# cat test.logxargs -d &#x27;&#x27; -n1</span><br><span class="line">2022-02-18 info test.log </span><br><span class="line">test</span><br><span class="line">log</span><br><span class="line">2022-02-18 error.log </span><br><span class="line">test</span><br><span class="line">log</span><br><span class="line"></span><br><span class="line">[root@ffing test]# cat test.logsed &#x27;s//\n/g&#x27;</span><br><span class="line">2022-02-18 info test.log </span><br><span class="line">test</span><br><span class="line">log</span><br><span class="line">2022-02-18 error.log </span><br><span class="line">test</span><br><span class="line">log</span><br></pre></td></tr></table></figure>
+
+<p>=&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</p>
+<p>例：find文件后，进行操作（ll、cp、mv等）</p>
+<p>#ll查看文件详细信息（ll是ls -l的别名！）</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://qnimg.ffing.cn/wp-content/uploads/2022/03/image-21.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#find文件名包含test.3*的文件</span><br><span class="line">[root@ffing test]# find / -type f -name  &quot;test.3*&quot;</span><br><span class="line">/root/test/test.3.log</span><br><span class="line">/root/test/test.3.txt</span><br><span class="line">/root/test/test.3.xml</span><br><span class="line">#将find到的文件，使用xargs查看文件详细信息</span><br><span class="line">[root@ffing test]# find / -type f -name  &quot;test.3*&quot;xargs ls -lh</span><br><span class="line">-rw-r--r--. 1 root root 0 2月  18 21:19 /root/test/test.3.log</span><br><span class="line">-rw-r--r--. 1 root root 0 2月  18 21:19 /root/test/test.3.txt</span><br><span class="line">-rw-r--r--. 1 root root 0 2月  18 21:19 /root/test/test.3.xml</span><br></pre></td></tr></table></figure>
+
+<p>#cp复制到指定目录</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://qnimg.ffing.cn/wp-content/uploads/2022/03/image-23.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@ffing test]# find / -type f -name  &quot;test.3*&quot;</span><br><span class="line">/root/test/test.3.log</span><br><span class="line">/root/test/test.3.txt</span><br><span class="line">/root/test/test.3.xml</span><br><span class="line">#将find到的文件，cp到/tmp目录下</span><br><span class="line">[root@ffing test]# find / -type f -name  &quot;test.3*&quot;xargs -i cp &#123;&#125; /tmp</span><br><span class="line">[root@ffing test]# ll /tmp</span><br><span class="line">总用量 4</span><br><span class="line">-rwx------. 1 root root 836 3月   2 2022 ks-script-XJEr39</span><br><span class="line">-rw-r--r--. 1 root root   0 2月  18 21:28 test.3.log</span><br><span class="line">-rw-r--r--. 1 root root   0 2月  18 21:28 test.3.txt</span><br><span class="line">-rw-r--r--. 1 root root   0 2月  18 21:28 test.3.xml</span><br><span class="line">drwx------. 2 root root   6 3月   2 2022 vmware-root</span><br><span class="line">-rw-------. 1 root root   0 3月   2 2022 yum.log</span><br></pre></td></tr></table></figure>
+
+<p>#mv移动</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://qnimg.ffing.cn/wp-content/uploads/2022/03/image-24.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">[root@ffing test]# ll</span><br><span class="line">总用量 0</span><br><span class="line">-rw-r--r--. 1 root root 0 2月  18 21:19 test.1.log</span><br><span class="line">-rw-r--r--. 1 root root 0 2月  18 21:19 test.1.txt</span><br><span class="line">-rw-r--r--. 1 root root 0 2月  18 21:19 test.1.xml</span><br><span class="line">-rw-r--r--. 1 root root 0 2月  18 21:19 test.2.log</span><br><span class="line">-rw-r--r--. 1 root root 0 2月  18 21:19 test.2.txt</span><br><span class="line">-rw-r--r--. 1 root root 0 2月  18 21:19 test.2.xml</span><br><span class="line">-rw-r--r--. 1 root root 0 2月  18 21:19 test.3.log</span><br><span class="line">-rw-r--r--. 1 root root 0 2月  18 21:19 test.3.txt</span><br><span class="line">-rw-r--r--. 1 root root 0 2月  18 21:19 test.3.xml</span><br><span class="line">[root@ffing test]# find / -type f -name  &quot;test.[0-9].xml&quot;</span><br><span class="line">/root/test/test.3.xml</span><br><span class="line">/root/test/test.1.xml</span><br><span class="line">/root/test/test.2.xml</span><br><span class="line">[root@ffing test]# find / -type f -name  &quot;test.[0-9].xml&quot;xargs -i mv &#123;&#125; /tmp</span><br><span class="line">[root@ffing test]# ll /tmp</span><br><span class="line">总用量 4</span><br><span class="line">-rwx------. 1 root root 836 3月   2 2022 ks-script-XJEr39</span><br><span class="line">-rw-r--r--. 1 root root   0 2月  18 21:19 test.1.xml</span><br><span class="line">-rw-r--r--. 1 root root   0 2月  18 21:19 test.2.xml</span><br><span class="line">-rw-r--r--. 1 root root   0 2月  18 21:28 test.3.log</span><br><span class="line">-rw-r--r--. 1 root root   0 2月  18 21:28 test.3.txt</span><br><span class="line">-rw-r--r--. 1 root root   0 2月  18 21:19 test.3.xml</span><br><span class="line">drwx------. 2 root root   6 3月   2 2022 vmware-root</span><br><span class="line">-rw-------. 1 root root   0 3月   2 2022 yum.log</span><br></pre></td></tr></table></figure>
+
+<p>#mv修改扩展名</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://qnimg.ffing.cn/wp-content/uploads/2022/04/image.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[root@ffing test]# ll</span><br><span class="line">总用量 0</span><br><span class="line">-rw-r--r--. 1 root root 0 4月  10 16:56 test1.txt</span><br><span class="line">-rw-r--r--. 1 root root 0 4月  10 16:56 test2.txt</span><br><span class="line">-rw-r--r--. 1 root root 0 4月  10 16:56 test3.txt</span><br><span class="line">-rw-r--r--. 1 root root 0 4月  10 16:56 test4.txt</span><br><span class="line">-rw-r--r--. 1 root root 0 4月  10 16:56 test5.txt</span><br><span class="line">[root@ffing test]# find ./ -type f -name &quot;*.txt&quot;xargs -i mv &#123;&#125; &#123;&#125;.xml</span><br><span class="line">[root@ffing test]# ll</span><br><span class="line">总用量 0</span><br><span class="line">-rw-r--r--. 1 root root 0 4月  10 16:56 test1.txt.xml</span><br><span class="line">-rw-r--r--. 1 root root 0 4月  10 16:56 test2.txt.xml</span><br><span class="line">-rw-r--r--. 1 root root 0 4月  10 16:56 test3.txt.xml</span><br><span class="line">-rw-r--r--. 1 root root 0 4月  10 16:56 test4.txt.xml</span><br><span class="line">-rw-r--r--. 1 root root 0 4月  10 16:56 test5.txt.xml</span><br></pre></td></tr></table></figure>
+
+<h2 id="sed命令"><a href="#sed命令" class="headerlink" title="sed命令"></a>sed命令</h2><p>sed命令,我前面文章写的有，这里只写关于日志过滤中常用到的命令。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br></pre></td><td class="code"><pre><span class="line">#查看test.log内容</span><br><span class="line">[root@ffing test]# cat test.log</span><br><span class="line">a=</span><br><span class="line">b</span><br><span class="line">c</span><br><span class="line">d</span><br><span class="line">e=</span><br><span class="line"></span><br><span class="line">#删除第一行</span><br><span class="line">[root@ffing test]# sed &#x27;1&#x27;d test.log</span><br><span class="line">b</span><br><span class="line">c</span><br><span class="line">d</span><br><span class="line">e=</span><br><span class="line"></span><br><span class="line">#删除最后一行</span><br><span class="line">[root@ffing test]# sed &#x27;$&#x27;d test.log</span><br><span class="line">a=</span><br><span class="line">b</span><br><span class="line">c</span><br><span class="line">d</span><br><span class="line"></span><br><span class="line">#查看第一行到第三行</span><br><span class="line">[root@ffing test]# sed -n &#x27;1,3&#x27;p test.log</span><br><span class="line">a=</span><br><span class="line">b</span><br><span class="line">c</span><br><span class="line"></span><br><span class="line">#查看第三行到最后一行</span><br><span class="line">[root@ffing test]# sed -n &#x27;3,$&#x27;p test.log</span><br><span class="line">c</span><br><span class="line">d</span><br><span class="line">e=</span><br><span class="line"></span><br><span class="line">#第一种方法：替换包含=号的行 【.* 代表任意一个字符】</span><br><span class="line">[root@ffing test]# sed &#x27;s/.*=.*/=======/&#x27; test.log</span><br><span class="line">=======</span><br><span class="line">b</span><br><span class="line">c</span><br><span class="line">d</span><br><span class="line">=======</span><br><span class="line"></span><br><span class="line">#第二种方法：替换包含=号的行 【利用行标c】</span><br><span class="line">[root@ffing test]# sed  &#x27;/=/c #####&#x27; test.log</span><br><span class="line">#####</span><br><span class="line">b</span><br><span class="line">c</span><br><span class="line">d</span><br><span class="line">#####</span><br><span class="line"></span><br><span class="line">#将第一行替换为ffing</span><br><span class="line">[root@ffing test]# sed &#x27;1c ffing&#x27; test.log</span><br><span class="line">ffing</span><br><span class="line">b</span><br><span class="line">c</span><br><span class="line">d</span><br><span class="line">e=</span><br><span class="line"></span><br><span class="line">#将第一行和第二行替换为ffing</span><br><span class="line">[root@ffing test]# sed &#x27;1,2c ffing&#x27; test.log</span><br><span class="line">ffing</span><br><span class="line">c</span><br><span class="line">d</span><br><span class="line">e=</span><br><span class="line"></span><br><span class="line">#同时替换多个字符串</span><br><span class="line">#将b字符替换为数字2，将c字符串替换为数字3</span><br><span class="line">[root@ffing test]# sed &#x27;s/b/2/;s/c/3/&#x27; test.log</span><br><span class="line">a=</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">d</span><br><span class="line">e=</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">####统计单词出现次数####</span><br><span class="line">[root@ffing_cn ~]# cat words.txt</span><br><span class="line">the day is sunny the the</span><br><span class="line">the sunny is is</span><br><span class="line">[root@ffing_cn ~]# cat words.txtsed &#x27;s/ /\n/g&#x27;</span><br><span class="line">the</span><br><span class="line">day</span><br><span class="line">is</span><br><span class="line">sunny</span><br><span class="line">the</span><br><span class="line">the</span><br><span class="line">the</span><br><span class="line">sunny</span><br><span class="line">is</span><br><span class="line">is</span><br><span class="line">[root@ffing_cn ~]# cat words.txtsed &#x27;s/ /\n/g&#x27;sortuniq -c</span><br><span class="line">      1 day</span><br><span class="line">      3 is</span><br><span class="line">      2 sunny</span><br><span class="line">      4 the</span><br><span class="line">[root@ffing_cn ~]# cat words.txtsed &#x27;s/ /\n/g&#x27;sortuniq -cawk &#x27;&#123;print $2 &quot; &quot; $1&#125;&#x27;</span><br><span class="line">day 1</span><br><span class="line">is 3</span><br><span class="line">sunny 2</span><br><span class="line">the 4</span><br><span class="line">[root@ffing_cn ~]# cat words.txtsed &#x27;s/ /\n/g&#x27;sortuniq -cawk &#x27;&#123;print $2 &quot;\t&quot; $1&#125;&#x27;</span><br><span class="line">day     1</span><br><span class="line">is      3</span><br><span class="line">sunny   2</span><br><span class="line">the     4</span><br></pre></td></tr></table></figure>
+
+<h2 id="grep命令"><a href="#grep命令" class="headerlink" title="grep命令"></a>grep命令</h2><p>grep用的太多，这里不详细描述了。</p>
+<p>-n 过滤的字符串，并带行号</p>
+<p>-i 忽略大小写</p>
+<p>-E 正则</p>
+<p>-v 排除</p>
+<p>例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">#过滤带时间戳的行</span><br><span class="line">[root@ffing test]# cat test1.log</span><br><span class="line">2022-02-18 9:00:00   asedfsadf:aaa</span><br><span class="line">fEROOOR：aaaaa</span><br><span class="line">2022-02-18 21:10:12   berer:bbb</span><br><span class="line">ferror：bbbbbbbbbb</span><br><span class="line">2022-02-18 10:00:23  cdfdf:ccc</span><br><span class="line">i:cccccccccc</span><br><span class="line">2022-02-19 13:00:45  der23:ccc</span><br><span class="line">n:xxxdfd</span><br><span class="line">2022-02-19 14:00:58  timeout</span><br><span class="line">g:timeout</span><br><span class="line">[root@ffing test]# grep [0-9]:[0-9][0-9]:[0-9] test1.log</span><br><span class="line">2022-02-18 9:00:00   asedfsadf:aaa</span><br><span class="line">2022-02-18 21:10:12   berer:bbb</span><br><span class="line">2022-02-18 10:00:23  cdfdf:ccc</span><br><span class="line">2022-02-19 13:00:45  der23:ccc</span><br><span class="line">2022-02-19 14:00:58  timeout</span><br></pre></td></tr></table></figure>
+
+<p>=&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;grep正则摘自网络，未做完整验证&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</p>
+<ul>
+<li><strong>grep , egrep 正则表达式特点：</strong></li>
+</ul>
+<blockquote>
+<p>1）grep 支持：BREs、EREs、PREs 正则表达式</p>
+<p>grep 指令后不跟任何参数，则表示要使用 ”BREs“ </p>
+<p>grep 指令后跟 ”-E” 参数，则表示要使用 “EREs“</p>
+<p>grep 指令后跟 “-P” 参数，则表示要使用 “PREs”</p>
+<p>2）egrep 支持：EREs、PREs 正则表达式</p>
+<p>egrep 指令后不跟任何参数，则表示要使用 “EREs”</p>
+<p>egrep 指令后跟 “-P” 参数，则表示要使用 “PREs”</p>
+<p>3）grep 与 egrep 正则匹配文件，处理文件方法</p>
+<p>a. grep 与 egrep 的处理对象：文本文件</p>
+<p>b. grep 与 egrep 的处理过程：查找文本文件中是否含要查找的 “关键字”（关键字可以是正则表达式） ，如果含有要查找的 ”关健字“，那么默认返回该文本文件中包含该”关健字“的该行的内容，并在标准输出中显示出来，除非使用了“&gt;” 重定向符号,</p>
+<p>c. grep 与 egrep 在处理文本文件时，是按行处理的</p>
+</blockquote>
+<ul>
+<li><strong>sed 正则表达式特点</strong></li>
+</ul>
+<blockquote>
+<p>1）sed 文本工具支持：BREs、EREs</p>
+<p>sed 指令默认是使用”BREs”</p>
+<p>sed 命令参数 “-r ” ，则表示要使用“EREs”</p>
+<p>2）sed 功能与作用</p>
+<p>a. sed 处理的对象：文本文件</p>
+<p>b. sed 处理操作：对文本文件的内容进行 — 查找、替换、删除、增加等操作</p>
+<p>c. sed 在处理文本文件的时候，也是按行处理的</p>
+</blockquote>
+<ul>
+<li><strong>Awk（gawk）正则表达式特点</strong></li>
+</ul>
+<blockquote>
+<p>1）Awk 文本工具支持：EREs</p>
+<p>awk 指令默认是使用 “EREs”</p>
+<p>2）Awk 文本工具处理文本的特点</p>
+<p>a. awk 处理的对象：文本文件</p>
+<p>b. awk 处理操作：主要是对列进行操作</p>
+</blockquote>
+<p><strong>三、常见3中类型正则表达式比较</strong></p>
+<p>字符</p>
+<p>说明</p>
+<p>Basic RegEx</p>
+<p>Extended RegEx</p>
+<p>python RegEx</p>
+<p>Perl regEx</p>
+<p>转义</p>
+<p> </p>
+<p>\</p>
+<p>\</p>
+<p>\</p>
+<p>\</p>
+<p>^</p>
+<p>匹配行首，例如’^dog’匹配以字符串dog开头的行（注意：awk 指令中，’^’则是匹配字符串的开始）</p>
+<p>^</p>
+<p>^</p>
+<p>^</p>
+<p>^</p>
+<p>$</p>
+<p>匹配行尾，例如：’^、dog$’匹配以字符串 dog 为结尾的行（注意：awk 指令中，’$’则是匹配字符串的结尾）</p>
+<p>$</p>
+<p>$</p>
+<p>$</p>
+<p>$</p>
+<p>^$</p>
+<p>匹配空行</p>
+<p>^$</p>
+<p>^$</p>
+<p>^$</p>
+<p>^$</p>
+<p>^string$</p>
+<p>匹配行，例如：’^dog$’匹配只含一个字符串 dog 的行</p>
+<p>^string$</p>
+<p>^string$</p>
+<p>^string$</p>
+<p>^string$</p>
+<p>\&lt;</p>
+<p>匹配单词，例如：’\&lt;frog’ （等价于’\bfrog’），匹配以 frog 开头的单词</p>
+<p>\&lt;</p>
+<p>\&lt;</p>
+<p><strong>不支持</strong></p>
+<p><strong>不支持</strong>（但可以使用\b来匹配单词，例如：’\bfrog’）</p>
+<p>\&gt;</p>
+<p>匹配单词，例如：’frog\&gt;’（等价于’frog\b ‘），匹配以 frog 结尾的单词</p>
+<p>\&gt;</p>
+<p>\&gt;</p>
+<p><strong>不支持</strong></p>
+<p><strong>不支持</strong>（但可以使用\b来匹配单词，例如：’frog\b’）</p>
+<p>\&lt;x\&gt;</p>
+<p>匹配一个单词或者一个特定字符，例如：’\&lt;frog\&gt;’（等价于’\bfrog\b’）、’\&lt;G\&gt;’</p>
+<p>\&lt;x\&gt;</p>
+<p>\&lt;x\&gt;</p>
+<p><strong>不支持</strong></p>
+<p><strong>不支持</strong>（但可以使用\b来匹配单词，例如：’\bfrog\b’</p>
+<p>()</p>
+<p>匹配表达式，例如：不支持’（frog）’</p>
+<p><strong>不支持</strong>（但可以使用，如：dogdog</p>
+<p>()</p>
+<p>()</p>
+<p>()</p>
+<p>匹配表达式，例如：不支持’（frog）’</p>
+<p><strong>不支持</strong>（同())</p>
+<p><strong>不支持</strong>（同())</p>
+<p><strong>不支持</strong>（同())</p>
+<p>？</p>
+<p>匹配前面的子表达式 0 次或 1 次（等价于{0,1}），例如：where(is)?能匹配”where” 以及”whereis”</p>
+<p><strong>不支持</strong>（同\?)</p>
+<p>？</p>
+<p>？</p>
+<p>？</p>
+<p>\?</p>
+<p>匹配前面的子表达式 0 次或 1 次（等价于’\{0,1\}’），例如：’whereisis\? ‘能匹配 “where”以及”whereis”</p>
+<p>\?</p>
+<p><strong>不支持</strong>（同?)</p>
+<p><strong>不支持</strong>（同?)</p>
+<p><strong>不支持</strong>（同?)</p>
+<p>?</p>
+<p>当该字符紧跟在任何一个其他限制符（*, +, ?, {n},{n,}, {n,m}） 后面时，匹配模式是非贪婪的。非贪婪模式尽可能少的匹配所搜索的字符串，而默认的贪婪模式则尽可能多的匹配所搜索的字符串。例如，对于字符串 “oooo”，’o+?’ 将匹配单个”o”，而 ‘o+’ 将匹配所有 ‘o’</p>
+<p><strong>不支持</strong></p>
+<p><strong>不支持</strong></p>
+<p><strong>不支持</strong></p>
+<p><strong>不支持</strong></p>
+<p>.</p>
+<p>匹配除换行符（’\n’）之外的任意单个字符（注意：awk 指令中的句点能匹配换行符）</p>
+<p>.</p>
+<p>.（如果要匹配包括“\n”在内的任何一个字符，请使用：’(^$)（.）</p>
+<p>.</p>
+<p>.（如果要匹配包括“\n”在内的任何一个字符，请使用：’ [.\n] ‘</p>
+<p>*</p>
+<p>匹配前面的子表达式 0 次或多次（等价于{0, }），例如：zo* 能匹配 “z”以及 “zoo”</p>
+<p>*</p>
+<p>*</p>
+<p>*</p>
+<p>*</p>
+<p>\+</p>
+<p>匹配前面的子表达式 1 次或多次（等价于’\{1, \}’），例如：’whereisis\+ ‘能匹配 “whereis”以及”whereisis”</p>
+<p>\+</p>
+<p><strong>不支持</strong>（同+)</p>
+<p><strong>不支持</strong>（同+)</p>
+<p><strong>不支持</strong>（同+)</p>
+<ul>
+<li></li>
+</ul>
+<p>匹配前面的子表达式 1 次或多次（等价于{1, }），例如：zo+能匹配 “zo”以及 “zoo”，但不能匹配 “z”</p>
+<p><strong>不支持</strong>（同\+)</p>
+<ul>
+<li></li>
+<li></li>
+<li></li>
+</ul>
+<p>{n}</p>
+<p>n 必须是一个 0 或者正整数，匹配子表达式 n 次，例如：zo{2}能匹配</p>
+<p><strong>不支持</strong>（同\{n\})</p>
+<p>{n}</p>
+<p>{n}</p>
+<p>{n}</p>
+<p>{n,}</p>
+<p>“zooz”，但不能匹配 “Bob”n 必须是一个 0 或者正整数，匹配子表达式大于等于 n次，例如：go{2,}</p>
+<p><strong>不支持</strong>（同\{n,\})</p>
+<p>{n,}</p>
+<p>{n,}</p>
+<p>{n,}</p>
+<p>{n,m}</p>
+<p>能匹配 “good”，但不能匹配 godm 和 n 均为非负整数，其中 n &lt;&#x3D; m，最少匹配 n 次且最多匹配 m 次 ，例如：o{1,3}将配”fooooood” 中的前三个 o（请注意在逗号和两个数之间不能有空格）</p>
+<p><strong>不支持</strong>（同\{n,m\})</p>
+<p>{n,m}</p>
+<p>{n,m}</p>
+<p>{n,m}</p>
+<p>xy</p>
+<p>匹配 x 或 y，例如： 不支持’z（food）’ 能匹配 “z” 或”food”；’（zf）ood’ 则匹配”zood” 或 “food”</p>
+<p><strong>不支持</strong>（同x\y)</p>
+<p>xy</p>
+<p>xy</p>
+<p>xy</p>
+<p>[0-9]</p>
+<p>匹配从 0 到 9 中的任意一个数字字符（注意：要写成递增）</p>
+<p>[0-9]</p>
+<p>[0-9]</p>
+<p>[0-9]</p>
+<p>[0-9]</p>
+<p>[xyz]</p>
+<p>字符集合，匹配所包含的任意一个字符，例如：’[abc]‘可以匹配”lay” 中的 ‘a’（注意：如果元字符，例如：. *等，它们被放在[ ]中，那么它们将变成一个普通字符）</p>
+<p>[xyz]</p>
+<p>[xyz]</p>
+<p>[xyz]</p>
+<p>[xyz]</p>
+<p>[^xyz]</p>
+<p>负值字符集合，匹配未包含的任意一个字符（注意：不包括换行符），例如：’[^abc]‘ 可以匹配 “Lay” 中的’L’（注意：[^xyz]在awk 指令中则是匹配未包含的任意一个字符+换行符）</p>
+<p>[^xyz]</p>
+<p>[^xyz]</p>
+<p>[^xyz]</p>
+<p>[^xyz]</p>
+<p>[A-Za-z]</p>
+<p>匹配大写字母或者小写字母中的任意一个字符（注意：要写成递增）</p>
+<p>[A-Za-z]</p>
+<p>[A-Za-z]</p>
+<p>[A-Za-z]</p>
+<p>[A-Za-z]</p>
+<p>[^A-Za-z]</p>
+<p>匹配除了大写与小写字母之外的任意一个字符（注意：写成递增）</p>
+<p>[^A-Za-z]</p>
+<p>[^A-Za-z]</p>
+<p>[^A-Za-z]</p>
+<p>[^A-Za-z]</p>
+<p><strong>\d</strong></p>
+<p>匹配从 0 到 9 中的任意一个数字字符（等价于 [0-9]）</p>
+<p><strong>不支持</strong></p>
+<p><strong>不支持</strong></p>
+<p>\d</p>
+<p>\d</p>
+<p><strong>\D</strong></p>
+<p>匹配非数字字符（等价于 [^0-9]）</p>
+<p><strong>不支持</strong></p>
+<p><strong>不支持</strong></p>
+<p>\D</p>
+<p>\D</p>
+<p>\S</p>
+<p>匹配任何非空白字符（等价于[^\f\n\r\t\v]）</p>
+<p><strong>不支持</strong></p>
+<p><strong>不支持</strong></p>
+<p>\S</p>
+<p>\S</p>
+<p>\s</p>
+<p>匹配任何空白字符，包括空格、制表符、换页符等等（等价于[ \f\n\r\t\v]）</p>
+<p><strong>不支持</strong></p>
+<p><strong>不支持</strong></p>
+<p>\s</p>
+<p>\s</p>
+<p>\W</p>
+<p>匹配任何非单词字符 (等价于[^A-Za-z0-9_])</p>
+<p>\W</p>
+<p>\W</p>
+<p>\W</p>
+<p>\W</p>
+<p>\w</p>
+<p>匹配包括下划线的任何单词字符（等价于[A-Za-z0-9_]）</p>
+<p>\w</p>
+<p>\w</p>
+<p>\w</p>
+<p>\w</p>
+<p>\B</p>
+<p>匹配非单词边界，例如：’er\B’ 能匹配 “verb” 中的’er’，但不能匹配”never” 中的’er’</p>
+<p>\B</p>
+<p>\B</p>
+<p>\B</p>
+<p>\B</p>
+<p>\b</p>
+<p>匹配一个单词边界，也就是指单词和空格间的位置，例如： ‘er\b’ 可以匹配”never” 中的 ‘er’，但不能匹配 “verb” 中的’er’</p>
+<p>\b</p>
+<p>\b</p>
+<p>\b</p>
+<p>\b</p>
+<p>\t</p>
+<p>匹配一个横向制表符（等价于 \x09和 \cI）</p>
+<p><strong>不支持</strong></p>
+<p><strong>不支持</strong></p>
+<p>\t</p>
+<p>\t</p>
+<p>\v</p>
+<p>匹配一个垂直制表符（等价于 \x0b和 \cK）</p>
+<p><strong>不支持</strong></p>
+<p><strong>不支持</strong></p>
+<p>\v</p>
+<p>\v</p>
+<p>\n</p>
+<p>匹配一个换行符（等价于 \x0a 和\cJ）</p>
+<p><strong>不支持</strong></p>
+<p><strong>不支持</strong></p>
+<p>\n</p>
+<p>\n</p>
+<p>\f</p>
+<p>匹配一个换页符（等价于\x0c 和\cL）</p>
+<p><strong>不支持</strong></p>
+<p><strong>不支持</strong></p>
+<p>\f</p>
+<p>\f</p>
+<p>\r</p>
+<p>匹配一个回车符（等价于 \x0d 和\cM）</p>
+<p><strong>不支持</strong></p>
+<p><strong>不支持</strong></p>
+<p>\r</p>
+<p>\r</p>
+<p>\\</p>
+<p>匹配转义字符本身”\“</p>
+<p>\\</p>
+<p>\\</p>
+<p>\\</p>
+<p>\\</p>
+<p>\cx</p>
+<p>匹配由 x 指明的控制字符，例如：\cM匹配一个Control-M 或回车符，x 的值必须为A-Z 或 a-z 之一，否则，将 c 视为一个原义的 ‘c’ 字符</p>
+<p><strong>不支持</strong></p>
+<p><strong>不支持</strong></p>
+<p> </p>
+<p>\cx</p>
+<p>\xn</p>
+<p>匹配 n，其中 n 为十六进制转义值。十六进制转义值必须为确定的两个数字长，例如：’\x41’ 匹配 “A”。’\x041’ 则等价于’\x04’ &amp; “1”。正则表达式中可以使用 ASCII 编码</p>
+<p><strong>不支持</strong></p>
+<p><strong>不支持</strong></p>
+<p> </p>
+<p>\xn</p>
+<p>\num</p>
+<p>匹配 num，其中 num是一个正整数。表示对所获取的匹配的引用</p>
+<p><strong>不支持</strong></p>
+<p>\num</p>
+<p>\num</p>
+<p> </p>
+<p>[:alnum:]</p>
+<p>匹配任何一个字母或数字（[A-Za-z0-9]），例如：’[[:alnum:]] ‘</p>
+<p>[:alnum:]</p>
+<p>[:alnum:]</p>
+<p>[:alnum:]</p>
+<p>[:alnum:]</p>
+<p>[:alpha:]</p>
+<p>匹配任何一个字母（[A－Za－z]）， 例如：’ [[:alpha:]] ‘</p>
+<p>[:alpha:]</p>
+<p>[:alpha:]</p>
+<p>[:alpha:]</p>
+<p>[:alpha:]</p>
+<p>[:digit:]</p>
+<p>匹配任何一个数字（[0-9]），例如：’[[:digit:]] ‘</p>
+<p>[:digit:]</p>
+<p>[:digit:]</p>
+<p>[:digit:]</p>
+<p>[:digit:]</p>
+<p>[:lower:]</p>
+<p>匹配任何一个小写字母（[a-z]）， 例如：’ [[:lower:]] ‘</p>
+<p>[:lower:]</p>
+<p>[:lower:]</p>
+<p>[:lower:]</p>
+<p>[:lower:]</p>
+<p>[:upper:]</p>
+<p>匹配任何一个大写字母（[A-Z]）</p>
+<p>[:upper:]</p>
+<p>[:upper:]</p>
+<p>[:upper:]</p>
+<p>[:upper:]</p>
+<p>[:space:]</p>
+<p>任何一个空白字符： 支持制表符、空格，例如：’ [[:space:]] ‘</p>
+<p>[:space:]</p>
+<p>[:space:]</p>
+<p>[:space:]</p>
+<p>[:space:]</p>
+<p>[:blank:]</p>
+<p>空格和制表符（横向和纵向），例如：’[[:blank:]]‘ó’[\s\t\v]‘</p>
+<p>[:blank:]</p>
+<p>[:blank:]</p>
+<p>[:blank:]</p>
+<p>[:blank:]</p>
+<p>[:graph:]</p>
+<p>任何一个可以看得见的且可以打印的字符（注意：不包括空格和换行符等），例如：’[[:graph:]] ‘</p>
+<p>[:graph:]</p>
+<p>[:graph:]</p>
+<p>[:graph:]</p>
+<p>[:graph:]</p>
+<p>[:print:]</p>
+<p>任何一个可以打印的字符（注意：不包括：[:cntrl:]、字符串结束符’\0’、EOF 文件结束符（-1）， 但包括空格符号），例如：’[[:print:]] ‘</p>
+<p>[:print:]</p>
+<p>[:print:]</p>
+<p>[:print:]</p>
+<p>[:print:]</p>
+<p>[:cntrl:]</p>
+<p>任何一个控制字符（ASCII 字符集中的前 32 个字符，即：用十进制表示为从 0 到31，例如：换行符、制表符等等），例如：’ [[:cntrl:]]‘</p>
+<p>[:cntrl:]</p>
+<p>[:cntrl:]</p>
+<p>[:cntrl:]</p>
+<p>[:cntrl:]</p>
+<p>[:punct:]</p>
+<p>任何一个标点符号（不包括：[:alnum:]、[:cntrl:]、[:space:]这些字符集）</p>
+<p>[:punct:]</p>
+<p>[:punct:]</p>
+<p>[:punct:]</p>
+<p>[:punct:]</p>
+<p>[:xdigit:]</p>
+<p>任何一个十六进制数（即：0-9，a-f，A-F）</p>
+<p>[:xdigit:]</p>
+<p>[:xdigit:]</p>
+<p>[:xdigit:]</p>
+<p>[:xdigit:]</p>
+<h2 id="awk命令"><a href="#awk命令" class="headerlink" title="awk命令"></a>awk命令</h2><p>awk支持运算和截取，……………………….</p>
+<p>例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br></pre></td><td class="code"><pre><span class="line">#获取大于12点之后日志</span><br><span class="line">[root@ffing test]# cat test1.log</span><br><span class="line">2022-02-18 9:00:00   asedfsadf:aaa</span><br><span class="line">ferror：aaaaa</span><br><span class="line">2022-02-18 21:10:12   berer:bbb</span><br><span class="line">ferror：bbbbbbbbbb</span><br><span class="line">2022-02-18 10:00:23  cdfdf:ccc</span><br><span class="line">i:cccccccccc</span><br><span class="line">2022-02-19 13:00:45  der23:ccc</span><br><span class="line">n:xxxdfd</span><br><span class="line">2022-02-19 14:00:58  timeout</span><br><span class="line">g:timeout</span><br><span class="line">#awk以空格和：为分隔符，获取HH（小时）字段列，$2&gt;12</span><br><span class="line">[root@ffing test]# cat test1.log awk -F &quot; +:&quot; &#x27;$2&gt;12&#123;print&#125;&#x27;</span><br><span class="line">2022-02-18 21:10:12   berer:bbb</span><br><span class="line">i:cccccccccc</span><br><span class="line">2022-02-19 13:00:45  der23:ccc</span><br><span class="line">n:xxxdfd</span><br><span class="line">2022-02-19 14:00:58  timeout</span><br><span class="line">g:timeout</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#获取硬盘分区使用率大于50%的分区（awk支持运算比较）</span><br><span class="line">[root@ffing_cn ~]# df -m</span><br><span class="line">文件系统       1M-块  已用  可用 已用% 挂载点</span><br><span class="line">devtmpfs         908     0   908    0% /dev</span><br><span class="line">tmpfs            919     0   919    0% /dev/shm</span><br><span class="line">tmpfs            919     1   919    1% /run</span><br><span class="line">tmpfs            919     0   919    0% /sys/fs/cgroup</span><br><span class="line">/dev/vda1      50268 29062 19060   61% /</span><br><span class="line">tmpfs            184     0   184    0% /run/user/0</span><br><span class="line"></span><br><span class="line">#获取硬盘分区使用率大于50%的分区（awk支持运算比较）</span><br><span class="line">[root@ffing_cn ~]# df -m awk -F &quot; +%&quot; &#x27;$5&gt;5&#123;print&#125;&#x27;</span><br><span class="line">文件系统       1M-块  已用  可用 已用% 挂载点</span><br><span class="line">/dev/vda1      50268 29063 19060   61% /</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#不显示显示文件系统和挂载点(默认分隔符为空)$1=$NF=&quot;&quot;</span><br><span class="line">[root@ffing_cn ~]# df -mawk &#x27;&#123;print $1=$NF=&quot;&quot;,$0&#125;&#x27;</span><br><span class="line">  1M-块 已用 可用 已用% </span><br><span class="line">  908 0 908 0% </span><br><span class="line">  919 0 919 0% </span><br><span class="line">  919 1 919 1% </span><br><span class="line">  919 0 919 0% </span><br><span class="line">  50268 29063 19060 61% </span><br><span class="line">  184 0 184 0% </span><br><span class="line"></span><br><span class="line">#不显示显示文件系统和挂载点(更改分隔符为tab)</span><br><span class="line">[root@ffing_cn ~]# df -mawk &#x27;OFS=&quot;\t&quot;&#123;print $1=$NF=&quot;&quot;,$0&#125;&#x27;</span><br><span class="line">                1M-块   已用    可用    已用%   </span><br><span class="line">                908     0       908     0%      </span><br><span class="line">                919     0       919     0%      </span><br><span class="line">                919     1       919     1%      </span><br><span class="line">                919     0       919     0%      </span><br><span class="line">                50268   29063   19060   61%     </span><br><span class="line">                184     0       184     0%   </span><br><span class="line"></span><br><span class="line">#将%百分比放第一列</span><br><span class="line">[root@ffing_cn ~]# df -mawk &#x27;&#123;print $5 &quot;\t&quot; $0&#125;&#x27;</span><br><span class="line">已用%   文件系统       1M-块  已用  可用 已用% 挂载点</span><br><span class="line">0%      devtmpfs         908     0   908    0% /dev</span><br><span class="line">0%      tmpfs            919     0   919    0% /dev/shm</span><br><span class="line">1%      tmpfs            919     1   919    1% /run</span><br><span class="line">0%      tmpfs            919     0   919    0% /sys/fs/cgroup</span><br><span class="line">61%     /dev/vda1      50268 29063 19060   61% /</span><br><span class="line">0%      tmpfs            184     0   184    0% /run/user/0</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#将第二列求和</span><br><span class="line">[root@ffing_cn ~]# df -mawk &#x27;&#123;sum+=$2&#125;;END&#123;print sum&#125;&#x27;</span><br><span class="line">54118</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#内存使用率：已使用内存/总内存</span><br><span class="line">[root@ffing_cn ~]# free -m</span><br><span class="line">              total        used        free      shared  buff/cache   available</span><br><span class="line">Mem:           1837         601         487          37         749        1049</span><br><span class="line">Swap:          3999           0        3999</span><br><span class="line"></span><br><span class="line">#打印第二行</span><br><span class="line">[root@ffing_cn ~]# free -mawk &#x27;NR==2&#x27;</span><br><span class="line">Mem:           1837         609         473          38         754        1040</span><br><span class="line">#过滤包含Mem的行</span><br><span class="line">[root@ffing_cn ~]# free -mawk &#x27;/Mem/&#x27;</span><br><span class="line">Mem:           1837         614         468          38         755        1035</span><br><span class="line"></span><br><span class="line">#awk浮点运算</span><br><span class="line">[root@ffing_cn ~]# free -mawk &#x27;NR==2&#123;print $3/$2*100&#125;&#x27;</span><br><span class="line">32.4986</span><br><span class="line"></span><br><span class="line">#awk配合printf，保留两位小数（printf【%.2f保留2为小数】【%字符串】【\n换行】）</span><br><span class="line"></span><br><span class="line">[root@ffing_cn ~]# free -mawk &#x27;NR==2&#123;printf(&quot;%.2f %\n&quot;,$3/$2*100)&#125;&#x27;</span><br><span class="line">32.99%</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">####文件转置（纵列变横行）####</span><br><span class="line"></span><br><span class="line">[root@ffing_cn ~]# cat test.txt</span><br><span class="line">1 a x</span><br><span class="line">2 b y</span><br><span class="line">3 c z</span><br><span class="line">#第一种使用awk + &amp;&amp; （当你知道列数，且较少时使用&amp;&amp;）</span><br><span class="line">[root@ffing_cn ~]# awk &#x27;&#123;print $1&#125;&#x27; test.txtxargs;awk &#x27;&#123;print $2&#125;&#x27; test.txtxargs;awk &#x27;&#123;print $3&#125;&#x27; test.txtxargs  </span><br><span class="line">1 2 3</span><br><span class="line">a b c</span><br><span class="line">x y z</span><br><span class="line"></span><br><span class="line">#第二种使用for+awk(awk -v 引用外部变量)</span><br><span class="line">[root@huaweiyun ~]# for i in `seq $(cat test.txtawk &#x27;&#123;print NF&#125;&#x27;sort nrhead -1)` ;do cat test.txtawk -v N=$i &#x27;&#123;print $N&#125;&#x27;xargs ;done</span><br><span class="line">1 2 3</span><br><span class="line">a b c</span><br><span class="line">x y z</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#awk配合substr取字节（$&#123;&#125;也可实现）</span><br><span class="line">#连续格式的时间戳，</span><br><span class="line">#取时间戳的&quot;秒&quot;数($NF最后一列，从1开始，2个字节)</span><br><span class="line">[root@huaweiyun ~]# echo &quot;01/Jan/2022_15:33:44AM&quot;awk -F &quot;:&quot; &#x27;&#123;print substr($NF,1,2)&#125;&#x27;</span><br><span class="line">44</span><br><span class="line"></span><br><span class="line">#取&quot;分钟&quot;数</span><br><span class="line">[root@huaweiyun ~]# echo &quot;01/Jan/2022:22:33:44AM&quot;awk -F &quot;:&quot; &#x27;&#123;print $(NF-1)&#125;&#x27;</span><br><span class="line">33</span><br><span class="line"></span><br><span class="line">#取“小时”数，这里使用length长度</span><br><span class="line">#“length($1)获取$1的字节长度，再“-1”，即是倒数第二位</span><br><span class="line">[root@huaweiyun ~]# echo &quot;01/Jan/2022_15:33:44AM&quot;awk -F &quot;:&quot; &#x27;&#123;print substr($1,length($1)-1)&#125;&#x27;</span><br><span class="line">15</span><br><span class="line"></span><br><span class="line">#合并，取出“时”：“分”：“秒”</span><br><span class="line">#第一种固定值</span><br><span class="line">[root@huaweiyun ~]# echo &quot;01/Jan/2022_15:33:44AM&quot;awk -F &quot;:&quot; &#x27;&#123;print substr($1,length($1)-1) &quot;:&quot; $2 &quot;:&quot; substr($NF,1,2)&#125;&#x27;</span><br><span class="line">15:33:44</span><br><span class="line">#第二种，通过NF匹配,这里注意length取值</span><br><span class="line">[root@huaweiyun ~]# echo &quot;01/Jan/2022_15:33:44AM&quot;awk -F &quot;:&quot; &#x27;&#123;print substr($(NF-2),length($(NF-2))-1) &quot;:&quot; $(NF-1) &quot;:&quot; substr($NF,1,2)&#125;&#x27;</span><br><span class="line">15:33:44</span><br><span class="line">#注：需要awk是取文件中的时间列，所以最后的通用取值命令就可以是“awk -F &quot;:&quot; &#x27;&#123;print substr($(NF-2),length($(NF-2))-1) &quot;:&quot; $(NF-1) &quot;:&quot; substr($NF,1,2)&#125;&#x27;</span><br><span class="line">”</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="tr命令"><a href="#tr命令" class="headerlink" title="tr命令"></a>tr命令</h2><p>[:alnum:] 所有的字母和数字<br>[:alpha:] 所有字母<br>[:digit:] 所有的数字<br>[:lower:] 所有的小写字符<br>[:upper:] 所有大写字母<br>[:blank:] 水平制表符，空白等<br>[:cntrl:] 所有控制字符<br>[:graph:] 所有可打印字符，不包括空格<br>[:print:] 所有可打印字符，包括空格<br>[:punct:] 所有的标点字符<br>[:space:] 所有的横向或纵向的空白<br>\\ 反斜杠 (第一个\转义)<br>\t Ctrl-I tab键<br>\n Ctrl-J 新行<br>\a Ctrl-G 铃声<br>\b Ctrl-H 退格符<br>\f Ctrl-L 走行换页<br>\r Ctrl-M 回车<br>\v Ctrl-X 水平制表符</p>
+<p>删除所有大写字母：tr -d [A-Z] 或使用tr -d [:upper:]</p>
+<p>删除所有字母和数字:tr -d [A-z0-9] 或使用tr -d [:alnum:]</p>
+<p>tr -s 【字符串】：压缩重复字符串</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">#查看test2.log</span><br><span class="line">[root@ffing test]# cat test2.log</span><br><span class="line">!@#$%^&amp;*()_-=+~,./;&#x27;\&lt;&gt;?:&quot;[]&#123;&#125;</span><br><span class="line">1234567890</span><br><span class="line">abcdefghigklmn</span><br><span class="line">ABCDEFG</span><br><span class="line"></span><br><span class="line">#删除所有标点字符</span><br><span class="line">[root@ffing test]# cat test2.log tr -d [:punct:]</span><br><span class="line"></span><br><span class="line">1234567890</span><br><span class="line">abcdefghigklmn</span><br><span class="line">ABCDEFG</span><br><span class="line"></span><br><span class="line">#删除所有大写及标点符号</span><br><span class="line">[root@ffing test]# cat test2.log tr -d [A-Z][:punct:]</span><br><span class="line"></span><br><span class="line">1234567890</span><br><span class="line">abcdefghigklmn</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#删除所有换行符</span><br><span class="line">[root@ffing test]# cat test2.log tr -d &quot;\n&quot;</span><br><span class="line">!@#$%^&amp;*()_-=+~,./;&#x27;\&lt;&gt;?:&quot;[]&#123;&#125;1234567890abcdefghigklmnABCDEFG[root@ffing test]# </span><br><span class="line"></span><br></pre></td></tr></table></figure></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://blog.ffing.fun">Ldy</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://blog.ffing.fun/posts/196759049.html">http://blog.ffing.fun/posts/196759049.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://blog.ffing.fun" target="_blank">FFing</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/awk/">awk</a><a class="post-meta__tags" href="/tags/sed/">sed</a><a class="post-meta__tags" href="/tags/grep/">grep</a><a class="post-meta__tags" href="/tags/xargs/">xargs</a></div><div class="post_share"><div class="social-share" data-image="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'"><script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/3368779073.html"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">shell 日志字段过滤脚本</div></div></a></div><div class="next-post pull-right"><a href="/posts/1938676093.html"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">linux 关${}、$()、$(())、$[]</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/posts/521480439.html" title="shell grep&#x2F;sed&#x2F;awk&#x2F;head|tail获取指定行或指定列"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-11-14</div><div class="title">shell grep&#x2F;sed&#x2F;awk&#x2F;head|tail获取指定行或指定列</div></div></a></div><div><a href="/posts/1976475200.html" title="linux 打印匹配内容前、后行"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-01-22</div><div class="title">linux 打印匹配内容前、后行</div></div></a></div><div><a href="/posts/4012590045.html" title="AWK 笔记"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-12-04</div><div class="title">AWK 笔记</div></div></a></div><div><a href="/posts/2711775468.html" title="linux 获取字符所在列"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-04-23</div><div class="title">linux 获取字符所在列</div></div></a></div><div><a href="/posts/38662760.html" title="linux 获取字符长度"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-04-10</div><div class="title">linux 获取字符长度</div></div></a></div><div><a href="/posts/2991852772.html" title="shell 脚本获取字段所在行号及列标"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-03-25</div><div class="title">shell 脚本获取字段所在行号及列标</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#xargs%E5%91%BD%E4%BB%A4"><span class="toc-number">1.</span> <span class="toc-text">xargs命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sed%E5%91%BD%E4%BB%A4"><span class="toc-number">2.</span> <span class="toc-text">sed命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#grep%E5%91%BD%E4%BB%A4"><span class="toc-number">3.</span> <span class="toc-text">grep命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#awk%E5%91%BD%E4%BB%A4"><span class="toc-number">4.</span> <span class="toc-text">awk命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#tr%E5%91%BD%E4%BB%A4"><span class="toc-number">5.</span> <span class="toc-text">tr命令</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div><div id="footer-banner"><div class="footer-banner-links"><div class="footer-banner-left"><div class="footer-banner-left"><div id="footer-banner-tips"></div><script src="https://src.ffing.cn/hexo/js/typed.min.foot_daziji.js"></script><script>var typed = new Typed("#footer-banner-tips", {
+  strings: ["你不在正经事上忧虑,就会在乱七八糟事上忧虑,能力守恒!", "折腾硬件、软件;折腾系统、平台;折腾开发、环境;折腾window、linux;折腾,折腾,瞎J8折腾."],
+  startDelay: 200,
+  backDelay: 2000,
+  typeSpeed: 100,
+  loop: true,
+  backSpeed: 20
+})
+</script></div></div><div class="footer-banner-right"><p><a target="_blank" href="https://hexo.io/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="http://src.ffing.cn/hexo/img/Frame-Hexo-blue.svg" title="框架"></a>&nbsp;<a target="_blank" href="https://butterfly.js.org/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="http://src.ffing.cn/hexo/img/Theme-Butterfly.svg" title="主题"></a>&nbsp;<a target="_blank" href="https://www.upyun.com/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="http://src.ffing.cn/hexo/img/CDN又拍云.svg" title="CDN加速"></a>&nbsp;<a target="_blank" href="https://www.51.la/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="http://src.ffing.cn/hexo/img/Analytics-51la.svg" title="51la统计"></a>&nbsp;<a target="_blank" href="https://beian.miit.gov.cn/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="http://src.ffing.cn/hexo/img/豫ICP备2021016009.svg" title="ICP备案"></a></p></div></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button class="share" type="button" title="分享链接" onclick="share()"><i class="fas fa-share-nodes"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button><button id="go-down" type="button" title="直达底部" onclick="btf.scrollToDest(document.body.scrollHeight, 500)"><i class="fas fa-arrow-down"></i></button></div></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.staticfile.org/fancyapps-ui/4.0.31/fancybox.umd.min.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script src="https://cdn.staticfile.org/algoliasearch/4.14.3/algoliasearch-lite.umd.min.js"></script><script src="https://cdn.staticfile.org/instantsearch.js/4.49.2/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script><div class="js-pjax"><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo.ffing.cn/',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo.ffing.cn/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.innerText = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.staticfile.org/twikoo/1.6.8/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script src="https://src.ffing.cn/hexo/js/jquery.min.3.6.3.js"></script><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script defer src="https://src.ffing.cn/hexo/js/switchDarkMode.js"></script><script defer src="https://src.ffing.cn/hexo/js/nav_menu.js"></script><script src="https://src.ffing.cn/hexo/js/foot_runtime.js"></script><script async src="//at.alicdn.com/t/c/font_3830672_5bphzb91mjp.js"></script><script async data-pjax src="/js/ip.js"></script><script async src="https://src.ffing.cn/hexo/js/copy_vue.min.js"></script><script async src="https://src.ffing.cn/hexo/js/copy_index.js"></script><script async src="https://src.ffing.cn/hexo/js/copy_tips.js"></script><script src="/js/clipboard.min.js"></script><script src="/js/share.js"></script></div></body></html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>shell grep/sed/awk/head|tail获取指定行或指定列 | FFing</title><meta name="author" content="Ldy"><meta name="copyright" content="Ldy"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="譬如要打印num.txt中的第三行内容 grep: 12345#过滤包含字母“c”的行cat num.txt grep c#grep还有个精确过滤\&lt;\&gt;，一般很少用到#如包含root和roott行，只过滤root就需要grep &amp;#x27;\&lt; &quot;root&quot;\&gt;&amp;#x27;cat num.txt grep &amp;#x27;\&lt; &quot;你要过滤">
+<meta property="og:type" content="article">
+<meta property="og:title" content="shell grep&#x2F;sed&#x2F;awk&#x2F;head|tail获取指定行或指定列">
+<meta property="og:url" content="http://blog.ffing.fun/posts/521480439.html">
+<meta property="og:site_name" content="FFing">
+<meta property="og:description" content="譬如要打印num.txt中的第三行内容 grep: 12345#过滤包含字母“c”的行cat num.txt grep c#grep还有个精确过滤\&lt;\&gt;，一般很少用到#如包含root和roott行，只过滤root就需要grep &amp;#x27;\&lt; &quot;root&quot;\&gt;&amp;#x27;cat num.txt grep &amp;#x27;\&lt; &quot;你要过滤">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-11-14T06:37:42.000Z">
+<meta property="article:modified_time" content="2023-02-20T16:09:15.457Z">
+<meta property="article:author" content="Ldy">
+<meta property="article:tag" content="awk">
+<meta property="article:tag" content="centos">
+<meta property="article:tag" content="sed">
+<meta property="article:tag" content="shell">
+<meta property="article:tag" content="head">
+<meta property="article:tag" content="tail">
+<meta name="twitter:card" content="summary"><link rel="shortcut icon" href="https://src.ffing.cn/hexo/img/fn_logo_32x32.png"><link rel="canonical" href="http://blog.ffing.fun/posts/521480439"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/6.0.0/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.staticfile.org/fancyapps-ui/4.0.31/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: {"appId":"DMF88DHB4X","apiKey":"143e12084a3d7306535e056bf276ba91","indexName":"hexo-blog","hits":{"per_page":5},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdnjs.cloudflare.com/ajax/libs/flickr-justified-gallery/2.1.2/fjGallery.min.js',
+      css: 'https://cdnjs.cloudflare.com/ajax/libs/flickr-justified-gallery/2.1.2/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'shell grep/sed/awk/head|tail获取指定行或指定列',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2023-02-21 00:09:15'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/loading_gif.css"><link rel="stylesheet" href="/css/bg_color.css"><link rel="stylesheet" href="/css/full_page.css"><link rel="stylesheet" href="/css/universe.css"><link rel="stylesheet" href="/css/lightlight.css"><link rel="stylesheet" href="https://src.ffing.cn/hexo/css/nav_menu.css"><link rel="stylesheet" href="/css/foot.css"><link rel="stylesheet" href="/css/auth_icon.css"><link rel="stylesheet" href="//at.alicdn.com/t/c/font_3830672_5bphzb91mjp.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="/css/other_page.css"><link rel="stylesheet" href="/css/mouse.css"><link rel="stylesheet" href="/css/aside.css"><link rel="stylesheet" href="/css/ip.css"><link rel="stylesheet" href="/css/copy_index.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><div class="loading-img"></div><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (false) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="/css/loading_bar.css"/><script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js"></script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://src.ffing.cn/hexo/img/fn_logo100.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">184</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">297</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><span> 归档</span></a></li><li><a class="site-page child" href="/categories/"><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 关于</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/about/"><span> 关于我</span></a></li><li><a class="site-page child" href="/timeline/"><span> 时间线</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><div class="back-home-button" tabindex="-1"><i class="back-home-button-icon fas fa-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://www.ffing.cn" title="前往首页" target="_blank" one-link-mark="yes"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://src.ffing.cn/hexo/img/fn_white_logo.png"/><span class="back-menu-item-text">首页</span></a><a class="back-menu-item" href="http://pan.ffing.cn/" rel="external nofollow" title="前往alist网盘" target="_blank" one-link-mark="yes"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://src.ffing.cn/hexo/img/alist_logo.png"/><span class="back-menu-item-text">alist网盘</span></a><a class="back-menu-item" href="https://kms.ffing.cn/" rel="external nofollow" title="前往kms服务" target="_blank" one-link-mark="yes"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://src.ffing.cn/hexo/img/kms_logo.png"/><span class="back-menu-item-text">kms服务</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">在线工具</div><div class="back-menu-list"><a class="back-menu-item" href="https://www.iconfont.cn" rel="noopener nofollow" title="前往阿里icon" target="_blank" one-link-mark="yes"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://src.ffing.cn/hexo/img/ali-icon_logo.png"/><span class="back-menu-item-text">阿里icon</span></a></div></div></div></div><a id="site-name" href="/"><div class="title">FFing</div><i class="fa-solid fa-house"></i></a></span><div class="mask-name-container"><center id="name-container"><a id="page-name" href="javascript:btf.scrollToDest(0, 500)">PAGE_NAME</a></center></div><div id="weather"></div><div id="tp-weather-widget"></div> <div id="menus"><div class="nav-button" id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="nav-button" id="darkmode_navswitch"><a class="darkmode_switchbutton" type="button" title="浅色和深色模式转换" onclick="switchDarkMode()"><i class="fas fa-adjust"></i></a></div><div class="nav-button" id="nav-totop"><a class="totopbtn"><i class="fas fa-arrow-up"></i><span id="percent" onclick="btf.scrollToDest(0,500)">0</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><span> 归档</span></a></li><li><a class="site-page child" href="/categories/"><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 关于</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/about/"><span> 关于我</span></a></li><li><a class="site-page child" href="/timeline/"><span> 时间线</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">shell grep/sed/awk/head|tail获取指定行或指定列</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-11-14T06:37:42.000Z" title="发表于 2021-11-14 14:37:42">2021-11-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-02-20T16:09:15.457Z" title="更新于 2023-02-21 00:09:15">2023-02-21</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Linux/">Linux</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">925</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>4分钟</span></span></div></div></div><article class="post-content" id="article-container"><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://qnimg.ffing.cn/wp-content/uploads/2021/11/image-56.png"></p>
+<p>譬如要打印num.txt中的第三行内容</p>
+<p>grep:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#过滤包含字母“c”的行</span><br><span class="line">cat num.txt grep c</span><br><span class="line">#grep还有个精确过滤\&lt;\&gt;，一般很少用到</span><br><span class="line">#如包含root和roott行，只过滤root就需要grep &#x27;\&lt; &quot;root&quot;\&gt;&#x27;</span><br><span class="line">cat num.txt grep &#x27;\&lt; &quot;你要过滤的字段&quot;\&gt;&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>sed：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">#打印包含字母“c”的行（-n）</span><br><span class="line">cat num.txt sed -n &#x27;/c/p&#x27;</span><br><span class="line">#打印包含字母“c”开头的行</span><br><span class="line">cat num.txt sed -n &#x27;/^c/p&#x27;</span><br><span class="line">#打印第3行</span><br><span class="line">cat num.txt sed -n &#x27;3p&#x27;</span><br><span class="line"></span><br><span class="line">#区间打印</span><br><span class="line">#打印第1~3行和第5行</span><br><span class="line">cat num.txt sed -n &#x27;1,3p;5p&#x27;</span><br><span class="line">#打印从第3行开始,再向后5行</span><br><span class="line">cat num.txt sed -n &#x27;3,+5p&#x27;</span><br><span class="line">#从第3行到尾行($结尾，打印最后一行使用$p)</span><br><span class="line">cat num.txt sed -n &#x27;3,$p&#x27;</span><br><span class="line">#打印字母a开头的行到字母开头c开头的行</span><br><span class="line">cat num.txt sed -n &#x27;/^a/,/^c/p&#x27;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">####打印奇数行（~2代表跳2行）</span><br><span class="line">#p打印</span><br><span class="line">seq 10 sed -n &#x27;1~2p&#x27;</span><br><span class="line">#也可以使用d删除偶数行，来获取偶数行</span><br><span class="line">seq 10 sed -n &#x27;2~2d&#x27;</span><br><span class="line">####打印偶数行（~2代表跳2行）</span><br><span class="line">seq 10 sed -n &#x27;2~2p&#x27;</span><br><span class="line">#也可以使用d删除奇数行，来获取偶数行</span><br><span class="line">seq 10 sed -n &#x27;1~2d&#x27;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">###sed整行替换 “c”</span><br><span class="line">#cat test.log</span><br><span class="line">2021-11-03nginx  test1post/admin.php</span><br><span class="line">2021-11-0315:30:30tomcatget/wp-index.php</span><br><span class="line">#将包含nginx整行替换为“=========”</span><br><span class="line"> cat test.logsed &#x27;/post/c ============&#x27;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>awk：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">#打印包含字母“c”的行</span><br><span class="line">cat num.txt awk ‘/c/’</span><br><span class="line">#打印以字母“c”开头的行</span><br><span class="line">cat num.txt awk ‘/^c/’</span><br><span class="line">#打印不以字母“c”开头的行（！取反）</span><br><span class="line">cat num.txt awk ‘！/^c/’</span><br><span class="line">#打印第3行，通过NR==值为真的行（NR行记录）</span><br><span class="line">cat num.txt awk &#x27;NR==3&#x27;</span><br><span class="line"></span><br><span class="line">#区间打印</span><br><span class="line">#打印1~3行和第5行</span><br><span class="line">cat num.txt awk &#x27;NR&gt;=1&amp;&amp;NR&lt;=3;NR==5&#x27;</span><br><span class="line">#打印字母a开头的行到字母开头c开头的行</span><br><span class="line">cat num.txt awk&#x27;/^a/,/^c/&#x27;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">####打印奇数行（AWK中0和空值为假，非空为真）</span><br><span class="line">#(第一行i=0取反就是1，有值，为真，打印；第二行，i=1，取反就是0，为假，不打印)</span><br><span class="line">seq 10  awk &#x27;i=!i&#x27;</span><br><span class="line">####打印偶数行(!取反)</span><br><span class="line">seq 10  awk &#x27;!(i=!i)&#x27;</span><br><span class="line"></span><br><span class="line">########指定列######</span><br><span class="line">###打印指定列大于或小于指定值的行（硬盘使用率使用较多！）</span><br><span class="line">例：硬盘使用率大于</span><br><span class="line">#df -h</span><br><span class="line">devtmpfs        486M     0  486M    0% /dev</span><br><span class="line">tmpfs           496M     0  496M    0% /dev/shm</span><br><span class="line">tmpfs           496M  748K  495M    1% /run</span><br><span class="line">tmpfs           496M     0  496M    0% /sys/fs/cgroup</span><br><span class="line">/dev/vda1        20G  2.3G   17G   13% /</span><br><span class="line">/dev/vda1        20G  10G    10G   50% /home</span><br><span class="line">#如下，打印硬盘使用率大于20%的行</span><br><span class="line">#df -h tr -d &quot;%&quot;awk &#x27;$5&gt;20&#123;print&#125;&#x27;</span><br><span class="line"></span><br><span class="line">###不打印指定列，其他列正常打印（其实也就将指定列为空）</span><br><span class="line">例：排除第2、3列</span><br><span class="line">#cat test.log</span><br><span class="line">2021-11-03nginx  test1post/admin.php</span><br><span class="line">2021-11-0315:30:30tomcatget/wp-index.php</span><br><span class="line">#cat test.logawk &#x27;&#123;$2=$3=&quot;&quot;;print&#125;&#x27;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>headtail</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#通过head先过滤前3行，再tail显示过滤后的最后一行</span><br><span class="line">cat num.txt head -n3tail -n1</span><br><span class="line"></span><br><span class="line">#head正着数行号（默认10行，默认+号可以不写）</span><br><span class="line">#只显示前两行+2</span><br><span class="line">cat num.txt head -n 2</span><br><span class="line">#不显示后2行-2</span><br><span class="line">cat num.txt head -n -2</span><br><span class="line"></span><br><span class="line">#tail倒着数行号（默认10行，默认减号可以不写）</span><br><span class="line">#只显示最后两行-2</span><br><span class="line">cat num.txt tail -n 2</span><br><span class="line">#不显示最前面2行（tail顶部多一，所以2行需要+3）</span><br><span class="line">cat num.txt tail -n +3</span><br></pre></td></tr></table></figure>
+
+<p>如需截取，可以通过awk或者cut进行获取。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#awk显示第1、2（默认以空格为分隔符）</span><br><span class="line">awk &#x27;&#123;print $1,2&#125;&#x27;</span><br><span class="line">#awk显示第1、2，以：为分隔符（-F指定分割符）</span><br><span class="line">awk  -F &#x27;:&#x27; &#x27;&#123;print $1,2&#125;&#x27;</span><br><span class="line"></span><br><span class="line">#cut：-d指定分隔符、-f显示列</span><br><span class="line">#cut第1、2列,以：分割</span><br><span class="line">cut -d &#x27;:&#x27; -f1,2</span><br></pre></td></tr></table></figure></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://blog.ffing.fun">Ldy</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://blog.ffing.fun/posts/521480439.html">http://blog.ffing.fun/posts/521480439.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://blog.ffing.fun" target="_blank">FFing</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/awk/">awk</a><a class="post-meta__tags" href="/tags/centos/">centos</a><a class="post-meta__tags" href="/tags/sed/">sed</a><a class="post-meta__tags" href="/tags/shell/">shell</a><a class="post-meta__tags" href="/tags/head/">head</a><a class="post-meta__tags" href="/tags/tail/">tail</a></div><div class="post_share"><div class="social-share" data-image="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'"><script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/842406916.html"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">centos-sed在指定行前后追加、替换、插入等操作</div></div></a></div><div class="next-post pull-right"><a href="/posts/2526359939.html"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">centos 批量创建及批量重命名</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/posts/4012590045.html" title="AWK 笔记"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-12-04</div><div class="title">AWK 笔记</div></div></a></div><div><a href="/posts/196759049.html" title="linux 日志过滤常用sed、awk、grep、xargs等操作"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-03-14</div><div class="title">linux 日志过滤常用sed、awk、grep、xargs等操作</div></div></a></div><div><a href="/posts/842406916.html" title="centos-sed在指定行前后追加、替换、插入等操作"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-11-14</div><div class="title">centos-sed在指定行前后追加、替换、插入等操作</div></div></a></div><div><a href="/posts/804075249.html" title="shell 获取log中指定日期的日志并做导出"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-12-31</div><div class="title">shell 获取log中指定日期的日志并做导出</div></div></a></div><div><a href="/posts/3876112188.html" title="shell 脚本，ping网段"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-10-29</div><div class="title">shell 脚本，ping网段</div></div></a></div><div><a href="/posts/1089940191.html" title="shell脚本，结束指定脚本"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-10-29</div><div class="title">shell脚本，结束指定脚本</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"></div></div></main><footer id="footer"><div id="footer-wrap"><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div><div id="footer-banner"><div class="footer-banner-links"><div class="footer-banner-left"><div class="footer-banner-left"><div id="footer-banner-tips"></div><script src="https://src.ffing.cn/hexo/js/typed.min.foot_daziji.js"></script><script>var typed = new Typed("#footer-banner-tips", {
+  strings: ["你不在正经事上忧虑,就会在乱七八糟事上忧虑,能力守恒!", "折腾硬件、软件;折腾系统、平台;折腾开发、环境;折腾window、linux;折腾,折腾,瞎J8折腾."],
+  startDelay: 200,
+  backDelay: 2000,
+  typeSpeed: 100,
+  loop: true,
+  backSpeed: 20
+})
+</script></div></div><div class="footer-banner-right"><p><a target="_blank" href="https://hexo.io/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="http://src.ffing.cn/hexo/img/Frame-Hexo-blue.svg" title="框架"></a>&nbsp;<a target="_blank" href="https://butterfly.js.org/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="http://src.ffing.cn/hexo/img/Theme-Butterfly.svg" title="主题"></a>&nbsp;<a target="_blank" href="https://www.upyun.com/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="http://src.ffing.cn/hexo/img/CDN又拍云.svg" title="CDN加速"></a>&nbsp;<a target="_blank" href="https://www.51.la/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="http://src.ffing.cn/hexo/img/Analytics-51la.svg" title="51la统计"></a>&nbsp;<a target="_blank" href="https://beian.miit.gov.cn/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="http://src.ffing.cn/hexo/img/豫ICP备2021016009.svg" title="ICP备案"></a></p></div></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="share" type="button" title="分享链接" onclick="share()"><i class="fas fa-share-nodes"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button><button id="go-down" type="button" title="直达底部" onclick="btf.scrollToDest(document.body.scrollHeight, 500)"><i class="fas fa-arrow-down"></i></button></div></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.staticfile.org/fancyapps-ui/4.0.31/fancybox.umd.min.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script src="https://cdn.staticfile.org/algoliasearch/4.14.3/algoliasearch-lite.umd.min.js"></script><script src="https://cdn.staticfile.org/instantsearch.js/4.49.2/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script><div class="js-pjax"><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo.ffing.cn/',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo.ffing.cn/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.innerText = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.staticfile.org/twikoo/1.6.8/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script src="https://src.ffing.cn/hexo/js/jquery.min.3.6.3.js"></script><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script defer src="https://src.ffing.cn/hexo/js/switchDarkMode.js"></script><script defer src="https://src.ffing.cn/hexo/js/nav_menu.js"></script><script src="https://src.ffing.cn/hexo/js/foot_runtime.js"></script><script async src="//at.alicdn.com/t/c/font_3830672_5bphzb91mjp.js"></script><script async data-pjax src="/js/ip.js"></script><script async src="https://src.ffing.cn/hexo/js/copy_vue.min.js"></script><script async src="https://src.ffing.cn/hexo/js/copy_index.js"></script><script async src="https://src.ffing.cn/hexo/js/copy_tips.js"></script><script src="/js/clipboard.min.js"></script><script src="/js/share.js"></script></div></body></html>

@@ -1,0 +1,359 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>搭建个人5T网盘（OneindexN+OneDrive） | FFing</title><meta name="author" content="Ldy"><meta name="copyright" content="Ldy"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Demo：cloud.ffing.cn 使用motrix下载工具，满速下载香，真香！  因为牵涉内容较多，篇幅较长。 oneindex作者已经删库，这里我以OneindexN稍做修改作为我的前端。 当个网盘、图床都可以，尽量不要当电影库，避免被封。 优势：  oneindex 不走服务器流量，直连国内世纪互联数据中心 满速下载（速度优于国产网盘） 空间1-5 T , 自定义页面，可玩性大 微软官方">
+<meta property="og:type" content="article">
+<meta property="og:title" content="搭建个人5T网盘（OneindexN+OneDrive）">
+<meta property="og:url" content="http://blog.ffing.fun/posts/1859337509.html">
+<meta property="og:site_name" content="FFing">
+<meta property="og:description" content="Demo：cloud.ffing.cn 使用motrix下载工具，满速下载香，真香！  因为牵涉内容较多，篇幅较长。 oneindex作者已经删库，这里我以OneindexN稍做修改作为我的前端。 当个网盘、图床都可以，尽量不要当电影库，避免被封。 优势：  oneindex 不走服务器流量，直连国内世纪互联数据中心 满速下载（速度优于国产网盘） 空间1-5 T , 自定义页面，可玩性大 微软官方">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-08-15T06:55:42.000Z">
+<meta property="article:modified_time" content="2023-02-20T16:09:15.493Z">
+<meta property="article:author" content="Ldy">
+<meta property="article:tag" content="网盘">
+<meta property="article:tag" content="5T空间">
+<meta property="article:tag" content="onedrive">
+<meta property="article:tag" content="oneindex">
+<meta property="article:tag" content="满速下载">
+<meta name="twitter:card" content="summary"><link rel="shortcut icon" href="https://src.ffing.cn/hexo/img/fn_logo_32x32.png"><link rel="canonical" href="http://blog.ffing.fun/posts/1859337509"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/6.0.0/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.staticfile.org/fancyapps-ui/4.0.31/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: {"appId":"DMF88DHB4X","apiKey":"143e12084a3d7306535e056bf276ba91","indexName":"hexo-blog","hits":{"per_page":5},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdnjs.cloudflare.com/ajax/libs/flickr-justified-gallery/2.1.2/fjGallery.min.js',
+      css: 'https://cdnjs.cloudflare.com/ajax/libs/flickr-justified-gallery/2.1.2/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '搭建个人5T网盘（OneindexN+OneDrive）',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-02-21 00:09:15'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/loading_gif.css"><link rel="stylesheet" href="/css/bg_color.css"><link rel="stylesheet" href="/css/full_page.css"><link rel="stylesheet" href="/css/universe.css"><link rel="stylesheet" href="/css/lightlight.css"><link rel="stylesheet" href="https://src.ffing.cn/hexo/css/nav_menu.css"><link rel="stylesheet" href="/css/foot.css"><link rel="stylesheet" href="/css/auth_icon.css"><link rel="stylesheet" href="//at.alicdn.com/t/c/font_3830672_5bphzb91mjp.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="/css/other_page.css"><link rel="stylesheet" href="/css/mouse.css"><link rel="stylesheet" href="/css/aside.css"><link rel="stylesheet" href="/css/ip.css"><link rel="stylesheet" href="/css/copy_index.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><div class="loading-img"></div><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (false) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="/css/loading_bar.css"/><script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js"></script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://src.ffing.cn/hexo/img/fn_logo100.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">184</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">297</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><span> 归档</span></a></li><li><a class="site-page child" href="/categories/"><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 关于</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/about/"><span> 关于我</span></a></li><li><a class="site-page child" href="/timeline/"><span> 时间线</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><div class="back-home-button" tabindex="-1"><i class="back-home-button-icon fas fa-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://www.ffing.cn" title="前往首页" target="_blank" one-link-mark="yes"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://src.ffing.cn/hexo/img/fn_white_logo.png"/><span class="back-menu-item-text">首页</span></a><a class="back-menu-item" href="http://pan.ffing.cn/" rel="external nofollow" title="前往alist网盘" target="_blank" one-link-mark="yes"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://src.ffing.cn/hexo/img/alist_logo.png"/><span class="back-menu-item-text">alist网盘</span></a><a class="back-menu-item" href="https://kms.ffing.cn/" rel="external nofollow" title="前往kms服务" target="_blank" one-link-mark="yes"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://src.ffing.cn/hexo/img/kms_logo.png"/><span class="back-menu-item-text">kms服务</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">在线工具</div><div class="back-menu-list"><a class="back-menu-item" href="https://www.iconfont.cn" rel="noopener nofollow" title="前往阿里icon" target="_blank" one-link-mark="yes"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://src.ffing.cn/hexo/img/ali-icon_logo.png"/><span class="back-menu-item-text">阿里icon</span></a></div></div></div></div><a id="site-name" href="/"><div class="title">FFing</div><i class="fa-solid fa-house"></i></a></span><div class="mask-name-container"><center id="name-container"><a id="page-name" href="javascript:btf.scrollToDest(0, 500)">PAGE_NAME</a></center></div><div id="weather"></div><div id="tp-weather-widget"></div> <div id="menus"><div class="nav-button" id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="nav-button" id="darkmode_navswitch"><a class="darkmode_switchbutton" type="button" title="浅色和深色模式转换" onclick="switchDarkMode()"><i class="fas fa-adjust"></i></a></div><div class="nav-button" id="nav-totop"><a class="totopbtn"><i class="fas fa-arrow-up"></i><span id="percent" onclick="btf.scrollToDest(0,500)">0</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><span> 归档</span></a></li><li><a class="site-page child" href="/categories/"><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 关于</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/about/"><span> 关于我</span></a></li><li><a class="site-page child" href="/timeline/"><span> 时间线</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">搭建个人5T网盘（OneindexN+OneDrive）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-08-15T06:55:42.000Z" title="发表于 2021-08-15 14:55:42">2021-08-15</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-02-20T16:09:15.493Z" title="更新于 2023-02-21 00:09:15">2023-02-21</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/other/">other</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%95%99%E7%A8%8B/">教程</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1598</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>6分钟</span></span></div></div></div><article class="post-content" id="article-container"><p>Demo：<a target="_blank" rel="noopener" href="http://cloud.ffing.cn/">cloud.ffing.cn</a></p>
+<p>使用motrix下载工具，满速下载香，真香！</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cloud.ffing.cn/0-%E8%AF%B7%E4%BD%BF%E7%94%A8Motrix%E5%B7%A5%E5%85%B7%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6%EF%BC%8C%E5%90%A6%E5%88%99%E5%AE%B9%E6%98%93%E4%B8%8B%E8%BD%BD%E5%A4%B1%E8%B4%A5%20%5B%E5%AE%89%E8%A3%85%E5%8C%85%E5%8F%8A%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B%5D-0/Motrix%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B.gif"></p>
+<p>因为牵涉内容较多，篇幅较长。</p>
+<p>oneindex作者已经删库，这里我以OneindexN稍做修改作为我的前端。</p>
+<p>当个网盘、图床都可以，尽量不要当电影库，避免被封。</p>
+<p>优势：</p>
+<ul>
+<li>oneindex 不走服务器流量，直连国内世纪互联数据中心</li>
+<li>满速下载（速度优于国产网盘）</li>
+<li>空间1-5 T , 自定义页面，可玩性大</li>
+<li>微软官方解释：<br>我们为中国用户提供了 Office 365 全球版和 Office 365 中国版两种版本。主要区别在于： Office 365 中国版由世纪互联负责运营，数据中心位于北京、上海，可以提供增值税发票。 目前仅 Office 365 全球版提供 Yammer、Microsoft Planner、Microsoft Teams 以及 Sway 等产品。</li>
+</ul>
+<p>准备工作：</p>
+<ul>
+<li>微软账号</li>
+<li>手机号</li>
+<li>科学上网</li>
+<li>云服务器（nginx+php5.6以上）</li>
+</ul>
+<p>流程：</p>
+<ul>
+<li>onedrive business 账号 (订阅office开发者E5账号) </li>
+<li>onedrive（调整5T空间）</li>
+<li>创建OneDriveAPP</li>
+<li>部署OneindexN程序（前端，利用OneDrive的API，列出OneDrive目录）</li>
+<li>安装aria2并配置自动上传至onedrive</li>
+<li>测试</li>
+<li>E5账户续约</li>
+<li>其他</li>
+</ul>
+<h2 id="第一步：onedrive-business-账号"><a href="#第一步：onedrive-business-账号" class="headerlink" title="第一步：onedrive business 账号"></a>第一步：onedrive business 账号</h2><p>通过微软账号，订阅office开发者E5权益，获取onedrive business 账号（需要科学上网否则无法获取手机验证码）</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://qnimg.ffing.cn/wp-content/uploads/2021/08/image-28.png"></p>
+<p>国内office开发者：<a target="_blank" rel="noopener" href="https://developer.microsoft.com/zh-cn/microsoft-365/dev-program">https://developer.microsoft.com/zh-cn/microsoft-365/dev-program</a></p>
+<p>或百度搜索：“office开发人员计划”</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://qnimg.ffing.cn/wp-content/uploads/2021/08/image-30.png"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://qnimg.ffing.cn/wp-content/uploads/2021/08/image-31.png"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://qnimg.ffing.cn/wp-content/uploads/2021/08/image-33.png"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://qnimg.ffing.cn/wp-content/uploads/2021/08/image-34.png"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://qnimg.ffing.cn/wp-content/uploads/2021/08/image-35.png"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://qnimg.ffing.cn/wp-content/uploads/2021/08/image-36.png"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://qnimg.ffing.cn/wp-content/uploads/2021/08/image-37.png"></p>
+<p>###创建onedrive business 账号</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://qnimg.ffing.cn/wp-content/uploads/2021/08/image-38.png"></p>
+<p>###需要科学上网，否则无法收到验证码</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://qnimg.ffing.cn/wp-content/uploads/2021/08/image-39.png"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://qnimg.ffing.cn/wp-content/uploads/2021/08/image-40.png"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://qnimg.ffing.cn/wp-content/uploads/2021/08/image-41.png"></p>
+<p>#onedrive business 账号创建完成</p>
+<p>注：3个月有效期，到期手工续订，或者利用api的频繁使用自动续订</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://qnimg.ffing.cn/wp-content/uploads/2021/08/image-42.png"></p>
+<h2 id="第二步，调整onedrive空间（默认1T，调整为5T）"><a href="#第二步，调整onedrive空间（默认1T，调整为5T）" class="headerlink" title="第二步，调整onedrive空间（默认1T，调整为5T）"></a>第二步，调整onedrive空间（默认1T，调整为5T）</h2><p>Onedirve空间管理：**<a target="_blank" rel="noopener" href="https://admin.onedrive.com/#v=StorageSettings">https://admin.onedrive.com/#v=StorageSettings</a>**</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://qnimg.ffing.cn/wp-content/uploads/2021/08/image-43-1024x769.png"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://qnimg.ffing.cn/wp-content/uploads/2021/08/image-44-1024x705.png"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://qnimg.ffing.cn/wp-content/uploads/2021/08/image-45-1024x612.png"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://qnimg.ffing.cn/wp-content/uploads/2021/08/image-46-1024x669.png"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://qnimg.ffing.cn/wp-content/uploads/2021/08/image-47-1024x635.png"></p>
+<h2 id="第三步，创建OneDriveAPP"><a href="#第三步，创建OneDriveAPP" class="headerlink" title="第三步，创建OneDriveAPP"></a>第三步，创建OneDriveAPP</h2><p>国际 Azure：<a target="_blank" rel="noopener" href="https://portal.azure.com/">https://portal.azure.com/</a></p>
+<p>国内世纪互联：<a target="_blank" rel="noopener" href="https://portal.azure.cn/">https://portal.azure.cn</a>）</p>
+<p>因是E5权益账号，需打开国际 Azure：<a target="_blank" rel="noopener" href="https://portal.azure.com/">https://portal.azure.com/</a></p>
+<p>需要获取APPID、APP秘钥，配置API权限</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://qnimg.ffing.cn/wp-content/uploads/2021/08/image-48-1024x447.png"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://qnimg.ffing.cn/wp-content/uploads/2021/08/image-49-1024x580.png"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://qnimg.ffing.cn/wp-content/uploads/2021/08/image-50-1024x556.png"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://qnimg.ffing.cn/wp-content/uploads/2021/08/image-53-1024x831.png"></p>
+<p>###复制获取到APPID进行保存，一会要用到。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://qnimg.ffing.cn/wp-content/uploads/2021/08/image-54.png"></p>
+<p>###创建秘钥，秘钥只会出现一次，必须保存好，一会要用到。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://qnimg.ffing.cn/wp-content/uploads/2021/08/image-56-1024x822.png"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://qnimg.ffing.cn/wp-content/uploads/2021/08/image-57-1024x550.png"></p>
+<p>###添加api权限</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://qnimg.ffing.cn/wp-content/uploads/2021/08/image-58-1024x706.png"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://qnimg.ffing.cn/wp-content/uploads/2021/08/image-59-1024x568.png"></p>
+<p>OK，刚创建的app统计信息</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://qnimg.ffing.cn/wp-content/uploads/2021/08/image-63.png"></p>
+<h2 id="第四步，部署OneindexN"><a href="#第四步，部署OneindexN" class="headerlink" title="第四步，部署OneindexN"></a>第四步，部署OneindexN</h2><p>服务器需nginx+php5.6以上,如没环境可使用我的脚本进行环境搭建。</p>
+<p>一键脚本：bash &lt;(curl <a target="_blank" rel="noopener" href="https://gitee.com/ffing/onekey/raw/master/onekey.sh">https://gitee.com/ffing/onekey/raw/master/onekey.sh</a>)</p>
+<p>1.克隆OneindexN前端到指定目录</p>
+<p>我的gitee项目地址：<a target="_blank" rel="noopener" href="https://gitee.com/ffing/oneindexn.git">https://gitee.com/ffing/oneindexn.git</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#懒人，直接git到nginx站点目录</span><br><span class="line">git clone https://gitee.com/ffing/oneindexn.git /usr/share/nginx/oneindexn</span><br></pre></td></tr></table></figure>
+
+<p>2.对OneindexN目录进行授权</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chown -R apache:apache /usr/share/nginx/oneindexn</span><br></pre></td></tr></table></figure>
+
+<p>3.配置nginx</p>
+<p>新增oneindexn配置文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/nginx/conf.d/oneindex.conf</span><br></pre></td></tr></table></figure>
+
+<p>oneindex.conf内容如下：（请更改自己域名、oneindexn路径、证书路径）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">listen 80;</span><br><span class="line">server_name cloud.ffing.cn;</span><br><span class="line">rewrite ^(.*)$ https://$host$1 permanent;</span><br><span class="line">&#125;</span><br><span class="line">server &#123;</span><br><span class="line">listen 443 ssl;</span><br><span class="line">server_name cloud.ffing.cn;</span><br><span class="line">root /usr/share/nginx/oneindexn;</span><br><span class="line">index index.php;</span><br><span class="line"></span><br><span class="line">#ssl证书(修改为自己证书路径)</span><br><span class="line">ssl_certificate /opt/cert/cloud.ffing.cn.pem;</span><br><span class="line">ssl_certificate_key /opt/cert/cloud.ffing.cn.key;</span><br><span class="line">ssl_protocols TLSv1.1 TLSv1.2;</span><br><span class="line">ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE;</span><br><span class="line">ssl_prefer_server_ciphers on;</span><br><span class="line">ssl_session_cache shared:SSL:10m;</span><br><span class="line">ssl_session_timeout 10m;</span><br><span class="line"></span><br><span class="line">#去除地址栏？，伪静态</span><br><span class="line">location / &#123;</span><br><span class="line">        if (!-f $request_filename)&#123;</span><br><span class="line">                set $rule_0 1$rule_0;</span><br><span class="line">                         &#125;</span><br><span class="line">        if (!-d $request_filename)&#123;</span><br><span class="line">                 set $rule_0 2$rule_0;</span><br><span class="line">                         &#125;</span><br><span class="line">        if ($rule_0 = &quot;21&quot;)&#123;</span><br><span class="line">                 rewrite ^/(.*) /?/$1 last;</span><br><span class="line">                         &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#aria2 反代</span><br><span class="line">location /jsonrpc &#123;</span><br><span class="line">        proxy_pass http://localhost:6800/jsonrpc;</span><br><span class="line">        proxy_redirect off;</span><br><span class="line">        proxy_set_header        X-Real-IP       $remote_addr;</span><br><span class="line">        proxy_set_header        X-Forwarded-For</span><br><span class="line">        $proxy_add_x_forwarded_for;</span><br><span class="line">        proxy_set_header Host $host;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">#PHP</span><br><span class="line">location ~ \.php$        &#123;</span><br><span class="line">        fastcgi_pass   127.0.0.1:9000;</span><br><span class="line">        fastcgi_index  index.php;</span><br><span class="line">        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;</span><br><span class="line">        include        fastcgi_params;</span><br><span class="line">                        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>4.配置完成后重启nginx</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart nginx</span><br></pre></td></tr></table></figure>
+
+<p>5.浏览器打开oneindexn前端，进行配置</p>
+<p>我在nginx中配置的域名：cloud.ffing.cn</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://qnimg.ffing.cn/wp-content/uploads/2021/08/image-51-1024x486.png"></p>
+<p>###输入我们上面获取的appid和秘钥</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://qnimg.ffing.cn/wp-content/uploads/2021/08/image-64-1024x715.png"></p>
+<p>###绑定我的business账号<a href="mailto:&#x66;&#x66;&#105;&#110;&#103;&#x63;&#110;&#64;&#x66;&#102;&#x69;&#110;&#x67;&#x63;&#x6e;&#x2e;&#111;&#x6e;&#x6d;&#105;&#x63;&#114;&#111;&#x73;&#x6f;&#x66;&#116;">&#x66;&#x66;&#105;&#110;&#103;&#x63;&#110;&#64;&#x66;&#102;&#x69;&#110;&#x67;&#x63;&#x6e;&#x2e;&#111;&#x6e;&#x6d;&#105;&#x63;&#114;&#111;&#x73;&#x6f;&#x66;&#116;</a>（如果刚清除过浏览器缓存或者不在同个浏览器，则需要我们重新绑定刚申请的business账号）</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://qnimg.ffing.cn/wp-content/uploads/2021/08/image-62-1024x351.png"></p>
+<p>OK，部署结束。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://qnimg.ffing.cn/wp-content/uploads/2021/08/image-65-1024x414.png"></p>
+<p>后台内容自行修改</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://qnimg.ffing.cn/wp-content/uploads/2021/08/image-66-1024x503.png"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://qnimg.ffing.cn/wp-content/uploads/2021/08/image-67-1024x868.png"></p>
+<h2 id="第五步，安装aria2并配置自动上传至onedrive"><a href="#第五步，安装aria2并配置自动上传至onedrive" class="headerlink" title="第五步，安装aria2并配置自动上传至onedrive"></a>第五步，安装aria2并配置自动上传至onedrive</h2><p>实现效果：通过yaaw面板下载完成的文件自动上传至onedrive</p>
+<p>可以自行安装aria2也可以使用我的一键脚本。</p>
+<p>一键脚本：bash &lt;(curl <a target="_blank" rel="noopener" href="https://gitee.com/ffing/onekey/raw/master/onekey.sh">https://gitee.com/ffing/onekey/raw/master/onekey.sh</a>)</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://qnimg.ffing.cn/wp-content/uploads/2021/08/image-68.png"></p>
+<p>检查aria2配置&#x2F;etc&#x2F;aria2&#x2F;aria2.conf,最后是否添加上传脚本</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#上传配置(上传脚本路径，我默认放置在oneindxn中)</span><br><span class="line">on-download-complete=/usr/share/nginx/oneindexn/onedirver_upload.sh</span><br></pre></td></tr></table></figure>
+
+<p>检查上传脚本，&#x2F;usr&#x2F;share&#x2F;nginx&#x2F;oneindexn&#x2F;onedirver_upload.sh</p>
+<p>onedrive上传脚本，脚本内容如下：（标准颜色路径自行修改）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line">###根据自己情况修改###</span><br><span class="line"></span><br><span class="line">#Onedirve上传目录(在web上onedrive显示的目录和本地没关系)</span><br><span class="line">UPpath=&#x27;/Yaaw_Upload&#x27;</span><br><span class="line">#Yaaw下载目录</span><br><span class="line">DOWNpath=&#x27;/aria2_download&#x27;</span><br><span class="line">#PHP路径</span><br><span class="line">PHPpath=&#x27;/bin/php&#x27;</span><br><span class="line">#oneindexn路径</span><br><span class="line">ONEpath=&#x27;/usr/share/nginx/oneindexn&#x27;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">###无需修改###</span><br><span class="line">path=$3</span><br><span class="line">if [ $2 -eq 0 ]</span><br><span class="line">        then</span><br><span class="line">                exit 0</span><br><span class="line">fi</span><br><span class="line">while true; do</span><br><span class="line">filepath=$path</span><br><span class="line">path=$&#123;path%/*&#125;;</span><br><span class="line">if [ &quot;$path&quot; = &quot;$DOWNpath&quot; ] &amp;&amp; [ $2 -eq 1 ]</span><br><span class="line">    #如果下载的是单个文件</span><br><span class="line">    then</span><br><span class="line">    $PHPpath &quot;$ONEpath&quot;/one.php upload:file &quot;$filepath&quot; &quot;$UPpath&quot;/</span><br><span class="line">    rm -rf &quot;$filepath&quot;</span><br><span class="line">    exit 0</span><br><span class="line">elif [ &quot;$path&quot; = &quot;$DOWNpath&quot; ]</span><br><span class="line">    #下载的是文件夹</span><br><span class="line">    then</span><br><span class="line">    $PHPpath &quot;$ONEpath&quot;/one.php upload:folder &quot;$filepath&quot;/ &quot;$UPpath&quot;/&quot;$&#123;filepath##*/&#125;&quot;/</span><br><span class="line">    rm -rf &quot;$filepath&quot;/</span><br><span class="line">    exit 0</span><br><span class="line">fi</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<p>添加执行权限</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod +x /usr/share/nginx/oneindexn/onedirver_upload.sh</span><br></pre></td></tr></table></figure>
+
+<h2 id="第六步，测试"><a href="#第六步，测试" class="headerlink" title="第六步，测试"></a>第六步，测试</h2><p>本地onedrive上传文件，测试oneindex前端</p>
+<p>yaaw远程下载，测试oneindex前端及本地onedrive客户端</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://qnimg.ffing.cn/wp-content/uploads/2021/08/image-79.png"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://qnimg.ffing.cn/wp-content/uploads/2021/08/image-69-1024x789.png"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://qnimg.ffing.cn/wp-content/uploads/2021/08/image-70-1024x785.png"></p>
+<h2 id="E5账户续约"><a href="#E5账户续约" class="headerlink" title="E5账户续约"></a>E5账户续约</h2><p>a，绑定github账户，通过github的活动来增加微软账户的活跃度</p>
+<p>如果你经常登陆github是个不错的选择</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://qnimg.ffing.cn/wp-content/uploads/2021/08/image-77.png"></p>
+<p>b，通过大神开发的api模拟开发者动作</p>
+<p>outlook的api模拟开发者：<a target="_blank" rel="noopener" href="https://e5.qyi.io/">https://e5.qyi.io/</a></p>
+<p><a href="mailto:&#120;&#120;&#120;&#64;&#x78;&#x78;&#x78;&#x2e;&#111;&#110;&#x6d;&#105;&#99;&#114;&#x6f;&#115;&#x6f;&#102;&#116;&#x2e;&#x63;&#x6f;&#109;">&#120;&#120;&#120;&#64;&#x78;&#x78;&#x78;&#x2e;&#111;&#110;&#x6d;&#105;&#99;&#114;&#x6f;&#115;&#x6f;&#102;&#116;&#x2e;&#x63;&#x6f;&#109;</a>建个子账号做outlookapi的账号</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://qnimg.ffing.cn/wp-content/uploads/2021/08/image-78.png"></p>
+<h2 id="其他："><a href="#其他：" class="headerlink" title="其他："></a>其他：</h2><p>1.onedrive business 账号，通过oneindexn列表前端无法删除目录，可以通过office.com进入onedrive删除（客户端删除文件会有个先下载到本地、再删除、最后同步云端流程。。。尤其是大文件）</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://qnimg.ffing.cn/wp-content/uploads/2021/08/image-80.png"></p>
+<p>2.修改 oneindexn前端程序验证地址</p>
+<p>编辑文件：oneindexn&#x2F;controller&#x2F;AdminController.php</p>
+<p>将我的云盘地址cloud.ffing.cn，替换为你自己搭建地址</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://qnimg.ffing.cn/wp-content/uploads/2021/08/image-81.png"></p>
+<p>3.修改oneindexn前端主题以nexmoe为例</p>
+<p>编辑文件：oneindexn&#x2F;view&#x2F;themes&#x2F;nexmoe&#x2F;layout.php</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://blog.ffing.fun">Ldy</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://blog.ffing.fun/posts/1859337509.html">http://blog.ffing.fun/posts/1859337509.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://blog.ffing.fun" target="_blank">FFing</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%BD%91%E7%9B%98/">网盘</a><a class="post-meta__tags" href="/tags/5T%E7%A9%BA%E9%97%B4/">5T空间</a><a class="post-meta__tags" href="/tags/onedrive/">onedrive</a><a class="post-meta__tags" href="/tags/oneindex/">oneindex</a><a class="post-meta__tags" href="/tags/%E6%BB%A1%E9%80%9F%E4%B8%8B%E8%BD%BD/">满速下载</a></div><div class="post_share"><div class="social-share" data-image="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'"><script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/3277866893.html"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">小众网盘kiftd（3分钟搭建适合个人或小团队的网盘）</div></div></a></div><div class="next-post pull-right"><a href="/posts/4256447413.html"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">3分钟搭建免费静态主机</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/posts/3277866893.html" title="小众网盘kiftd（3分钟搭建适合个人或小团队的网盘）"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-08-15</div><div class="title">小众网盘kiftd（3分钟搭建适合个人或小团队的网盘）</div></div></a></div><div><a href="/posts/3892790353.html" title="阿里云盘列表程序Alist"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-08-28</div><div class="title">阿里云盘列表程序Alist</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9Aonedrive-business-%E8%B4%A6%E5%8F%B7"><span class="toc-number">1.</span> <span class="toc-text">第一步：onedrive business 账号</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%8C%E8%B0%83%E6%95%B4onedrive%E7%A9%BA%E9%97%B4%EF%BC%88%E9%BB%98%E8%AE%A41T%EF%BC%8C%E8%B0%83%E6%95%B4%E4%B8%BA5T%EF%BC%89"><span class="toc-number">2.</span> <span class="toc-text">第二步，调整onedrive空间（默认1T，调整为5T）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5%EF%BC%8C%E5%88%9B%E5%BB%BAOneDriveAPP"><span class="toc-number">3.</span> <span class="toc-text">第三步，创建OneDriveAPP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E6%AD%A5%EF%BC%8C%E9%83%A8%E7%BD%B2OneindexN"><span class="toc-number">4.</span> <span class="toc-text">第四步，部署OneindexN</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%94%E6%AD%A5%EF%BC%8C%E5%AE%89%E8%A3%85aria2%E5%B9%B6%E9%85%8D%E7%BD%AE%E8%87%AA%E5%8A%A8%E4%B8%8A%E4%BC%A0%E8%87%B3onedrive"><span class="toc-number">5.</span> <span class="toc-text">第五步，安装aria2并配置自动上传至onedrive</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E5%85%AD%E6%AD%A5%EF%BC%8C%E6%B5%8B%E8%AF%95"><span class="toc-number">6.</span> <span class="toc-text">第六步，测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#E5%E8%B4%A6%E6%88%B7%E7%BB%AD%E7%BA%A6"><span class="toc-number">7.</span> <span class="toc-text">E5账户续约</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%EF%BC%9A"><span class="toc-number">8.</span> <span class="toc-text">其他：</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div><div id="footer-banner"><div class="footer-banner-links"><div class="footer-banner-left"><div class="footer-banner-left"><div id="footer-banner-tips"></div><script src="https://src.ffing.cn/hexo/js/typed.min.foot_daziji.js"></script><script>var typed = new Typed("#footer-banner-tips", {
+  strings: ["你不在正经事上忧虑,就会在乱七八糟事上忧虑,能力守恒!", "折腾硬件、软件;折腾系统、平台;折腾开发、环境;折腾window、linux;折腾,折腾,瞎J8折腾."],
+  startDelay: 200,
+  backDelay: 2000,
+  typeSpeed: 100,
+  loop: true,
+  backSpeed: 20
+})
+</script></div></div><div class="footer-banner-right"><p><a target="_blank" href="https://hexo.io/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="http://src.ffing.cn/hexo/img/Frame-Hexo-blue.svg" title="框架"></a>&nbsp;<a target="_blank" href="https://butterfly.js.org/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="http://src.ffing.cn/hexo/img/Theme-Butterfly.svg" title="主题"></a>&nbsp;<a target="_blank" href="https://www.upyun.com/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="http://src.ffing.cn/hexo/img/CDN又拍云.svg" title="CDN加速"></a>&nbsp;<a target="_blank" href="https://www.51.la/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="http://src.ffing.cn/hexo/img/Analytics-51la.svg" title="51la统计"></a>&nbsp;<a target="_blank" href="https://beian.miit.gov.cn/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="http://src.ffing.cn/hexo/img/豫ICP备2021016009.svg" title="ICP备案"></a></p></div></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button class="share" type="button" title="分享链接" onclick="share()"><i class="fas fa-share-nodes"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button><button id="go-down" type="button" title="直达底部" onclick="btf.scrollToDest(document.body.scrollHeight, 500)"><i class="fas fa-arrow-down"></i></button></div></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.staticfile.org/fancyapps-ui/4.0.31/fancybox.umd.min.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script src="https://cdn.staticfile.org/algoliasearch/4.14.3/algoliasearch-lite.umd.min.js"></script><script src="https://cdn.staticfile.org/instantsearch.js/4.49.2/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script><div class="js-pjax"><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo.ffing.cn/',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo.ffing.cn/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.innerText = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.staticfile.org/twikoo/1.6.8/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script src="https://src.ffing.cn/hexo/js/jquery.min.3.6.3.js"></script><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script defer src="https://src.ffing.cn/hexo/js/switchDarkMode.js"></script><script defer src="https://src.ffing.cn/hexo/js/nav_menu.js"></script><script src="https://src.ffing.cn/hexo/js/foot_runtime.js"></script><script async src="//at.alicdn.com/t/c/font_3830672_5bphzb91mjp.js"></script><script async data-pjax src="/js/ip.js"></script><script async src="https://src.ffing.cn/hexo/js/copy_vue.min.js"></script><script async src="https://src.ffing.cn/hexo/js/copy_index.js"></script><script async src="https://src.ffing.cn/hexo/js/copy_tips.js"></script><script src="/js/clipboard.min.js"></script><script src="/js/share.js"></script></div></body></html>

@@ -1,0 +1,308 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>mysql 笔记（表操作） | FFing</title><meta name="author" content="Ldy"><meta name="copyright" content="Ldy"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="表操作:alter table123456789alter table 《表名称》--rename --add --drop--modify--change----after----first   创建表： 123456create table 《表名称》 （字段名 字段类型 （约束条件），字段名 字段类型 （约束条件），字段名 字段类型 （约束条件），）；         删除表： 1drop">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mysql 笔记（表操作）">
+<meta property="og:url" content="http://blog.ffing.fun/posts/2952710.html">
+<meta property="og:site_name" content="FFing">
+<meta property="og:description" content="表操作:alter table123456789alter table 《表名称》--rename --add --drop--modify--change----after----first   创建表： 123456create table 《表名称》 （字段名 字段类型 （约束条件），字段名 字段类型 （约束条件），字段名 字段类型 （约束条件），）；         删除表： 1drop">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-10-02T04:28:32.000Z">
+<meta property="article:modified_time" content="2023-02-20T16:09:15.443Z">
+<meta property="article:author" content="Ldy">
+<meta property="article:tag" content="mysql">
+<meta property="article:tag" content="mysql表操作">
+<meta name="twitter:card" content="summary"><link rel="shortcut icon" href="https://src.ffing.cn/hexo/img/fn_logo_32x32.png"><link rel="canonical" href="http://blog.ffing.fun/posts/2952710"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/6.0.0/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.staticfile.org/fancyapps-ui/4.0.31/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: {"appId":"DMF88DHB4X","apiKey":"143e12084a3d7306535e056bf276ba91","indexName":"hexo-blog","hits":{"per_page":5},"languages":{"input_placeholder":"搜索文章","hits_empty":"找不到您查询的内容：${query}","hits_stats":"找到 ${hits} 条结果，用时 ${time} 毫秒"}},
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdnjs.cloudflare.com/ajax/libs/flickr-justified-gallery/2.1.2/fjGallery.min.js',
+      css: 'https://cdnjs.cloudflare.com/ajax/libs/flickr-justified-gallery/2.1.2/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'mysql 笔记（表操作）',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-02-21 00:09:15'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/loading_gif.css"><link rel="stylesheet" href="/css/bg_color.css"><link rel="stylesheet" href="/css/full_page.css"><link rel="stylesheet" href="/css/universe.css"><link rel="stylesheet" href="/css/lightlight.css"><link rel="stylesheet" href="https://src.ffing.cn/hexo/css/nav_menu.css"><link rel="stylesheet" href="/css/foot.css"><link rel="stylesheet" href="/css/auth_icon.css"><link rel="stylesheet" href="//at.alicdn.com/t/c/font_3830672_5bphzb91mjp.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="/css/other_page.css"><link rel="stylesheet" href="/css/mouse.css"><link rel="stylesheet" href="/css/aside.css"><link rel="stylesheet" href="/css/ip.css"><link rel="stylesheet" href="/css/copy_index.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><div class="loading-img"></div><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+
+if (false) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="/css/loading_bar.css"/><script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js"></script><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://src.ffing.cn/hexo/img/fn_logo100.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">184</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">297</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><span> 归档</span></a></li><li><a class="site-page child" href="/categories/"><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 关于</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/about/"><span> 关于我</span></a></li><li><a class="site-page child" href="/timeline/"><span> 时间线</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><div class="back-home-button" tabindex="-1"><i class="back-home-button-icon fas fa-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://www.ffing.cn" title="前往首页" target="_blank" one-link-mark="yes"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://src.ffing.cn/hexo/img/fn_white_logo.png"/><span class="back-menu-item-text">首页</span></a><a class="back-menu-item" href="http://pan.ffing.cn/" rel="external nofollow" title="前往alist网盘" target="_blank" one-link-mark="yes"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://src.ffing.cn/hexo/img/alist_logo.png"/><span class="back-menu-item-text">alist网盘</span></a><a class="back-menu-item" href="https://kms.ffing.cn/" rel="external nofollow" title="前往kms服务" target="_blank" one-link-mark="yes"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://src.ffing.cn/hexo/img/kms_logo.png"/><span class="back-menu-item-text">kms服务</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">在线工具</div><div class="back-menu-list"><a class="back-menu-item" href="https://www.iconfont.cn" rel="noopener nofollow" title="前往阿里icon" target="_blank" one-link-mark="yes"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://src.ffing.cn/hexo/img/ali-icon_logo.png"/><span class="back-menu-item-text">阿里icon</span></a></div></div></div></div><a id="site-name" href="/"><div class="title">FFing</div><i class="fa-solid fa-house"></i></a></span><div class="mask-name-container"><center id="name-container"><a id="page-name" href="javascript:btf.scrollToDest(0, 500)">PAGE_NAME</a></center></div><div id="weather"></div><div id="tp-weather-widget"></div> <div id="menus"><div class="nav-button" id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="nav-button" id="darkmode_navswitch"><a class="darkmode_switchbutton" type="button" title="浅色和深色模式转换" onclick="switchDarkMode()"><i class="fas fa-adjust"></i></a></div><div class="nav-button" id="nav-totop"><a class="totopbtn"><i class="fas fa-arrow-up"></i><span id="percent" onclick="btf.scrollToDest(0,500)">0</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><span> 归档</span></a></li><li><a class="site-page child" href="/categories/"><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 关于</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/about/"><span> 关于我</span></a></li><li><a class="site-page child" href="/timeline/"><span> 时间线</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">mysql 笔记（表操作）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-10-02T04:28:32.000Z" title="发表于 2021-10-02 12:28:32">2021-10-02</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-02-20T16:09:15.443Z" title="更新于 2023-02-21 00:09:15">2023-02-21</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/SQL/">SQL</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1335</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>4分钟</span></span></div></div></div><article class="post-content" id="article-container"><h2 id="表操作-alter-table"><a href="#表操作-alter-table" class="headerlink" title="表操作:alter table"></a>表操作:alter table</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">alter table 《表名称》</span><br><span class="line">--rename </span><br><span class="line">--add </span><br><span class="line">--drop</span><br><span class="line">--modify</span><br><span class="line">--change</span><br><span class="line"></span><br><span class="line">----after</span><br><span class="line">----first</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://qnimg.ffing.cn/wp-content/uploads/2021/09/image-26.png"></p>
+<p>创建表：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">create table 《表名称》 （</span><br><span class="line">字段名 字段类型 （约束条件），</span><br><span class="line">字段名 字段类型 （约束条件），</span><br><span class="line">字段名 字段类型 （约束条件），</span><br><span class="line">）；</span><br><span class="line">       </span><br></pre></td></tr></table></figure>
+
+<p>删除表：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">drop table 《表名称》；</span><br></pre></td></tr></table></figure>
+
+<p>删除表中全部记录：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">delete from 《表名称》；</span><br></pre></td></tr></table></figure>
+
+<p>删除符合条件的记录：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">delete from 《表名称》 where 字段=&#x27;值&#x27;；</span><br></pre></td></tr></table></figure>
+
+<p>插入数据：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#所有字段全部插入值</span><br><span class="line">insert into 《表名称》 values (&#x27;字段1值&#x27;，&#x27;字段2值&#x27;，&#x27;字段3值&#x27;...);</span><br><span class="line">#仅插入需要的字段值</span><br><span class="line">insert into 《表名称》（字段X）valuse (&#x27;字段值&#x27;)；</span><br></pre></td></tr></table></figure>
+
+<p>修改数据：(注：不加条件将导致整个字段值全部为新值)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">update 《表名称》 set 修改的字段=&#x27;值&#x27; where 条件字段=&#x27;值&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>查看表所有记录：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from 《表名称》；</span><br></pre></td></tr></table></figure>
+
+<p>仅查看某个或几个字段记录：(字段顺序将是查询后的字段顺序)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select 字段1，字段2 from 《表名称》；</span><br></pre></td></tr></table></figure>
+
+<h2 id="表结构"><a href="#表结构" class="headerlink" title="表结构"></a>表结构</h2><p>查看表结构：describe</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">desc 《表名称》；</span><br></pre></td></tr></table></figure>
+
+<p>修改表名称：</p>
+<p>alter table 《旧表名称》 rename 《新表名称》;</p>
+<p>修改字段类型：modify和change</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#modify小范围修改，仅修改类型、约束</span><br><span class="line">#修改一个字段</span><br><span class="line">alter table 《表名称》 modify 《字段名》 《新字段类型》 《新字段约束》;</span><br><span class="line">#修改多个字段</span><br><span class="line">alter table 《表名称》 modify 《字段名1》 《新字段类型》 《新字段约束》,modify 《字段名2》 《新字段类型》 《新字段约束》;</span><br><span class="line"></span><br><span class="line">##########</span><br><span class="line">#change修改字段名称+类型+约束</span><br><span class="line">alter table 《表名称》 change 《旧字段名》 《新字段名》 《新字段类型》 《新字段约束》；</span><br></pre></td></tr></table></figure>
+
+<p>修改字段顺序：change(也可以修改字段名称)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#将字段修改到指定字段之后</span><br><span class="line">alter table 《表名称》 change 《旧字段名》 《新字段名》 《新字段类型》 《新字段约束》 after 《指定字段》；</span><br><span class="line">#将字段修改到第一个字段位置</span><br><span class="line">alter table 《表名称》 change 《旧字段名》 《新字段名》 《新字段类型》 《新字段约束》 frist；</span><br></pre></td></tr></table></figure>
+
+<p>注：modify只可以小范围修改数据类型、约束，change可以修改字段名、数据类型、约束（chang后必须跟新字段名、类型！）</p>
+<p>表中添加字段：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#添加一个字段</span><br><span class="line">alter table 《表名称》 add 《字段名》《字段类型》 《字段约束》；</span><br><span class="line">#添加多个字段</span><br><span class="line">alter table 《表名称》 add 《字段名1》《字段类型1》 《字段约束1》，add 《字段名2》《字段类型2》 《字段约束2》；</span><br><span class="line">#添加多个字段，也可以使用括号（）</span><br><span class="line">alter table 《表名称》 add (《字段名1》《字段类型1》 《字段约束1》,《字段名2》《字段类型2》 《字段约束2》....);</span><br><span class="line">#在《指定字段》后面加入新字段</span><br><span class="line">alter tabel 《表名称》 add 《字段名》《字段类型》 《字段约束》after《指定字段》;</span><br><span class="line">#添加字段到第一个字段：first（没有在指定字段之前加入字段）</span><br><span class="line">alter table 《表名称》 add 《字段名》《字段类型》 《字段约束》first;</span><br></pre></td></tr></table></figure>
+
+<p>表中删除字段：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table 《表名称》 drop 《字段名》；</span><br></pre></td></tr></table></figure>
+
+<h2 id="约束条件"><a href="#约束条件" class="headerlink" title="约束条件"></a>约束条件</h2><p>约束</p>
+<p>说明</p>
+<p>PRIMARY KEY</p>
+<p> 主键约束，唯一的标识对应的元组（不重复且非空）</p>
+<p>FOREIGN KEY</p>
+<p> 外键约束，是与之联系某表的主键</p>
+<p> NOT NULL</p>
+<p> 非空约束，不能为空</p>
+<p>UNIQUE</p>
+<p> 唯一约束，该属性的值是唯一的</p>
+<p>AUTO_INCREMENT</p>
+<p>自增约束，MySQL的SQL语句的特色（自动增加）</p>
+<p>DEFAULT</p>
+<p>默认约束，该属性设置默认值</p>
+<p>删除约束</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#删除主键约束 primary key </span><br><span class="line">alter table 《表名称》 drop primary key;</span><br><span class="line">#删除外键约束 foreign key</span><br><span class="line"></span><br><span class="line">#删除非空约束</span><br><span class="line">利用modify和change修改为null</span><br><span class="line">#删除唯一约束</span><br><span class="line">alter table 《表名称》 drop 《字段名》;</span><br></pre></td></tr></table></figure>
+
+<p>后期添加字段约束：（不能忘记括号）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table 《表名称》 add 《字段约束》 (《字段名》)；</span><br></pre></td></tr></table></figure>
+
+<p>后期修改：modify或change</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#modify</span><br><span class="line">alter tabel 《表名称》 modify 《字段名》《新字段类型》 《新字段约束》；</span><br><span class="line">#change</span><br><span class="line">alter tabel 《表名称》 change 《字段名》《新字段名》《新字段类型》 《新字段约束》；</span><br></pre></td></tr></table></figure>
+
+<p>创建表时候直接添加，不复述。</p>
+<p>主键约束：primary key</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">#第一种：主键约束（约束一个主键）</span><br><span class="line">create table 《表名称》 (</span><br><span class="line">id int primary key,</span><br><span class="line">name varchar (20),</span><br><span class="line">Password varchar (20),</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#第二种：联动约束（约束多个主键）</span><br><span class="line">create table 《表名称》 (</span><br><span class="line">id int,</span><br><span class="line">name varchar (20),</span><br><span class="line">Password varchar (20),</span><br><span class="line">Primary key (id ,name)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#注注注：如果前期忘记添加主键约束，可通过alter增加主键</span><br><span class="line">alter table 《表名称》 add primary key (字段名);</span><br><span class="line">#注注注：删除表结构主键约束</span><br><span class="line">alter table 《表名称》 drop primary key；</span><br></pre></td></tr></table></figure>
+
+<p>自增约束：aute_increment</p>
+<p>通常和主键一起使用。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">create table 《表名称》(</span><br><span class="line">id int primary key auto_incerment,</span><br><span class="line">name varchar(20),</span><br><span class="line">password varchar(20),</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p>删除约束：</p>
+<p>表中添加一个新字段并放置一个字段位置，并唯一约束</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table 《表名称》 add 《字段名》unique first；</span><br></pre></td></tr></table></figure>
+
+<p>修改字段：添加唯一约束</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table 《表名称》 modify 《字段名》 《新字段类型》unique;</span><br></pre></td></tr></table></figure>
+
+<p>删除唯一约束</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter tabel 《表名称》 drop index 《字段名》；</span><br></pre></td></tr></table></figure>
+
+<p>注：如果多个字段组合唯一约束，需组合的记录不能重复！（key:mul）</p>
+<p>外键约束：子表引用父表</p>
+<p>外键关联的字段必须有唯一性（唯一约束或主键约束）</p>
+<p>作用：父表约束子表信息</p>
+<p>foreign key (《本子表中的字段》) references 《父表》 ( 《父表字段》）；</p>
+<p>注：暴力删除父表外键约束数据</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#禁用外键约束</span><br><span class="line">set FOREIGN_KEY_CHECKS=0;</span><br><span class="line">#恢复外键约束</span><br><span class="line">set FOREIGN_KEY_CHECKS=1;</span><br></pre></td></tr></table></figure></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://blog.ffing.fun">Ldy</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://blog.ffing.fun/posts/2952710.html">http://blog.ffing.fun/posts/2952710.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://blog.ffing.fun" target="_blank">FFing</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/mysql/">mysql</a><a class="post-meta__tags" href="/tags/mysql%E8%A1%A8%E6%93%8D%E4%BD%9C/">mysql表操作</a></div><div class="post_share"><div class="social-share" data-image="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'"><script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/3707919207.html"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">mysql修改密码</div></div></a></div><div class="next-post pull-right"><a href="/posts/2510013622.html"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">centos 开机启动脚本（服务）</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/posts/2701124192.html" title="Centos7 通过shell来一键操作mysql，实现修改密码及创建wordpress数据库操作"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-03-05</div><div class="title">Centos7 通过shell来一键操作mysql，实现修改密码及创建wordpress数据库操作</div></div></a></div><div><a href="/posts/2098171719.html" title="mysql - 事务"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-10-08</div><div class="title">mysql - 事务</div></div></a></div><div><a href="/posts/2354548760.html" title="mysql 创建用户及权限"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-10-04</div><div class="title">mysql 创建用户及权限</div></div></a></div><div><a href="/posts/734164079.html" title="mysql 笔记 （查询）"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-10-07</div><div class="title">mysql 笔记 （查询）</div></div></a></div><div><a href="/posts/3707919207.html" title="mysql修改密码"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-10-04</div><div class="title">mysql修改密码</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%A8%E6%93%8D%E4%BD%9C-alter-table"><span class="toc-number">1.</span> <span class="toc-text">表操作:alter table</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%A8%E7%BB%93%E6%9E%84"><span class="toc-number">2.</span> <span class="toc-text">表结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%A6%E6%9D%9F%E6%9D%A1%E4%BB%B6"><span class="toc-number">3.</span> <span class="toc-text">约束条件</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div><div id="footer-banner"><div class="footer-banner-links"><div class="footer-banner-left"><div class="footer-banner-left"><div id="footer-banner-tips"></div><script src="https://src.ffing.cn/hexo/js/typed.min.foot_daziji.js"></script><script>var typed = new Typed("#footer-banner-tips", {
+  strings: ["你不在正经事上忧虑,就会在乱七八糟事上忧虑,能力守恒!", "折腾硬件、软件;折腾系统、平台;折腾开发、环境;折腾window、linux;折腾,折腾,瞎J8折腾."],
+  startDelay: 200,
+  backDelay: 2000,
+  typeSpeed: 100,
+  loop: true,
+  backSpeed: 20
+})
+</script></div></div><div class="footer-banner-right"><p><a target="_blank" href="https://hexo.io/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="http://src.ffing.cn/hexo/img/Frame-Hexo-blue.svg" title="框架"></a>&nbsp;<a target="_blank" href="https://butterfly.js.org/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="http://src.ffing.cn/hexo/img/Theme-Butterfly.svg" title="主题"></a>&nbsp;<a target="_blank" href="https://www.upyun.com/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="http://src.ffing.cn/hexo/img/CDN又拍云.svg" title="CDN加速"></a>&nbsp;<a target="_blank" href="https://www.51.la/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="http://src.ffing.cn/hexo/img/Analytics-51la.svg" title="51la统计"></a>&nbsp;<a target="_blank" href="https://beian.miit.gov.cn/"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="http://src.ffing.cn/hexo/img/豫ICP备2021016009.svg" title="ICP备案"></a></p></div></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button class="share" type="button" title="分享链接" onclick="share()"><i class="fas fa-share-nodes"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button><button id="go-down" type="button" title="直达底部" onclick="btf.scrollToDest(document.body.scrollHeight, 500)"><i class="fas fa-arrow-down"></i></button></div></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.staticfile.org/fancyapps-ui/4.0.31/fancybox.umd.min.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script src="https://cdn.staticfile.org/algoliasearch/4.14.3/algoliasearch-lite.umd.min.js"></script><script src="https://cdn.staticfile.org/instantsearch.js/4.49.2/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script><div class="js-pjax"><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo.ffing.cn/',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo.ffing.cn/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.innerText = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.staticfile.org/twikoo/1.6.8/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script src="https://src.ffing.cn/hexo/js/jquery.min.3.6.3.js"></script><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script defer src="https://src.ffing.cn/hexo/js/switchDarkMode.js"></script><script defer src="https://src.ffing.cn/hexo/js/nav_menu.js"></script><script src="https://src.ffing.cn/hexo/js/foot_runtime.js"></script><script async src="//at.alicdn.com/t/c/font_3830672_5bphzb91mjp.js"></script><script async data-pjax src="/js/ip.js"></script><script async src="https://src.ffing.cn/hexo/js/copy_vue.min.js"></script><script async src="https://src.ffing.cn/hexo/js/copy_index.js"></script><script async src="https://src.ffing.cn/hexo/js/copy_tips.js"></script><script src="/js/clipboard.min.js"></script><script src="/js/share.js"></script></div></body></html>
