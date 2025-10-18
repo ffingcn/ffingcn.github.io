@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+
+<html lang="zh">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="圣经在线阅读,旧约,创世记,出埃及记,利未记,民数记,申命记,约书亚记,士师记,路得记,撒母耳记上,撒母耳记下,列王纪上,列王纪下,历代志上,历代志下,以斯拉记,尼希米记,以斯帖记,约伯记,诗篇,箴言,传道书,雅歌,以赛亚书,耶利米书,耶利米哀歌,以西结书,但以理书,何西阿书,约珥书,阿摩司书,俄巴底亚书,约拿书,弥迦书,那鸿书,哈巴谷书,西番雅书,哈该书,撒迦利亚书,玛拉基书,新约,马太福音,马可福音,路加福音,约翰福音,使徒行传,罗马书,哥林多前书,哥林多后书,加拉太书,以弗所书,腓立比书,歌罗西书,帖撒罗尼迦后书,帖撒罗尼迦前书,提摩太前书,提摩太后书,提多书,腓利门书,希伯来书,雅各书,彼得前书,彼得后书,约翰一书,约翰二书,约翰三书,犹大书,启示录" name="description"/>
+<link href="../image/logo.png" rel="icon"/>
+<title>圣经在线:路加福音</title>
+<style>
+
+
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        /* 顶部插图区域 */
+        .header {
+            height: 10%; /* 顶部区域高度 */
+            background-color: #f0f0f0;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .header img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain; /* 图片自动拉伸并保持宽高比例 */
+        }
+        
+        /* 主要内容区域 */
+        .content-container {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+        
+        /* 左侧圣经类别区域 */
+        .left-sidebar {
+            width: 18ch; /* 固定宽度，大约能容纳10个汉字（每个汉字约2ch） */
+            min-width: 100px; /* 设置最小宽度，防止在小屏幕上宽度不足 */
+            max-width: 160px; /* 设置最大宽度，防止在大屏幕上宽度过大 */
+            background-color: #f5f5f5;
+            padding: 10px;
+            overflow-y: auto;
+        }
+        
+        .category {
+            margin-bottom: 20px;
+        }
+        
+        .category h3 {
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .category ul {
+            list-style-type: none;
+        }
+        
+        .category ul li {
+            margin-bottom: 5px;
+        }
+        
+        /* 取消链接下划线并设置颜色为黑色 */
+        .category ul li a {
+            color: black;
+            text-decoration: none; /* 取消下划线 */
+        }
+        
+        /* 右侧主要内容区域 */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        /* 针对 Webkit 内核浏览器（Chrome/Edge/Safari） */
+        .chapter-list::-webkit-scrollbar {
+            width: 8px;         /* 横向滚动条宽度 */
+            height: 8px;        /* 纵向滚动条高度（章节列表是纵向，所以用height） */
+        }
+
+        .chapter-list::-webkit-scrollbar-thumb {
+            background-color: rgba(0, 0, 0, 0.3);  /* 滚动条颜色 */
+            border-radius: 4px;
+        }
+
+        .chapter-list::-webkit-scrollbar-track {
+            background-color: transparent;  /* 轨道颜色（设为透明避免干扰） */
+        }
+
+
+
+        /* 章节列表区域 */
+        .chapter-list {
+            border-bottom: 1px solid #ddd;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(60px, 1fr)); /* 使用网格布局 */
+            padding: 10px 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #eee;  /* 添加浅灰色边框 */
+            max-height: 40vh;      /* 最大高度为视口高度的40% */
+            overflow-y: auto;      /* 当内容超出时显示垂直滚动条 */
+        }
+        
+        .chapter-list a {
+            text-decoration: none;
+            color: #333;
+            padding: 4px 8px;
+            border-radius: 3px;
+            font-size: 20px;
+            text-align: center;
+            margin: 3px;
+        }
+        
+        .chapter-list a.active {
+            background-color: #007bff;
+            color: white;
+            border: 2px solid #007bff; /* 为当前章节添加边框 */
+            padding: 4px 10px; /* 添加内边距以确保数字在方框内居中 */
+            /* 可以使用box-shadow来实现更生动的效果 */
+            /* box-shadow: 0 0 0 2px white, 0 0 0 4px #007bff; */
+        }
+        
+        /* 章节内容区域 */
+        .chapter-content {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            transition: font-size 0.3s ease; /* 平滑过渡效果 */
+        }
+        
+        /* 字体大小控制按钮 */
+        .font-size-controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #eee;
+        }
+        
+        .font-size-btn {
+            background-color: #f0f0f0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 5px 10px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.2s;
+        }
+        
+        .font-size-btn:hover {
+            background-color: #e0e0e0;
+        }
+        
+        /* 文章底部导航样式 */
+        .chapter-navigation {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            font-size: 20px;
+            gap: 10px; /* 控制导航元素之间的间距 */
+        }
+
+        .chapter-navigation a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        .chapter-navigation a:hover {
+            text-decoration: underline;
+        }
+
+        .chapter-navigation span {
+            color: #333; /* 当前页面的文字颜色 */
+            font-weight: bold;
+        }
+
+        /* 底部信息区域 */
+        .footer {
+            height: 80px; /* 底部区域高度 */
+            background-color: #f0f0f0;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            padding: 10px;
+            font-size: 14px;
+        }
+        .footer p a {
+            color: #333;          /* 统一文字颜色 */
+            text-decoration: none; /* 移除下划线 */
+        }
+
+        
+        .category h3 {
+            color: #e46000; /* 将h3的字体颜色设置为红色 */
+        }
+
+
+        /* 广告弹窗容器 */
+        #popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 600px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+            z-index: 9999;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* 图片容器 */
+        .popup-content {
+            position: relative;
+            height: 0;
+            padding-bottom: 75%; /* 4:3比例 */
+            overflow: hidden;
+        }
+
+        /* 图片样式 */
+        .popup-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* 升级后的关闭按钮 */
+        .close-btn {
+            position: absolute;
+            top: -25px; /* 距离弹窗外顶部 */
+            right: -25px; /* 距离弹窗外右侧 */
+            width: 50px;
+            height: 50px;
+            background: #ff4444; /* 红色背景 */
+            border-radius: 50%; /* 圆形 */
+            color: white;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            z-index: 10000;
+            transition: all 0.3s ease;
+        }
+
+        /* 悬停效果 */
+        .close-btn:hover {
+            transform: scale(1.1);
+            background: #cc0000;
+        }
+
+        /* 遮罩层 */
+        #overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 9998;
+        }
+
+
+
+
+
+
+    </style>
+</head>
+<body>
+<!-- 广告弹窗结构 -->
+<div id="overlay"></div>
+<div id="popup">
+<div class="close-btn">×</div>
+<div class="popup-content">
+<img alt="广告" class="popup-img" src="../image/pay.jpg"/>
+</div>
+</div>
+<script>
+        (function() {
+            const now = new Date();
+            const lastShown = localStorage.getItem('popupLastShown');
+            
+            // 如果从未显示过，或者距离上次显示已超过7天
+            if (!lastShown || now - new Date(lastShown) > 7 * 24 * 60 * 60 * 1000) {
+                const popup = document.getElementById('popup');
+                const overlay = document.getElementById('overlay');
+                
+                // 显示弹窗
+                popup.style.display = 'block';
+                overlay.style.display = 'block';
+                
+                // 事件绑定
+                document.querySelector('.close-btn').addEventListener('click', function() {
+                    popup.style.display = 'none';
+                    overlay.style.display = 'none';
+                    localStorage.setItem('popupLastShown', now.toISOString());
+                });
+                
+                overlay.addEventListener('click', function() {
+                    popup.style.display = 'none';
+                    overlay.style.display = 'none';
+                    localStorage.setItem('popupLastShown', now.toISOString());
+                });
+            }
+        })();
+    </script>
+<!-- 顶部插图区域 -->
+<div class="header">
+<img alt="圣经封面" src="../image/head.png"/>
+</div>
+<!-- 主要内容区域 -->
+<div class="content-container">
+<!-- 左侧圣经类别区域 -->
+<div class="left-sidebar">
+<div class="category">
+<h3>--旧约</h3>
+<ul>
+<li><a href="../旧约_创世记/旧约_01.创世记_1.html">• 创世记</a></li>
+<li><a href="../旧约_出埃及记/旧约_02.出埃及记_1.html">• 出埃及记</a></li>
+<li><a href="../旧约_利未记/旧约_03.利未记_1.html">• 利未记</a></li>
+<li><a href="../旧约_民数记/旧约_04.民数记_1.html">• 民数记</a></li>
+<li><a href="../旧约_申命记/旧约_05.申命记_1.html">• 申命记</a></li>
+<li><a href="../旧约_约书亚记/旧约_06.约书亚记_1.html">• 约书亚记</a></li>
+<li><a href="../旧约_士师记/旧约_07.士师记_1.html">• 士师记</a></li>
+<li><a href="../旧约_路得记/旧约_08.路得记_1.html">• 路得记</a></li>
+<li><a href="../旧约_撒母耳记上/旧约_09.撒母耳记上_1.html">• 撒母耳记上</a></li>
+<li><a href="../旧约_撒母耳记下/旧约_10.撒母耳记下_1.html">• 撒母耳记下</a></li>
+<li><a href="../旧约_列王纪上/旧约_11.列王纪上_1.html">• 列王纪上</a></li>
+<li><a href="../旧约_列王纪下/旧约_12.列王纪下_1.html">• 列王纪下</a></li>
+<li><a href="../旧约_历代志上/旧约_13.历代志上_1.html">• 历代志上</a></li>
+<li><a href="../旧约_历代志下/旧约_14.历代志下_1.html">• 历代志下</a></li>
+<li><a href="../旧约_以斯拉记/旧约_15.以斯拉记_1.html">• 以斯拉记</a></li>
+<li><a href="../旧约_尼希米记/旧约_16.尼希米记_1.html">• 尼希米记</a></li>
+<li><a href="../旧约_以斯帖记/旧约_17.以斯帖记_1.html">• 以斯帖记</a></li>
+<li><a href="../旧约_约伯记/旧约_18.约伯记_1.html">• 约伯记</a></li>
+<li><a href="../旧约_诗篇/旧约_19.诗篇_1.html">• 诗篇</a></li>
+<li><a href="../旧约_箴言/旧约_20.箴言_1.html">• 箴言</a></li>
+<li><a href="../旧约_传道书/旧约_21.传道书_1.html">• 传道书</a></li>
+<li><a href="../旧约_雅歌/旧约_22.雅歌_1.html">• 雅歌</a></li>
+<li><a href="../旧约_以赛亚书/旧约_23.以赛亚书_1.html">• 以赛亚书</a></li>
+<li><a href="../旧约_耶利米书/旧约_24.耶利米书_1.html">• 耶利米书</a></li>
+<li><a href="../旧约_耶利米哀歌/旧约_25.耶利米哀歌_1.html">• 耶利米哀歌</a></li>
+<li><a href="../旧约_以西结书/旧约_26.以西结书_1.html">• 以西结书</a></li>
+<li><a href="../旧约_但以理书/旧约_27.但以理书_1.html">• 但以理书</a></li>
+<li><a href="../旧约_何西阿书/旧约_28.何西阿书_1.html">• 何西阿书</a></li>
+<li><a href="../旧约_约珥书/旧约_29.约珥书_1.html">• 约珥书</a></li>
+<li><a href="../旧约_阿摩司书/旧约_30.阿摩司书_1.html">• 阿摩司书</a></li>
+<li><a href="../旧约_俄巴底亚书/旧约_31.俄巴底亚书_1.html">• 俄巴底亚书</a></li>
+<li><a href="../旧约_约拿书/旧约_32.约拿书_1.html">• 约拿书</a></li>
+<li><a href="../旧约_弥迦书/旧约_33.弥迦书_1.html">• 弥迦书</a></li>
+<li><a href="../旧约_那鸿书/旧约_34.那鸿书_1.html">• 那鸿书</a></li>
+<li><a href="../旧约_哈巴谷书/旧约_35.哈巴谷书_1.html">• 哈巴谷书</a></li>
+<li><a href="../旧约_西番雅书/旧约_36.西番雅书_1.html">• 西番雅书</a></li>
+<li><a href="../旧约_哈该书/旧约_37.哈该书_1.html">• 哈该书</a></li>
+<li><a href="../旧约_撒迦利亚书/旧约_38.撒迦利亚书_1.html">• 撒迦利亚书</a></li>
+<li><a href="../旧约_玛拉基书/旧约_39.玛拉基书_1.html">• 玛拉基书</a></li>
+</ul>
+</div>
+<div class="category">
+<h3>--新约</h3>
+<ul>
+<li><a href="../新约_马太福音/新约_01.马太福音_1.html">• 马太福音</a></li>
+<li><a href="../新约_马可福音/新约_02.马可福音_1.html">• 马可福音</a></li>
+<li><a href="新约_03.路加福音_1.html">• 路加福音</a></li>
+<li><a href="../新约_约翰福音/新约_04.约翰福音_1.html">• 约翰福音</a></li>
+<li><a href="../新约_使徒行传/新约_05.使徒行传_1.html">• 使徒行传</a></li>
+<li><a href="../新约_罗马书/新约_06.罗马书_1.html">• 罗马书</a></li>
+<li><a href="../新约_哥林多前书/新约_07.哥林多前书_1.html">• 哥林多前书</a></li>
+<li><a href="../新约_哥林多后书/新约_08.哥林多后书_1.html">• 哥林多后书</a></li>
+<li><a href="../新约_加拉太书/新约_09.加拉太书_1.html">• 加拉太书</a></li>
+<li><a href="../新约_以弗所书/新约_10.以弗所书_1.html">• 以弗所书</a></li>
+<li><a href="../新约_腓立比书/新约_11.腓立比书_1.html">• 腓立比书</a></li>
+<li><a href="../新约_歌罗西书/新约_12.歌罗西书_1.html">• 歌罗西书</a></li>
+<li><a href="../新约_帖撒罗尼迦后书/新约_13.帖撒罗尼迦后书_1.html">• 帖撒罗尼迦后书</a></li>
+<li><a href="../新约_帖撒罗尼迦前书/新约_14.帖撒罗尼迦前书_1.html">• 帖撒罗尼迦前书</a></li>
+<li><a href="../新约_提摩太前书/新约_15.提摩太前书_1.html">• 提摩太前书</a></li>
+<li><a href="../新约_提摩太后书/新约_16.提摩太后书_1.html">• 提摩太后书</a></li>
+<li><a href="../新约_提多书/新约_17.提多书_1.html">• 提多书</a></li>
+<li><a href="../新约_腓利门书/新约_18.腓利门书_1.html">• 腓利门书</a></li>
+<li><a href="../新约_希伯来书/新约_19.希伯来书_1.html">• 希伯来书</a></li>
+<li><a href="../新约_雅各书/新约_20.雅各书_1.html">• 雅各书</a></li>
+<li><a href="../新约_彼得前书/新约_21.彼得前书_1.html">• 彼得前书</a></li>
+<li><a href="../新约_彼得后书/新约_22.彼得后书_1.html">• 彼得后书</a></li>
+<li><a href="../新约_约翰一书/新约_23.约翰一书_1.html">• 约翰一书</a></li>
+<li><a href="../新约_约翰二书/新约_24.约翰二书_1.html">• 约翰二书</a></li>
+<li><a href="../新约_约翰三书/新约_25.约翰三书_1.html">• 约翰三书</a></li>
+<li><a href="../新约_犹大书/新约_26.犹大书_1.html">• 犹大书</a></li>
+<li><a href="../新约_启示录/新约_27.启示录_1.html">• 启示录</a></li>
+</ul>
+</div>
+<div class="category">
+<ul>
+<li><a href="../index.html"><h3>爱心奉献</h3></a></li>
+</ul>
+</div>
+</div>
+<!-- 右侧主要内容区域 -->
+<div class="main-content">
+<!-- 章节列表区域 -->
+<div class="chapter-list">
+<!-- 这里是章节列表，最多显示60章START <a href="../新约_启示录/新约_27.启示录_1.html" class="active">NOW_PAGE</a>-->
+<a href="新约_03.路加福音_1.html">1</a>
+<a href="新约_03.路加福音_2.html">2</a>
+<a href="新约_03.路加福音_3.html">3</a>
+<a href="新约_03.路加福音_4.html">4</a>
+<a href="新约_03.路加福音_5.html">5</a>
+<a href="新约_03.路加福音_6.html">6</a>
+<a href="新约_03.路加福音_7.html">7</a>
+<a href="新约_03.路加福音_8.html">8</a>
+<a href="新约_03.路加福音_9.html">9</a>
+<a href="新约_03.路加福音_10.html">10</a>
+<a href="新约_03.路加福音_11.html">11</a>
+<a href="新约_03.路加福音_12.html">12</a>
+<a href="新约_03.路加福音_13.html">13</a>
+<a href="新约_03.路加福音_14.html">14</a>
+<a href="新约_03.路加福音_15.html">15</a>
+<a href="新约_03.路加福音_16.html">16</a>
+<a href="新约_03.路加福音_17.html">17</a>
+<a href="新约_03.路加福音_18.html">18</a>
+<a href="新约_03.路加福音_19.html">19</a>
+<a href="新约_03.路加福音_20.html">20</a>
+<a href="新约_03.路加福音_21.html">21</a>
+<a href="新约_03.路加福音_22.html">22</a>
+<a href="新约_03.路加福音_23.html">23</a>
+<a class="active" href="新约_03.路加福音_24.html">24</a>
+<!--这里是章节列表，最多显示60章END-->
+</div>
+<!-- 字体大小控制按钮 -->
+<div class="font-size-controls">
+<button class="font-size-btn" id="decrease-font">字体缩小 -</button>
+<button class="font-size-btn" id="increase-font">字体变大 +</button>
+</div>
+<!-- 章节内容区域 -->
+<div class="chapter-content">
+<!-- 正文h1+p_START <h1>第一章：开始</h1> <p></p>-->
+<h1>路加福音 第24章</h1>
+<hr/>
+<p>24:1 七日的头一日、黎明的时候、那些妇女带着所预备的香料、来到坟墓前。</p>
+<hr/>
+<p>24:2 看见石头已经从坟墓滚开了．</p>
+<hr/>
+<p>24:3 他们就进去、只是不见主耶稣的身体。</p>
+<hr/>
+<p>24:4 正在猜疑之间、忽然有两个人站在旁边．衣服放光。</p>
+<hr/>
+<p>24:5 妇女们惊怕、将脸伏地．那两个人就对他们说、为甚么在死人中找活人呢。</p>
+<hr/>
+<p>24:6 他不在这里、已经复活了．当记念他还在加利利的时候、怎样告诉你们、</p>
+<hr/>
+<p>24:7 说、人子必须被交在罪人手里、钉在十字架上、第三日复活。</p>
+<hr/>
+<p>24:8 他们就想起耶稣的话来、</p>
+<hr/>
+<p>24:9 便从坟墓那里回去、把这一切事告诉十一个使徒和其余的人。</p>
+<hr/>
+<p>24:10 那告诉使徒的、就是抹大拉的马利亚、和约亚拿、并雅各的母亲马利亚、还有与他们在一处的妇女。</p>
+<hr/>
+<p>24:11 他们这些话、使徒以为是胡言、就不相信。</p>
+<hr/>
+<p>24:12 彼得起来、跑到坟墓前、低头往里看、见细麻布独在一处、就回去了、心里希奇所成的事。</p>
+<hr/>
+<p>24:13 正当那日、门徒中有两个人往一个村子去、这村子名叫以马忤斯、离耶路撒冷约有二十五里。</p>
+<hr/>
+<p>24:14 他们彼此谈论所遇见的这一切事。</p>
+<hr/>
+<p>24:15 正谈论相问的时候、耶稣亲自就近他们、和他们同行。</p>
+<hr/>
+<p>24:16 只是他们的眼睛迷糊了、不认识他。</p>
+<hr/>
+<p>24:17 耶稣对他们说、你们走路彼此谈论的是甚么事呢．他们就站住、脸上带着愁容。</p>
+<hr/>
+<p>24:18 二人中有一个名叫革流巴的、回答说、你在耶路撒冷作客、还不知道这几天在那里所出的事么。</p>
+<hr/>
+<p>24:19 耶稣说、甚么事呢．他们说、就是拿撒勒人耶稣的事．他是个先知、在　神和众百姓面前、说话行事都有大能。</p>
+<hr/>
+<p>24:20 祭司长和我们的官府、竟把他解去定了死罪、钉在十字架上。</p>
+<hr/>
+<p>24:21 但我们素来所盼望要赎以色列民的就是他。不但如此、而且这事成就、现在已经三天了。</p>
+<hr/>
+<p>24:22 再者、我们中间有几个妇女使我们惊奇、他们清早到了坟墓那里．</p>
+<hr/>
+<p>24:23 不见他的身体、就回来告诉我们说、看见了天使显现、说他活了。</p>
+<hr/>
+<p>24:24 又有我们的几个人、往坟墓那里去、所遇见的、正如妇女们所说的、只是没有看见他。</p>
+<hr/>
+<p>24:25 耶稣对他们说、无知的人哪．先知所说的一切话、你们的心、信得太迟钝了。</p>
+<hr/>
+<p>24:26 基督这样受害、又进入他的荣耀、岂不是应当的么。</p>
+<hr/>
+<p>24:27 于是从摩西和众先知起、凡经上所指着自己的话、都给他们讲解明白了。</p>
+<hr/>
+<p>24:28 将近他们所去的村子、耶稣好像还要往前行。</p>
+<hr/>
+<p>24:29 他们却强留他说、时候晚了、日头已经平西了、请你同我们住下吧。耶稣就进去、要同他们住下。</p>
+<hr/>
+<p>24:30 到了坐席的时候、耶稣拿起饼来、祝谢了、擘开、递给他们。</p>
+<hr/>
+<p>24:31 他们的眼睛明亮了、这才认出他来．忽然耶稣不见了。</p>
+<hr/>
+<p>24:32 他们彼此说、在路上、他和我们说话、给我们讲解圣经的时候、我们的心岂不是火热的么。</p>
+<hr/>
+<p>24:33 他们就立时起身、回耶路撒冷去、正遇见十一个使徒、和他们的同人、聚集在一处．</p>
+<hr/>
+<p>24:34 说、主果然复活、已经现给西门看了。</p>
+<hr/>
+<p>24:35 两个人就把路上所遇见、和擘饼的时候怎么被他们认出来的事、都述说了一遍。</p>
+<hr/>
+<p>24:36 正说这话的时候、耶稣亲自站在他们当中、说、愿你们平安。</p>
+<hr/>
+<p>24:37 他们却惊慌害怕、以为所看见的是魂。</p>
+<hr/>
+<p>24:38 耶稣说、你们为甚么愁烦．为甚么心里起疑念呢。</p>
+<hr/>
+<p>24:39 你们看我的手、我的脚、就知道实在是我了．摸我看看．魂无骨无肉、你们看我是有的。</p>
+<hr/>
+<p>24:40 说了这话、就把手和脚给他们看。</p>
+<hr/>
+<p>24:41 他们正喜得不敢信、并且希奇、耶稣就说、你们这里有甚么吃的没有。</p>
+<hr/>
+<p>24:42 他们便给他一片烧鱼。〔有古卷在此有和一块蜜房〕</p>
+<hr/>
+<p>24:43 他接过来、在他们面前吃了。</p>
+<hr/>
+<p>24:44 耶稣对他们说、这就是我从前与你们同在之时、所告诉你们的话、说、摩西的律法、先知的书、和诗篇上所记的、凡指着我的话、都必须应验。</p>
+<hr/>
+<p>24:45 于是耶稣开他们的心窍、使他们能明白圣经．</p>
+<hr/>
+<p>24:46 又对他们说、照经上所写的、基督必受害、第三日从死里复活．</p>
+<hr/>
+<p>24:47 并且人要奉他的名传悔改赦罪的道、从耶路撒冷起直传到万邦。</p>
+<hr/>
+<p>24:48 你们就是这些事的见证。</p>
+<hr/>
+<p>24:49 我要将我父所应许的降在你们身上．你们要在城里等候、直到你们领受从上头来的能力。</p>
+<hr/>
+<p>24:50 耶稣领他们到伯大尼的对面、就举手给他们祝福。</p>
+<hr/>
+<p>24:51 正祝福的时候、他就离开他们、被带到天上去了。</p>
+<hr/>
+<p>24:52 他们就拜他、大大的欢喜、回耶路撒冷去．</p>
+<hr/>
+<p>24:53 常在殿里称颂　神。</p>
+<hr/>
+<!-- 正文h1+p_END -->
+<!-- 文章底部导航START -->
+<!--                 <div class="chapter-navigation">
+                    <a href="#chapter1"><&nbsp;</a>
+                    <span>NOW_PAGE</span>
+                    <a href="#chapter3">&nbsp;></a>
+                </div> -->
+<div class="chapter-navigation">
+<a href="新约_03.路加福音_23.html">&lt; </a>
+<span>24</span>
+<a href=""> </a>
+</div>
+<!-- 文章底部导航END -->
+</div>
+</div>
+</div>
+<!-- 底部信息区域 -->
+
+<script>
+        // 字体大小控制功能
+        const chapterContent = document.querySelector('.chapter-content');
+        const decreaseBtn = document.getElementById('decrease-font');
+        const increaseBtn = document.getElementById('increase-font');
+        
+        // 设置字体大小范围
+        const minFontSize = 12;
+        const maxFontSize = 150;
+        
+        // 获取当前字体大小
+        let currentFontSize = parseInt(window.getComputedStyle(chapterContent)
+            .getPropertyValue('font-size'));
+        
+        // 减小字体大小
+        decreaseBtn.addEventListener('click', () => {
+            if (currentFontSize > minFontSize) {
+                currentFontSize -= 2;
+                chapterContent.style.fontSize = `${currentFontSize}px`;
+            }
+        });
+        
+        // 增大字体大小
+        increaseBtn.addEventListener('click', () => {
+            if (currentFontSize < maxFontSize) {
+                currentFontSize += 2;
+                chapterContent.style.fontSize = `${currentFontSize}px`;
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+
+<html lang="zh">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="圣经在线阅读,旧约,创世记,出埃及记,利未记,民数记,申命记,约书亚记,士师记,路得记,撒母耳记上,撒母耳记下,列王纪上,列王纪下,历代志上,历代志下,以斯拉记,尼希米记,以斯帖记,约伯记,诗篇,箴言,传道书,雅歌,以赛亚书,耶利米书,耶利米哀歌,以西结书,但以理书,何西阿书,约珥书,阿摩司书,俄巴底亚书,约拿书,弥迦书,那鸿书,哈巴谷书,西番雅书,哈该书,撒迦利亚书,玛拉基书,新约,马太福音,马可福音,路加福音,约翰福音,使徒行传,罗马书,哥林多前书,哥林多后书,加拉太书,以弗所书,腓立比书,歌罗西书,帖撒罗尼迦后书,帖撒罗尼迦前书,提摩太前书,提摩太后书,提多书,腓利门书,希伯来书,雅各书,彼得前书,彼得后书,约翰一书,约翰二书,约翰三书,犹大书,启示录" name="description"/>
+<link href="../image/logo.png" rel="icon"/>
+<title>圣经在线:诗篇</title>
+<style>
+
+
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        /* 顶部插图区域 */
+        .header {
+            height: 10%; /* 顶部区域高度 */
+            background-color: #f0f0f0;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .header img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain; /* 图片自动拉伸并保持宽高比例 */
+        }
+        
+        /* 主要内容区域 */
+        .content-container {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+        
+        /* 左侧圣经类别区域 */
+        .left-sidebar {
+            width: 18ch; /* 固定宽度，大约能容纳10个汉字（每个汉字约2ch） */
+            min-width: 100px; /* 设置最小宽度，防止在小屏幕上宽度不足 */
+            max-width: 160px; /* 设置最大宽度，防止在大屏幕上宽度过大 */
+            background-color: #f5f5f5;
+            padding: 10px;
+            overflow-y: auto;
+        }
+        
+        .category {
+            margin-bottom: 20px;
+        }
+        
+        .category h3 {
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .category ul {
+            list-style-type: none;
+        }
+        
+        .category ul li {
+            margin-bottom: 5px;
+        }
+        
+        /* 取消链接下划线并设置颜色为黑色 */
+        .category ul li a {
+            color: black;
+            text-decoration: none; /* 取消下划线 */
+        }
+        
+        /* 右侧主要内容区域 */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        /* 针对 Webkit 内核浏览器（Chrome/Edge/Safari） */
+        .chapter-list::-webkit-scrollbar {
+            width: 8px;         /* 横向滚动条宽度 */
+            height: 8px;        /* 纵向滚动条高度（章节列表是纵向，所以用height） */
+        }
+
+        .chapter-list::-webkit-scrollbar-thumb {
+            background-color: rgba(0, 0, 0, 0.3);  /* 滚动条颜色 */
+            border-radius: 4px;
+        }
+
+        .chapter-list::-webkit-scrollbar-track {
+            background-color: transparent;  /* 轨道颜色（设为透明避免干扰） */
+        }
+
+
+
+        /* 章节列表区域 */
+        .chapter-list {
+            border-bottom: 1px solid #ddd;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(60px, 1fr)); /* 使用网格布局 */
+            padding: 10px 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #eee;  /* 添加浅灰色边框 */
+            max-height: 40vh;      /* 最大高度为视口高度的40% */
+            overflow-y: auto;      /* 当内容超出时显示垂直滚动条 */
+        }
+        
+        .chapter-list a {
+            text-decoration: none;
+            color: #333;
+            padding: 4px 8px;
+            border-radius: 3px;
+            font-size: 20px;
+            text-align: center;
+            margin: 3px;
+        }
+        
+        .chapter-list a.active {
+            background-color: #007bff;
+            color: white;
+            border: 2px solid #007bff; /* 为当前章节添加边框 */
+            padding: 4px 10px; /* 添加内边距以确保数字在方框内居中 */
+            /* 可以使用box-shadow来实现更生动的效果 */
+            /* box-shadow: 0 0 0 2px white, 0 0 0 4px #007bff; */
+        }
+        
+        /* 章节内容区域 */
+        .chapter-content {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            transition: font-size 0.3s ease; /* 平滑过渡效果 */
+        }
+        
+        /* 字体大小控制按钮 */
+        .font-size-controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #eee;
+        }
+        
+        .font-size-btn {
+            background-color: #f0f0f0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 5px 10px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.2s;
+        }
+        
+        .font-size-btn:hover {
+            background-color: #e0e0e0;
+        }
+        
+        /* 文章底部导航样式 */
+        .chapter-navigation {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            font-size: 20px;
+            gap: 10px; /* 控制导航元素之间的间距 */
+        }
+
+        .chapter-navigation a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        .chapter-navigation a:hover {
+            text-decoration: underline;
+        }
+
+        .chapter-navigation span {
+            color: #333; /* 当前页面的文字颜色 */
+            font-weight: bold;
+        }
+
+        /* 底部信息区域 */
+        .footer {
+            height: 80px; /* 底部区域高度 */
+            background-color: #f0f0f0;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            padding: 10px;
+            font-size: 14px;
+        }
+        .footer p a {
+            color: #333;          /* 统一文字颜色 */
+            text-decoration: none; /* 移除下划线 */
+        }
+
+        
+        .category h3 {
+            color: #e46000; /* 将h3的字体颜色设置为红色 */
+        }
+
+
+        /* 广告弹窗容器 */
+        #popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 600px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+            z-index: 9999;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* 图片容器 */
+        .popup-content {
+            position: relative;
+            height: 0;
+            padding-bottom: 75%; /* 4:3比例 */
+            overflow: hidden;
+        }
+
+        /* 图片样式 */
+        .popup-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* 升级后的关闭按钮 */
+        .close-btn {
+            position: absolute;
+            top: -25px; /* 距离弹窗外顶部 */
+            right: -25px; /* 距离弹窗外右侧 */
+            width: 50px;
+            height: 50px;
+            background: #ff4444; /* 红色背景 */
+            border-radius: 50%; /* 圆形 */
+            color: white;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            z-index: 10000;
+            transition: all 0.3s ease;
+        }
+
+        /* 悬停效果 */
+        .close-btn:hover {
+            transform: scale(1.1);
+            background: #cc0000;
+        }
+
+        /* 遮罩层 */
+        #overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 9998;
+        }
+
+
+
+
+
+
+    </style>
+</head>
+<body>
+<!-- 广告弹窗结构 -->
+<div id="overlay"></div>
+<div id="popup">
+<div class="close-btn">×</div>
+<div class="popup-content">
+<img alt="广告" class="popup-img" src="../image/pay.jpg"/>
+</div>
+</div>
+<script>
+        (function() {
+            const now = new Date();
+            const lastShown = localStorage.getItem('popupLastShown');
+            
+            // 如果从未显示过，或者距离上次显示已超过7天
+            if (!lastShown || now - new Date(lastShown) > 7 * 24 * 60 * 60 * 1000) {
+                const popup = document.getElementById('popup');
+                const overlay = document.getElementById('overlay');
+                
+                // 显示弹窗
+                popup.style.display = 'block';
+                overlay.style.display = 'block';
+                
+                // 事件绑定
+                document.querySelector('.close-btn').addEventListener('click', function() {
+                    popup.style.display = 'none';
+                    overlay.style.display = 'none';
+                    localStorage.setItem('popupLastShown', now.toISOString());
+                });
+                
+                overlay.addEventListener('click', function() {
+                    popup.style.display = 'none';
+                    overlay.style.display = 'none';
+                    localStorage.setItem('popupLastShown', now.toISOString());
+                });
+            }
+        })();
+    </script>
+<!-- 顶部插图区域 -->
+<div class="header">
+<img alt="圣经封面" src="../image/head.png"/>
+</div>
+<!-- 主要内容区域 -->
+<div class="content-container">
+<!-- 左侧圣经类别区域 -->
+<div class="left-sidebar">
+<div class="category">
+<h3>--旧约</h3>
+<ul>
+<li><a href="../旧约_创世记/旧约_01.创世记_1.html">• 创世记</a></li>
+<li><a href="../旧约_出埃及记/旧约_02.出埃及记_1.html">• 出埃及记</a></li>
+<li><a href="../旧约_利未记/旧约_03.利未记_1.html">• 利未记</a></li>
+<li><a href="../旧约_民数记/旧约_04.民数记_1.html">• 民数记</a></li>
+<li><a href="../旧约_申命记/旧约_05.申命记_1.html">• 申命记</a></li>
+<li><a href="../旧约_约书亚记/旧约_06.约书亚记_1.html">• 约书亚记</a></li>
+<li><a href="../旧约_士师记/旧约_07.士师记_1.html">• 士师记</a></li>
+<li><a href="../旧约_路得记/旧约_08.路得记_1.html">• 路得记</a></li>
+<li><a href="../旧约_撒母耳记上/旧约_09.撒母耳记上_1.html">• 撒母耳记上</a></li>
+<li><a href="../旧约_撒母耳记下/旧约_10.撒母耳记下_1.html">• 撒母耳记下</a></li>
+<li><a href="../旧约_列王纪上/旧约_11.列王纪上_1.html">• 列王纪上</a></li>
+<li><a href="../旧约_列王纪下/旧约_12.列王纪下_1.html">• 列王纪下</a></li>
+<li><a href="../旧约_历代志上/旧约_13.历代志上_1.html">• 历代志上</a></li>
+<li><a href="../旧约_历代志下/旧约_14.历代志下_1.html">• 历代志下</a></li>
+<li><a href="../旧约_以斯拉记/旧约_15.以斯拉记_1.html">• 以斯拉记</a></li>
+<li><a href="../旧约_尼希米记/旧约_16.尼希米记_1.html">• 尼希米记</a></li>
+<li><a href="../旧约_以斯帖记/旧约_17.以斯帖记_1.html">• 以斯帖记</a></li>
+<li><a href="../旧约_约伯记/旧约_18.约伯记_1.html">• 约伯记</a></li>
+<li><a href="旧约_19.诗篇_1.html">• 诗篇</a></li>
+<li><a href="../旧约_箴言/旧约_20.箴言_1.html">• 箴言</a></li>
+<li><a href="../旧约_传道书/旧约_21.传道书_1.html">• 传道书</a></li>
+<li><a href="../旧约_雅歌/旧约_22.雅歌_1.html">• 雅歌</a></li>
+<li><a href="../旧约_以赛亚书/旧约_23.以赛亚书_1.html">• 以赛亚书</a></li>
+<li><a href="../旧约_耶利米书/旧约_24.耶利米书_1.html">• 耶利米书</a></li>
+<li><a href="../旧约_耶利米哀歌/旧约_25.耶利米哀歌_1.html">• 耶利米哀歌</a></li>
+<li><a href="../旧约_以西结书/旧约_26.以西结书_1.html">• 以西结书</a></li>
+<li><a href="../旧约_但以理书/旧约_27.但以理书_1.html">• 但以理书</a></li>
+<li><a href="../旧约_何西阿书/旧约_28.何西阿书_1.html">• 何西阿书</a></li>
+<li><a href="../旧约_约珥书/旧约_29.约珥书_1.html">• 约珥书</a></li>
+<li><a href="../旧约_阿摩司书/旧约_30.阿摩司书_1.html">• 阿摩司书</a></li>
+<li><a href="../旧约_俄巴底亚书/旧约_31.俄巴底亚书_1.html">• 俄巴底亚书</a></li>
+<li><a href="../旧约_约拿书/旧约_32.约拿书_1.html">• 约拿书</a></li>
+<li><a href="../旧约_弥迦书/旧约_33.弥迦书_1.html">• 弥迦书</a></li>
+<li><a href="../旧约_那鸿书/旧约_34.那鸿书_1.html">• 那鸿书</a></li>
+<li><a href="../旧约_哈巴谷书/旧约_35.哈巴谷书_1.html">• 哈巴谷书</a></li>
+<li><a href="../旧约_西番雅书/旧约_36.西番雅书_1.html">• 西番雅书</a></li>
+<li><a href="../旧约_哈该书/旧约_37.哈该书_1.html">• 哈该书</a></li>
+<li><a href="../旧约_撒迦利亚书/旧约_38.撒迦利亚书_1.html">• 撒迦利亚书</a></li>
+<li><a href="../旧约_玛拉基书/旧约_39.玛拉基书_1.html">• 玛拉基书</a></li>
+</ul>
+</div>
+<div class="category">
+<h3>--新约</h3>
+<ul>
+<li><a href="../新约_马太福音/新约_01.马太福音_1.html">• 马太福音</a></li>
+<li><a href="../新约_马可福音/新约_02.马可福音_1.html">• 马可福音</a></li>
+<li><a href="../新约_路加福音/新约_03.路加福音_1.html">• 路加福音</a></li>
+<li><a href="../新约_约翰福音/新约_04.约翰福音_1.html">• 约翰福音</a></li>
+<li><a href="../新约_使徒行传/新约_05.使徒行传_1.html">• 使徒行传</a></li>
+<li><a href="../新约_罗马书/新约_06.罗马书_1.html">• 罗马书</a></li>
+<li><a href="../新约_哥林多前书/新约_07.哥林多前书_1.html">• 哥林多前书</a></li>
+<li><a href="../新约_哥林多后书/新约_08.哥林多后书_1.html">• 哥林多后书</a></li>
+<li><a href="../新约_加拉太书/新约_09.加拉太书_1.html">• 加拉太书</a></li>
+<li><a href="../新约_以弗所书/新约_10.以弗所书_1.html">• 以弗所书</a></li>
+<li><a href="../新约_腓立比书/新约_11.腓立比书_1.html">• 腓立比书</a></li>
+<li><a href="../新约_歌罗西书/新约_12.歌罗西书_1.html">• 歌罗西书</a></li>
+<li><a href="../新约_帖撒罗尼迦后书/新约_13.帖撒罗尼迦后书_1.html">• 帖撒罗尼迦后书</a></li>
+<li><a href="../新约_帖撒罗尼迦前书/新约_14.帖撒罗尼迦前书_1.html">• 帖撒罗尼迦前书</a></li>
+<li><a href="../新约_提摩太前书/新约_15.提摩太前书_1.html">• 提摩太前书</a></li>
+<li><a href="../新约_提摩太后书/新约_16.提摩太后书_1.html">• 提摩太后书</a></li>
+<li><a href="../新约_提多书/新约_17.提多书_1.html">• 提多书</a></li>
+<li><a href="../新约_腓利门书/新约_18.腓利门书_1.html">• 腓利门书</a></li>
+<li><a href="../新约_希伯来书/新约_19.希伯来书_1.html">• 希伯来书</a></li>
+<li><a href="../新约_雅各书/新约_20.雅各书_1.html">• 雅各书</a></li>
+<li><a href="../新约_彼得前书/新约_21.彼得前书_1.html">• 彼得前书</a></li>
+<li><a href="../新约_彼得后书/新约_22.彼得后书_1.html">• 彼得后书</a></li>
+<li><a href="../新约_约翰一书/新约_23.约翰一书_1.html">• 约翰一书</a></li>
+<li><a href="../新约_约翰二书/新约_24.约翰二书_1.html">• 约翰二书</a></li>
+<li><a href="../新约_约翰三书/新约_25.约翰三书_1.html">• 约翰三书</a></li>
+<li><a href="../新约_犹大书/新约_26.犹大书_1.html">• 犹大书</a></li>
+<li><a href="../新约_启示录/新约_27.启示录_1.html">• 启示录</a></li>
+</ul>
+</div>
+<div class="category">
+<ul>
+<li><a href="../index.html"><h3>爱心奉献</h3></a></li>
+</ul>
+</div>
+</div>
+<!-- 右侧主要内容区域 -->
+<div class="main-content">
+<!-- 章节列表区域 -->
+<div class="chapter-list">
+<!-- 这里是章节列表，最多显示60章START <a href="../新约_启示录/新约_27.启示录_1.html" class="active">NOW_PAGE</a>-->
+<a href="旧约_19.诗篇_1.html">1</a>
+<a href="旧约_19.诗篇_2.html">2</a>
+<a href="旧约_19.诗篇_3.html">3</a>
+<a href="旧约_19.诗篇_4.html">4</a>
+<a href="旧约_19.诗篇_5.html">5</a>
+<a href="旧约_19.诗篇_6.html">6</a>
+<a href="旧约_19.诗篇_7.html">7</a>
+<a href="旧约_19.诗篇_8.html">8</a>
+<a href="旧约_19.诗篇_9.html">9</a>
+<a href="旧约_19.诗篇_10.html">10</a>
+<a href="旧约_19.诗篇_11.html">11</a>
+<a href="旧约_19.诗篇_12.html">12</a>
+<a href="旧约_19.诗篇_13.html">13</a>
+<a href="旧约_19.诗篇_14.html">14</a>
+<a href="旧约_19.诗篇_15.html">15</a>
+<a href="旧约_19.诗篇_16.html">16</a>
+<a href="旧约_19.诗篇_17.html">17</a>
+<a href="旧约_19.诗篇_18.html">18</a>
+<a href="旧约_19.诗篇_19.html">19</a>
+<a href="旧约_19.诗篇_20.html">20</a>
+<a href="旧约_19.诗篇_21.html">21</a>
+<a href="旧约_19.诗篇_22.html">22</a>
+<a href="旧约_19.诗篇_23.html">23</a>
+<a href="旧约_19.诗篇_24.html">24</a>
+<a href="旧约_19.诗篇_25.html">25</a>
+<a href="旧约_19.诗篇_26.html">26</a>
+<a href="旧约_19.诗篇_27.html">27</a>
+<a href="旧约_19.诗篇_28.html">28</a>
+<a href="旧约_19.诗篇_29.html">29</a>
+<a href="旧约_19.诗篇_30.html">30</a>
+<a href="旧约_19.诗篇_31.html">31</a>
+<a href="旧约_19.诗篇_32.html">32</a>
+<a href="旧约_19.诗篇_33.html">33</a>
+<a href="旧约_19.诗篇_34.html">34</a>
+<a href="旧约_19.诗篇_35.html">35</a>
+<a href="旧约_19.诗篇_36.html">36</a>
+<a href="旧约_19.诗篇_37.html">37</a>
+<a href="旧约_19.诗篇_38.html">38</a>
+<a class="active" href="旧约_19.诗篇_39.html">39</a>
+<a href="旧约_19.诗篇_40.html">40</a>
+<a href="旧约_19.诗篇_41.html">41</a>
+<a href="旧约_19.诗篇_42.html">42</a>
+<a href="旧约_19.诗篇_43.html">43</a>
+<a href="旧约_19.诗篇_44.html">44</a>
+<a href="旧约_19.诗篇_45.html">45</a>
+<a href="旧约_19.诗篇_46.html">46</a>
+<a href="旧约_19.诗篇_47.html">47</a>
+<a href="旧约_19.诗篇_48.html">48</a>
+<a href="旧约_19.诗篇_49.html">49</a>
+<a href="旧约_19.诗篇_50.html">50</a>
+<a href="旧约_19.诗篇_51.html">51</a>
+<a href="旧约_19.诗篇_52.html">52</a>
+<a href="旧约_19.诗篇_53.html">53</a>
+<a href="旧约_19.诗篇_54.html">54</a>
+<a href="旧约_19.诗篇_55.html">55</a>
+<a href="旧约_19.诗篇_56.html">56</a>
+<a href="旧约_19.诗篇_57.html">57</a>
+<a href="旧约_19.诗篇_58.html">58</a>
+<a href="旧约_19.诗篇_59.html">59</a>
+<a href="旧约_19.诗篇_60.html">60</a>
+<a href="旧约_19.诗篇_61.html">61</a>
+<a href="旧约_19.诗篇_62.html">62</a>
+<a href="旧约_19.诗篇_63.html">63</a>
+<a href="旧约_19.诗篇_64.html">64</a>
+<a href="旧约_19.诗篇_65.html">65</a>
+<a href="旧约_19.诗篇_66.html">66</a>
+<a href="旧约_19.诗篇_67.html">67</a>
+<a href="旧约_19.诗篇_68.html">68</a>
+<a href="旧约_19.诗篇_69.html">69</a>
+<a href="旧约_19.诗篇_70.html">70</a>
+<a href="旧约_19.诗篇_71.html">71</a>
+<a href="旧约_19.诗篇_72.html">72</a>
+<a href="旧约_19.诗篇_73.html">73</a>
+<a href="旧约_19.诗篇_74.html">74</a>
+<a href="旧约_19.诗篇_75.html">75</a>
+<a href="旧约_19.诗篇_76.html">76</a>
+<a href="旧约_19.诗篇_77.html">77</a>
+<a href="旧约_19.诗篇_78.html">78</a>
+<a href="旧约_19.诗篇_79.html">79</a>
+<a href="旧约_19.诗篇_80.html">80</a>
+<a href="旧约_19.诗篇_81.html">81</a>
+<a href="旧约_19.诗篇_82.html">82</a>
+<a href="旧约_19.诗篇_83.html">83</a>
+<a href="旧约_19.诗篇_84.html">84</a>
+<a href="旧约_19.诗篇_85.html">85</a>
+<a href="旧约_19.诗篇_86.html">86</a>
+<a href="旧约_19.诗篇_87.html">87</a>
+<a href="旧约_19.诗篇_88.html">88</a>
+<a href="旧约_19.诗篇_89.html">89</a>
+<a href="旧约_19.诗篇_90.html">90</a>
+<a href="旧约_19.诗篇_91.html">91</a>
+<a href="旧约_19.诗篇_92.html">92</a>
+<a href="旧约_19.诗篇_93.html">93</a>
+<a href="旧约_19.诗篇_94.html">94</a>
+<a href="旧约_19.诗篇_95.html">95</a>
+<a href="旧约_19.诗篇_96.html">96</a>
+<a href="旧约_19.诗篇_97.html">97</a>
+<a href="旧约_19.诗篇_98.html">98</a>
+<a href="旧约_19.诗篇_99.html">99</a>
+<a href="旧约_19.诗篇_100.html">100</a>
+<a href="旧约_19.诗篇_101.html">101</a>
+<a href="旧约_19.诗篇_102.html">102</a>
+<a href="旧约_19.诗篇_103.html">103</a>
+<a href="旧约_19.诗篇_104.html">104</a>
+<a href="旧约_19.诗篇_105.html">105</a>
+<a href="旧约_19.诗篇_106.html">106</a>
+<a href="旧约_19.诗篇_107.html">107</a>
+<a href="旧约_19.诗篇_108.html">108</a>
+<a href="旧约_19.诗篇_109.html">109</a>
+<a href="旧约_19.诗篇_110.html">110</a>
+<a href="旧约_19.诗篇_111.html">111</a>
+<a href="旧约_19.诗篇_112.html">112</a>
+<a href="旧约_19.诗篇_113.html">113</a>
+<a href="旧约_19.诗篇_114.html">114</a>
+<a href="旧约_19.诗篇_115.html">115</a>
+<a href="旧约_19.诗篇_116.html">116</a>
+<a href="旧约_19.诗篇_117.html">117</a>
+<a href="旧约_19.诗篇_118.html">118</a>
+<a href="旧约_19.诗篇_119.html">119</a>
+<a href="旧约_19.诗篇_120.html">120</a>
+<a href="旧约_19.诗篇_121.html">121</a>
+<a href="旧约_19.诗篇_122.html">122</a>
+<a href="旧约_19.诗篇_123.html">123</a>
+<a href="旧约_19.诗篇_124.html">124</a>
+<a href="旧约_19.诗篇_125.html">125</a>
+<a href="旧约_19.诗篇_126.html">126</a>
+<a href="旧约_19.诗篇_127.html">127</a>
+<a href="旧约_19.诗篇_128.html">128</a>
+<a href="旧约_19.诗篇_129.html">129</a>
+<a href="旧约_19.诗篇_130.html">130</a>
+<a href="旧约_19.诗篇_131.html">131</a>
+<a href="旧约_19.诗篇_132.html">132</a>
+<a href="旧约_19.诗篇_133.html">133</a>
+<a href="旧约_19.诗篇_134.html">134</a>
+<a href="旧约_19.诗篇_135.html">135</a>
+<a href="旧约_19.诗篇_136.html">136</a>
+<a href="旧约_19.诗篇_137.html">137</a>
+<a href="旧约_19.诗篇_138.html">138</a>
+<a href="旧约_19.诗篇_139.html">139</a>
+<a href="旧约_19.诗篇_140.html">140</a>
+<a href="旧约_19.诗篇_141.html">141</a>
+<a href="旧约_19.诗篇_142.html">142</a>
+<a href="旧约_19.诗篇_143.html">143</a>
+<a href="旧约_19.诗篇_144.html">144</a>
+<a href="旧约_19.诗篇_145.html">145</a>
+<a href="旧约_19.诗篇_146.html">146</a>
+<a href="旧约_19.诗篇_147.html">147</a>
+<a href="旧约_19.诗篇_148.html">148</a>
+<a href="旧约_19.诗篇_149.html">149</a>
+<a href="旧约_19.诗篇_150.html">150</a>
+<!--这里是章节列表，最多显示60章END-->
+</div>
+<!-- 字体大小控制按钮 -->
+<div class="font-size-controls">
+<button class="font-size-btn" id="decrease-font">字体缩小 -</button>
+<button class="font-size-btn" id="increase-font">字体变大 +</button>
+</div>
+<!-- 章节内容区域 -->
+<div class="chapter-content">
+<!-- 正文h1+p_START <h1>第一章：开始</h1> <p></p>-->
+<h1>诗篇 第039章</h1>
+<hr/>
+<p>39:1 〔大卫的诗、交与伶长耶杜顿。〕我曾说、我要谨慎我的言行、免得我舌头犯罪．恶人在我面前的时候、我要用嚼环勒住我的口。</p>
+<hr/>
+<p>39:2 我默然无声、连好话也不出口．我的愁苦就发动了。</p>
+<hr/>
+<p>39:3 我的心在我里面发热．我默想的时候、火就烧起、我便用舌头说话．</p>
+<hr/>
+<p>39:4 耶和华阿、求你叫我晓得我身之终、我的寿数几何、叫我知道我的生命不长。</p>
+<hr/>
+<p>39:5 你使我的年日、窄如手掌．我一生的年数、在你面前、如同无有．各人最稳妥的时候、真是全然虚幻。〔细拉〕</p>
+<hr/>
+<p>39:6 世人行动实系幻影．他们忙乱、真是枉然．积蓄财宝、不知将来有谁收取。</p>
+<hr/>
+<p>39:7 主阿、如今我等甚么呢．我的指望在乎你。</p>
+<hr/>
+<p>39:8 求你救我脱离一切的过犯．不要使我受愚顽人的羞辱。</p>
+<hr/>
+<p>39:9 因我所遭遇的是出于你、我就默然不语。</p>
+<hr/>
+<p>39:10 求你把你的责罚从我身上免去．因你手的责打、我便消灭。</p>
+<hr/>
+<p>39:11 你因人的罪恶、惩罚他的时候、叫他的笑容消灭、〔的笑容或作所喜爱的〕如衣被虫所咬．世人真是虚幻。〔细拉〕</p>
+<hr/>
+<p>39:12 耶和华阿．求你听我的祷告、留心听我的呼求．我流泪、求你不要静默无声．因为我在你面前是客旅、是寄居的、像我列祖一般。</p>
+<hr/>
+<p>39:13 求你宽容我、使我在去而不返之先、可以力量复原。</p>
+<hr/>
+<!-- 正文h1+p_END -->
+<!-- 文章底部导航START -->
+<!--                 <div class="chapter-navigation">
+                    <a href="#chapter1"><&nbsp;</a>
+                    <span>NOW_PAGE</span>
+                    <a href="#chapter3">&nbsp;></a>
+                </div> -->
+<div class="chapter-navigation">
+<a href="旧约_19.诗篇_38.html">&lt; </a>
+<span>39</span>
+<a href="旧约_19.诗篇_40.html"> &gt;</a>
+</div>
+<!-- 文章底部导航END -->
+</div>
+</div>
+</div>
+<!-- 底部信息区域 -->
+
+<script>
+        // 字体大小控制功能
+        const chapterContent = document.querySelector('.chapter-content');
+        const decreaseBtn = document.getElementById('decrease-font');
+        const increaseBtn = document.getElementById('increase-font');
+        
+        // 设置字体大小范围
+        const minFontSize = 12;
+        const maxFontSize = 150;
+        
+        // 获取当前字体大小
+        let currentFontSize = parseInt(window.getComputedStyle(chapterContent)
+            .getPropertyValue('font-size'));
+        
+        // 减小字体大小
+        decreaseBtn.addEventListener('click', () => {
+            if (currentFontSize > minFontSize) {
+                currentFontSize -= 2;
+                chapterContent.style.fontSize = `${currentFontSize}px`;
+            }
+        });
+        
+        // 增大字体大小
+        increaseBtn.addEventListener('click', () => {
+            if (currentFontSize < maxFontSize) {
+                currentFontSize += 2;
+                chapterContent.style.fontSize = `${currentFontSize}px`;
+            }
+        });
+    </script>
+</body>
+</html>
